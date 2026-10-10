@@ -568,16 +568,6 @@ html.blmd-js .blmd-page .woocommerce form.login:not(.is-open),html.blmd-js .blmd
 .blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.blmd-cro-kiedy-dotrze,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.blmd-cro-rozmiar-spokoj{border-bottom:0}
 .blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.blmd-cro-kiedy-dotrze td,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.blmd-cro-rozmiar-spokoj td{display:flex;gap:8px;align-items:flex-start;width:100%;padding:0 0 12px;font-size:14.5px;line-height:1.45;text-align:left;color:var(--blmd-ink-2)}
 .blmd-cro-ico{flex:none;width:18px;height:18px;margin-top:1px;color:var(--blmd-violet-d)}
-/* dobierz */
-.blmd-cro-dobierz{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center;margin-top:14px;padding:12px;border-radius:18px;background:var(--blmd-bg);box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2)}
-.blmd-cro-dobierz:has(input:checked){background:var(--blmd-lav);box-shadow:inset 0 0 0 2px var(--blmd-violet)}
-.blmd-cro-dobierz img{width:56px;height:72px;object-fit:cover;object-position:50% 15%;border-radius:10px;background:var(--blmd-photo)}
-.blmd-cro-dobierz-t{font-size:14.5px;line-height:1.4;color:var(--blmd-ink-2)}
-.blmd-cro-dobierz-t strong{display:block;font-size:15px;color:var(--blmd-ink)}
-.blmd-cro-dobierz-t del{color:var(--blmd-mute);margin-right:4px}
-.blmd-cro-dobierz-t b{color:var(--blmd-violet-dd)}
-.blmd-cro-dobierz label{grid-column:1/-1;display:flex;align-items:center;gap:10px;min-height:44px;padding:0 4px;font-weight:600;font-size:15.5px;color:var(--blmd-ink);cursor:pointer}
-.blmd-cro-dobierz input{width:22px;height:22px;margin:0;accent-color:var(--blmd-violet);flex:none}
 /* zaufanie-platnosc */
 .blmd-cro-zaufanie-platnosc{display:grid;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--blmd-line)}
 .blmd-cro-zaufanie-platnosc li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:var(--blmd-ink-2)}
@@ -825,7 +815,6 @@ html.blmd-js .blmd-crodemo{display:block;position:fixed;top:84px;right:12px;z-in
    <summary><span><span data-zm-minilbl>Pokaż podsumowanie</span><svg class="blmd-caret" aria-hidden="true"><use href="#blmd-i-caret"/></svg></span><strong data-zm-total-text>117,00 zł</strong></summary>
    <div class="blmd-zm-mini-in">
     <div class="blmd-zm-item"><span class="blmd-zm-thumb"><img src="img/2024-07-spodnie-medyczne-damskie-comfy-proline-lila.webp" width="1200" height="1804" alt=""></span><span>Spodnie medyczne damskie Comfy PROline liliowy VIOLET MIST<dl class="variation"><dt>Rozmiar:</dt><dd><p>XS</p></dd></dl></span></div>
-    <div class="blmd-zm-item" data-zm-bumpmini hidden><span class="blmd-zm-thumb"><img src="img/2024-09-bluza-medyczna-damska-smart-prolina-lila.webp" width="1200" height="1804" alt="" loading="lazy"></span><span>Bluza medyczna damska Smart PROline liliowy VIOLET MIST<dl class="variation"><dt>Rozmiar:</dt><dd><p>XS</p></dd></dl></span></div>
     <div class="blmd-zm-mini-row"><span>Kwota</span><b data-zm-sub-text>99,00 zł</b></div>
     <div class="blmd-zm-mini-row"><span>Dostawa</span><b data-zm-ship-text>18,00 zł</b></div>
     <div class="blmd-zm-mini-row"><span>Łącznie</span><b data-zm-total-text>117,00 zł</b></div>
@@ -940,7 +929,7 @@ html.blmd-js .blmd-crodemo{display:block;position:fixed;top:84px;right:12px;z-in
     <!-- MODUŁ CRO: dostawa-pasek. CEL: jasno pokazuje próg darmowej dostawy (500 zł, fakt ze strony głównej), zanim klient zapłaci za wysyłkę.
          WDROŻENIE: woocommerce_checkout_before_order_review_heading, priorytet 20; kwota z WC()->cart->get_displayed_subtotal(); odświeżanie przez fragment woocommerce_update_order_review_fragments. -->
     <div class="blmd-cro-dostawa-pasek" data-blmd-cro="dostawa-pasek" data-zm-free>
-     <p aria-live="polite" data-zm-freemsg>Do darmowej dostawy od 500 zł brakuje Ci <strong>401,00&nbsp;zł</strong>. <a href="KOSZYK.html" data-href="https://blancomed.com/koszyk/">Dobierz coś do kompletu</a></p>
+     <p aria-live="polite" data-zm-freemsg>Do darmowej dostawy od 500 zł brakuje Ci <strong>401,00&nbsp;zł</strong>.</p>
      <progress max="500" value="99" aria-label="Postęp do darmowej dostawy od 500 zł" data-zm-freebar>99 z 500 zł</progress>
     </div>
 
@@ -954,10 +943,6 @@ html.blmd-js .blmd-crodemo{display:block;position:fixed;top:84px;right:12px;z-in
         <tr class="cart_item">
          <td class="product-name"><div class="blmd-zm-item"><span class="blmd-zm-thumb"><img src="img/2024-07-spodnie-medyczne-damskie-comfy-proline-lila.webp" width="1200" height="1804" alt=""><strong class="product-quantity" aria-label="Ilość: 1">1</strong></span><span>Spodnie medyczne damskie Comfy PROline liliowy VIOLET MIST<dl class="variation"><dt class="variation-Rozmiar">Rozmiar:</dt><dd class="variation-Rozmiar"><p>XS</p></dd></dl></span></div></td>
          <td class="product-total"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>170,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></del><span class="screen-reader-text">Cena regularna 170,00 zł, teraz:</span> <ins><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></ins></td>
-        </tr>
-        <tr class="cart_item" data-zm-bumprow hidden>
-         <td class="product-name"><div class="blmd-zm-item"><span class="blmd-zm-thumb"><img src="img/2024-09-bluza-medyczna-damska-smart-prolina-lila.webp" width="1200" height="1804" alt="" loading="lazy"><strong class="product-quantity" aria-label="Ilość: 1">1</strong></span><span>Bluza medyczna damska Smart PROline liliowy VIOLET MIST<dl class="variation"><dt class="variation-Rozmiar">Rozmiar:</dt><dd class="variation-Rozmiar"><p>XS</p></dd></dl></span></div></td>
-         <td class="product-total"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>160,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></ins></td>
         </tr>
         <!-- MODUŁ CRO: rozmiar-spokoj. CEL: usuwa obawę „a jak rozmiar nie będzie pasował” (14 dni na zwrot lub wymianę, fakt z FAQ).
              WDROŻENIE: woocommerce_review_order_after_cart_contents, priorytet 10 (wiersz tabeli). -->
@@ -988,15 +973,6 @@ html.blmd-js .blmd-crodemo{display:block;position:fixed;top:84px;right:12px;z-in
         <tr class="order-total"><th>Łącznie</th><td><strong data-zm-total><span class="woocommerce-Price-amount amount"><bdi>117,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></strong></td></tr>
        </tfoot>
       </table>
-
-      <!-- MODUŁ CRO: dobierz (order bump). CEL: komplet w tym samym kolorze i rozmiarze jednym kliknięciem, bez wracania do sklepu. Cena z crawl/produkty.json (160,00 zł, promocja 99,00 zł).
-           WDROŻENIE: woocommerce_review_order_before_payment, priorytet 5; zaznaczenie = AJAX add-to-cart wariantu (ten sam rozmiar co w koszyku) + $(document.body).trigger('update_checkout'). Pokazywać tylko, gdy produktu nie ma w koszyku i wariant jest na stanie.
-           DO-POTWIERDZENIA: stan bluzy Smart PROline liliowej w rozmiarze XS. -->
-      <div class="blmd-cro-dobierz" data-blmd-cro="dobierz">
-       <img src="img/2024-09-bluza-medyczna-damska-smart-prolina-lila.webp" width="1200" height="1804" alt="" loading="lazy">
-       <p class="blmd-cro-dobierz-t"><strong>Bluza Smart PROline w tym samym kolorze</strong>Rozmiar XS, <del>160,00 zł</del><b>99,00 zł</b></p>
-       <label><input type="checkbox" name="blmd_dobierz" value="1" data-zm-bump> Dodaj do zamówienia</label>
-      </div>
 
       <!-- checkout/payment.php + payment-method.php. Bramki PayU jak na żywym sklepie; id bramek według wtyczki PayU, DO-POTWIERDZENIA. -->
       <div id="payment" class="woocommerce-checkout-payment">
@@ -1257,7 +1233,7 @@ cpn.addEventListener('submit',e=>{e.preventDefault();const v=$('coupon_code').va
 $('blmd-zm-login').addEventListener('submit',e=>e.preventDefault());
 
 /* Sumy: produkty + order bump + dostawa (0 zł od 500 zł) */
-const methods=QA('input.shipping_method'),bump=Q('[data-zm-bump]');
+const methods=QA('input.shipping_method'),bump=null; /* bez order bumpa w zamówieniu (decyzja 10.10.2026) */
 const bumpOn=()=>bump&&bump.checked&&!bump.closest('[data-blmd-cro]').hidden;
 function totals(){
  const sub=PRICE+(bumpOn()?BUMP:0),free=sub>=FREE;
@@ -1266,9 +1242,8 @@ function totals(){
  Q('[data-zm-sub]').innerHTML=money(sub);Q('[data-zm-total]').innerHTML=money(t);Q('[data-zm-total-btn]').innerHTML=num(t)+'&nbsp;zł';
  QA('[data-zm-total-text]').forEach(el=>el.textContent=num(t)+' zł');
  QA('[data-zm-sub-text]').forEach(el=>el.textContent=num(sub)+' zł');QA('[data-zm-ship-text]').forEach(el=>el.textContent=num(sc)+' zł');
- Q('[data-zm-bumprow]').hidden=!bumpOn();Q('[data-zm-bumpmini]').hidden=!bumpOn();
  const fb=Q('[data-zm-free]');fb.classList.toggle('is-free',free);Q('[data-zm-freebar]').value=Math.min(sub,FREE);
- Q('[data-zm-freemsg]').innerHTML=free?'<strong>Masz darmową dostawę.</strong>':'Do darmowej dostawy od 500 zł brakuje Ci <strong>'+num(FREE-sub)+'&nbsp;zł</strong>. <a href="KOSZYK.html" data-href="https://blancomed.com/koszyk/">Dobierz coś do kompletu</a>';
+ Q('[data-zm-freemsg]').innerHTML=free?'<strong>Masz darmową dostawę.</strong>':'Do darmowej dostawy od 500 zł brakuje Ci <strong>'+num(FREE-sub)+'&nbsp;zł</strong>.';
 }
 methods.forEach(m=>m.addEventListener('change',()=>{totals();pErr.textContent='';}));
 if(bump)bump.addEventListener('change',totals);
