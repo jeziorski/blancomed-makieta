@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Twój koszyk | Blanco Med</title>
-<meta name="description" content="Sprawdź produkty w koszyku, zmień ilość i przejdź do zamówienia. Darmowa dostawa od 500 zł, 14 dni na zwrot lub wymianę, płatność BLIK i PayU.">
+<meta name="description" content="Sprawdź produkty w koszyku, zmień ilość i wybierz dostawę InPost. Darmowa dostawa od 500 zł, 14 dni na zwrot lub wymianę, płatność BLIK i PayU.">
 <link rel="icon" href="img/ikona-blancomed.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -295,20 +295,143 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 </style>
 <!-- SHELL:END css -->
 <style data-wp-block-html="css">
-/* Koszyk (WooCommerce): klasy blmd-ko- */
-.blmd-ko-top{padding-top:clamp(8px,1.5vw,20px);padding-bottom:clamp(64px,8vw,104px)}
+/* WOO-BAZA: wspólny wygląd szablonów WooCommerce (koszyk, zamówienie, Moje konto).
+   WDROŻENIE: ten plik idzie do CSS motywu potomnego (szablony Woo nie są blokami GLAI), selektory bez .blmd-page zostaw z prefiksem .woocommerce. */
+.blmd-page .woocommerce{font-size:17px;color:var(--blmd-ink-2)}
+.blmd-page .woocommerce h2,.blmd-page .woocommerce h3{font-size:22px;line-height:1.25;margin:0 0 16px}
+/* Pola formularzy (form-row z WooCommerce) */
+.blmd-page .woocommerce .form-row{display:flex;flex-direction:column;gap:6px;margin:0 0 16px;padding:0}
+.blmd-page .woocommerce .form-row-first,.blmd-page .woocommerce .form-row-last{width:calc(50% - 8px);display:inline-flex;vertical-align:top}
+.blmd-page .woocommerce .form-row-first{margin-right:12px}
+@media (max-width:620px){.blmd-page .woocommerce .form-row-first,.blmd-page .woocommerce .form-row-last{width:100%;margin-right:0}}
+.blmd-page .woocommerce .form-row label{font-size:15px;font-weight:600;color:var(--blmd-ink)}
+.blmd-page .woocommerce .form-row .required{color:#b42318;text-decoration:none;border:0}
+.blmd-page .woocommerce .form-row .optional{font-weight:400;color:var(--blmd-mute)}
+.blmd-page .woocommerce .input-text,.blmd-page .woocommerce select,.blmd-page .woocommerce textarea{width:100%;min-height:54px;padding:14px 18px;border-radius:14px;border:1.5px solid var(--blmd-lav-2);background:#fff;font-size:17px;color:var(--blmd-ink);transition:border-color .2s,box-shadow .2s}
+.blmd-page .woocommerce textarea{min-height:110px;resize:vertical}
+.blmd-page .woocommerce .input-text::placeholder,.blmd-page .woocommerce textarea::placeholder{color:#8d8da0}
+.blmd-page .woocommerce .input-text:focus,.blmd-page .woocommerce select:focus,.blmd-page .woocommerce textarea:focus{outline:none;border-color:var(--blmd-violet);box-shadow:0 0 0 4px rgba(102,103,171,.16)}
+.blmd-page .woocommerce .woocommerce-invalid .input-text,.blmd-page .woocommerce .woocommerce-invalid select{border-color:#b42318;box-shadow:0 0 0 4px rgba(180,35,24,.1)}
+.blmd-page .woocommerce .woocommerce-validated .input-text{border-color:#2f855a}
+.blmd-page .woocommerce .woocommerce-form__label-for-checkbox,.blmd-page .woocommerce label.checkbox{display:flex;gap:10px;align-items:flex-start;font-weight:500;cursor:pointer}
+.blmd-page .woocommerce input[type=checkbox],.blmd-page .woocommerce input[type=radio]{width:22px;height:22px;margin:1px 0 0;accent-color:var(--blmd-violet);flex:none}
+/* Przyciski WooCommerce */
+.blmd-page .woocommerce .button,.blmd-page .woocommerce button.button,.blmd-page .woocommerce a.button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:0;background:var(--blmd-ink);color:#fff;font-weight:600;font-size:16px;cursor:pointer;text-decoration:none;transition:background-color .2s,transform .2s}
+.blmd-page .woocommerce .button:hover{background:#34343f;transform:translateY(-1px)}
+.blmd-page .woocommerce .button.alt,.blmd-page .woocommerce .checkout-button,.blmd-page .woocommerce #place_order{background:var(--blmd-violet);box-shadow:0 16px 30px -16px rgba(102,103,171,.9)}
+.blmd-page .woocommerce .button.alt:hover,.blmd-page .woocommerce .checkout-button:hover,.blmd-page .woocommerce #place_order:hover{background:var(--blmd-violet-d)}
+.blmd-page .woocommerce .button.blmd-woo-ghost{background:#fff;color:var(--blmd-ink);box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2)}
+.blmd-page .woocommerce .button:disabled,.blmd-page .woocommerce .button.disabled{opacity:.5;cursor:not-allowed;transform:none}
+/* Komunikaty */
+.blmd-page .woocommerce-message,.blmd-page .woocommerce-info,.blmd-page .woocommerce-error{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;list-style:none;margin:0 0 20px;padding:16px 20px;border-radius:16px;font-size:16px;line-height:1.5}
+.blmd-page .woocommerce-message{background:#ecf7f0;color:#1d5c38;box-shadow:inset 0 0 0 1px #c6e7d3}
+.blmd-page .woocommerce-info{background:var(--blmd-lav);color:var(--blmd-ink-2);box-shadow:inset 0 0 0 1px var(--blmd-lav-2)}
+.blmd-page .woocommerce-error{background:#fdf1f0;color:#8a1c12;box-shadow:inset 0 0 0 1px #f4cdc9;display:block}
+.blmd-page .woocommerce-error li+li{margin-top:6px}
+.blmd-page .woocommerce-message .button,.blmd-page .woocommerce-info .button{min-height:44px;padding:0 18px;font-size:15px}
+/* Tabele (shop_table) */
+.blmd-page .woocommerce table.shop_table{width:100%;border-collapse:separate;border-spacing:0;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);overflow:hidden;font-size:16px}
+.blmd-page .woocommerce table.shop_table th,.blmd-page .woocommerce table.shop_table td{padding:16px 18px;text-align:left;vertical-align:middle;border-bottom:1px solid var(--blmd-line)}
+.blmd-page .woocommerce table.shop_table tr:last-child>*{border-bottom:0}
+.blmd-page .woocommerce table.shop_table thead th{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blmd-mute);background:var(--blmd-bg)}
+.blmd-page .woocommerce .amount{font-weight:700;color:var(--blmd-ink);white-space:nowrap}
+.blmd-page .woocommerce del .amount{font-weight:500;color:var(--blmd-mute)}
+.blmd-page .woocommerce ins{text-decoration:none}
+/* Ilość z przyciskami (Kadence: input.minus / input.plus) */
+.blmd-page .woocommerce .quantity{display:inline-flex;align-items:center;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2)}
+.blmd-page .woocommerce .quantity .qty{width:46px;min-height:44px;padding:0;border:0;background:transparent;text-align:center;font-weight:600;font-size:16px;-moz-appearance:textfield}
+.blmd-page .woocommerce .quantity .qty::-webkit-inner-spin-button{-webkit-appearance:none}
+.blmd-page .woocommerce .quantity .minus,.blmd-page .woocommerce .quantity .plus{width:44px;height:44px;border:0;border-radius:50%;background:transparent;font-size:20px;color:var(--blmd-ink);cursor:pointer}
+.blmd-page .woocommerce .quantity .minus:hover,.blmd-page .woocommerce .quantity .plus:hover{background:var(--blmd-lav)}
+/* Karta (wspólny kontener) */
+.blmd-page .blmd-woo-card{padding:clamp(20px,3vw,32px);border-radius:24px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
+/* InPost Pay: podgląd przycisku (w WP renderuje go wtyczka w shadow DOM; stylujemy tylko kontener) */
+.blmd-page .izi-widget-placeholder{margin:12px 0 0}
+.blmd-page .blmd-izi{display:flex;flex-direction:column;align-items:stretch;gap:6px}
+.blmd-page .blmd-izi-btn{display:flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 20px;border-radius:999px;background:#1d1d1b;color:#fff;font-weight:600;font-size:16px;border:0;cursor:pointer;position:relative}
+.blmd-page .blmd-izi-btn b{display:inline-flex;align-items:center;gap:4px;font-weight:800;letter-spacing:-.01em}
+.blmd-page .blmd-izi-btn b i{display:inline-block;width:14px;height:14px;border-radius:3px;background:#ffcd00;transform:rotate(45deg)}
+.blmd-page .blmd-izi-tag{position:absolute;left:14px;top:50%;transform:translateY(-50%);padding:2px 6px;border-radius:6px;background:#ffcd00;color:#1d1d1b;font-size:10px;font-weight:800;line-height:1.1;text-transform:uppercase}
+.blmd-page .blmd-izi-note{font-size:13px;text-align:center;color:var(--blmd-txt)}
+
+/* ===== KOSZYK/ZAMÓWIENIE (dopisane 10.10.2026): reguły ogólne dla koszyka, zamówienia (Flux) i strony „Zamówienie przyjęte”.
+   WDROŻENIE: jak cały plik, do CSS motywu potomnego. Selektory klas WooCommerce, nie bloków GLAI. ===== */
+.blmd-page .woocommerce .screen-reader-text{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Warianty pozycji (dl.variation, np. Rozmiar) */
+.blmd-page .woocommerce dl.variation{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;margin:6px 0 0;font-size:15px;line-height:1.4}
+.blmd-page .woocommerce dl.variation dt{font-weight:500;color:var(--blmd-txt)}
+.blmd-page .woocommerce dl.variation dd{margin:0 12px 0 0;font-weight:700;color:var(--blmd-ink)}
+.blmd-page .woocommerce dl.variation dd p{margin:0}
+/* Usuwanie pozycji (a.remove, w WooCommerce znak ×) */
+.blmd-page .woocommerce a.remove{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-size:26px;line-height:1;font-weight:400;color:var(--blmd-txt);text-decoration:none;transition:background-color .2s,color .2s}
+.blmd-page .woocommerce a.remove:hover{background:#fdf1f0;color:#b42318}
+/* Cena przekreślona i aktualna w jednej komórce */
+.blmd-page .woocommerce del{text-decoration-thickness:1.5px;color:var(--blmd-mute)}
+.blmd-page .woocommerce del+ins,.blmd-page .woocommerce ins+del{margin-left:6px}
+/* Metody dostawy: cała karta klikalna, wybrana podświetlona */
+.blmd-page .woocommerce ul.woocommerce-shipping-methods{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods li{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;min-height:58px;padding:10px 16px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2);transition:box-shadow .2s,background-color .2s}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods li:has(input:checked){background:var(--blmd-lav);box-shadow:inset 0 0 0 2px var(--blmd-violet)}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods li:has(input:focus-visible){outline:3px solid var(--blmd-violet-d);outline-offset:2px}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods input{margin:0}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods label{flex:1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;font-size:16px;font-weight:600;line-height:1.35;color:var(--blmd-ink);cursor:pointer}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods label::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods li>:not(input,label){position:relative;z-index:1}
+.blmd-page .woocommerce .woocommerce-shipping-destination{margin-top:10px;font-size:15px;line-height:1.45;color:var(--blmd-txt)}
+/* Metody płatności (ul.wc_payment_methods > li.wc_payment_method); opis pokazuje się przy wybranej metodzie, bez JS przez :has */
+.blmd-page .woocommerce ul.wc_payment_methods{display:grid;gap:8px;margin:0 0 22px;padding:0;list-style:none}
+.blmd-page .woocommerce li.wc_payment_method{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:12px;align-items:center;padding:0 16px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2);transition:box-shadow .2s,background-color .2s}
+.blmd-page .woocommerce li.wc_payment_method:has(>input:checked){background:var(--blmd-lav);box-shadow:inset 0 0 0 2px var(--blmd-violet)}
+.blmd-page .woocommerce li.wc_payment_method:has(>input:focus-visible){outline:3px solid var(--blmd-violet-d);outline-offset:2px}
+.blmd-page .woocommerce li.wc_payment_method>input{grid-column:1;margin:0}
+.blmd-page .woocommerce li.wc_payment_method>label{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;min-height:60px;padding:10px 0;font-size:16.5px;font-weight:600;line-height:1.3;color:var(--blmd-ink);cursor:pointer}
+.blmd-page .woocommerce .payment_box{grid-column:1/-1;margin:0 0 14px;padding:14px 16px;border-radius:12px;background:#fff;font-size:15.5px;line-height:1.5;color:var(--blmd-ink-2)}
+.blmd-page .woocommerce li.wc_payment_method:not(:has(>input:checked))>.payment_box{display:none}
+.blmd-page .woocommerce .payment_box p+p{margin-top:8px}
+/* Błąd przy polu (WooCommerce 8+: p.checkout-inline-error-message) */
+.blmd-page .woocommerce .checkout-inline-error-message{margin:2px 0 0;font-size:15px;font-weight:600;line-height:1.4;color:#b42318}
+.blmd-page .woocommerce .woocommerce-error a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+/* Regulamin, informacja o danych, zgody */
+.blmd-page .woocommerce .woocommerce-terms-and-conditions-wrapper{display:grid;gap:14px;margin:0 0 18px}
+.blmd-page .woocommerce .woocommerce-terms-and-conditions-wrapper .form-row{margin:0}
+.blmd-page .woocommerce .woocommerce-privacy-policy-text p{font-size:14.5px;line-height:1.55;color:var(--blmd-txt)}
+.blmd-page .woocommerce .woocommerce-terms-and-conditions-wrapper a,.blmd-page .woocommerce .woocommerce-privacy-policy-text a{color:var(--blmd-violet-d);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.blmd-page .woocommerce .woocommerce-terms-and-conditions-checkbox-text{font-size:16px;line-height:1.45}
+/* Wiersz sumy w tabelach podsumowania */
+.blmd-page .woocommerce tr.order-total th{font-size:17px;color:var(--blmd-ink)}
+.blmd-page .woocommerce tr.order-total .amount{font-size:24px;letter-spacing:-.02em}
+/* InPost Pay jako opcja dodatkowa pod naszym głównym przyciskiem (fiolet zostaje główny) */
+.blmd-page .blmd-izi-or{display:flex;align-items:center;gap:12px;margin:0 0 8px;font-size:14px;color:var(--blmd-mute)}
+.blmd-page .blmd-izi-or::before,.blmd-page .blmd-izi-or::after{content:"";flex:1;height:1px;background:var(--blmd-line)}
+.blmd-page .blmd-izi--sub .blmd-izi-btn{min-height:48px;font-size:15px;cursor:default}
+.blmd-page .blmd-izi--sub .blmd-izi-tag{left:10px}
+@media (max-width:480px){.blmd-page .blmd-izi--sub .blmd-izi-btn{gap:6px;padding:0 10px;font-size:14px;white-space:nowrap}.blmd-page .blmd-izi--sub .blmd-izi-tag{position:static;transform:none;font-size:9px;padding:2px 4px}}
+
+</style>
+<style data-wp-block-html="css">
+/* KOSZYK: klasyczny szablon WooCommerce (cart/cart.php, cart-totals.php, cart-shipping.php) w opakowaniu Kadence.
+   WDROŻENIE: reguły dla klas WooCommerce (.woocommerce, .kadence-woo-cart-form-wrap, table.cart, .cart_totals) idą do CSS motywu potomnego,
+   tak jak woo-baza.css (zakaz stylowania obcych klas z GLAI tu nie obowiązuje, bo koszyk to szablon PHP, nie blok).
+   Nasze dodatki mają klasy blmd-ko-; sposób dodania w WP opisany w komentarzach WDROŻENIE przy każdym z nich. */
+.blmd-ko-top{padding-top:clamp(8px,1.5vw,20px);padding-bottom:clamp(56px,7vw,96px)}
+/* Kroki (nasz dodatek, blok GLAI nad shortcode koszyka) */
 .blmd-ko-steps{display:flex;flex-wrap:wrap;gap:8px 6px;margin-bottom:clamp(18px,2.4vw,28px);counter-reset:ko}
 .blmd-ko-steps li{display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 16px 0 6px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);font-size:14.5px;font-weight:500;color:var(--blmd-txt)}
 .blmd-ko-steps li::before{counter-increment:ko;content:counter(ko);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--blmd-lav);color:var(--blmd-violet-dd);font-weight:700;font-size:13.5px}
 .blmd-ko-steps li[aria-current]{background:var(--blmd-ink);color:#fff;box-shadow:none}
 .blmd-ko-steps li[aria-current]::before{background:#fff;color:var(--blmd-ink)}
-.blmd-ko-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:clamp(20px,2.6vw,32px)}
+.blmd-ko-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:clamp(18px,2.4vw,28px)}
 .blmd-ko-head h1{font-size:clamp(34px,4vw,54px);line-height:1.05;letter-spacing:-.035em}
-.blmd-ko-back svg{transform:scaleX(-1)}
 .blmd-ko-head h1 small{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:.42em;font-weight:500;letter-spacing:0;color:var(--blmd-txt);margin-left:10px;white-space:nowrap}
-.blmd-ko-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);gap:clamp(20px,2.6vw,36px);align-items:start}
-/* Pasek darmowej dostawy */
-.blmd-ko-ship{display:grid;gap:12px;padding:18px 22px 20px;border-radius:22px;background:radial-gradient(70% 140% at 100% 0%,rgba(138,138,255,.35),transparent 60%),var(--blmd-lav-3);margin-bottom:14px}
+.blmd-ko-back svg{transform:scaleX(-1)}
+
+/* Układ: formularz z tabelą po lewej, podsumowanie po prawej (Kadence: .kadence-woo-cart-form-wrap) */
+.blmd-page .woocommerce .kadence-woo-cart-form-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(340px,1fr);gap:clamp(20px,2.6vw,36px);align-items:start}
+.blmd-page .woocommerce .kadence-woo-cart-form-wrap[hidden]{display:none}
+.blmd-page .woocommerce-notices-wrapper:empty{display:none}
+
+/* Pasek darmowej dostawy (nasz dodatek, hook woocommerce_before_cart_table) */
+.blmd-ko-ship{display:grid;gap:12px;padding:16px 20px 18px;border-radius:22px;background:radial-gradient(70% 140% at 100% 0%,rgba(138,138,255,.35),transparent 60%),var(--blmd-lav-3);margin-bottom:14px}
 .blmd-ko-ship p{display:flex;align-items:center;gap:12px;font-size:16.5px;line-height:1.4;color:var(--blmd-ink-2)}
 .blmd-ko-ship p strong{color:var(--blmd-ink)}
 .blmd-ko-ship-ico{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:#fff;color:var(--blmd-violet-d);flex:none}
@@ -317,89 +440,81 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 .blmd-ko-bar::-webkit-progress-bar{background:rgba(255,255,255,.75);border-radius:8px}
 .blmd-ko-bar::-webkit-progress-value{background:var(--blmd-grad);border-radius:8px}
 .blmd-ko-bar::-moz-progress-bar{background:var(--blmd-violet);border-radius:8px}
-.blmd-ko-ship.is-free{background:radial-gradient(70% 140% at 100% 0%,rgba(138,138,255,.35),transparent 60%),#e6f4ec}
+.blmd-ko-ship.is-free{background:radial-gradient(70% 140% at 100% 0%,rgba(138,138,255,.3),transparent 60%),#e6f4ec}
 .blmd-ko-ship.is-free .blmd-ko-ship-ico{color:#1f6b45}
-/* Lista produktów */
-.blmd-ko-list{border-radius:var(--blmd-r);background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);padding:6px 22px}
-.blmd-ko-item{display:grid;grid-template-columns:104px minmax(0,1fr) auto auto;grid-template-areas:"img info qty sum";gap:8px 22px;align-items:center;padding:18px 0}
-.blmd-ko-item+.blmd-ko-item,.blmd-ko-undo+.blmd-ko-item,.blmd-ko-item+.blmd-ko-undo{border-top:1px solid var(--blmd-line)}
-.blmd-ko-img{grid-area:img;display:block;overflow:hidden;border-radius:16px;background:var(--blmd-photo);aspect-ratio:3/4}
-.blmd-ko-img img{width:100%;height:100%;object-fit:cover;object-position:50% 14%}
-.blmd-ko-info{grid-area:info;min-width:0}
-.blmd-ko-coll{display:block;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blmd-violet-d)}
-.blmd-ko-info h3{margin-top:2px;font-size:17px;line-height:1.35;letter-spacing:-.01em}
-.blmd-ko-info h3 a:hover{text-decoration:underline;text-underline-offset:3px}
-.blmd-ko-attr{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.blmd-ko-attr span{display:inline-flex;align-items:center;gap:7px;min-height:30px;padding:0 12px;border-radius:999px;background:var(--blmd-bg);box-shadow:inset 0 0 0 1px var(--blmd-line);font-size:14px;color:var(--blmd-ink-2)}
-.blmd-ko-attr i{width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
-.blmd-ko-unit{margin-top:8px;font-size:14.5px;color:var(--blmd-mute)}
-.blmd-ko-qty{grid-area:qty;display:inline-flex;align-items:center;padding:4px;border-radius:999px;background:var(--blmd-bg);box-shadow:inset 0 0 0 1px var(--blmd-line)}
-.blmd-ko-qty button{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:#fff;color:var(--blmd-ink);cursor:pointer;box-shadow:0 4px 10px -6px rgba(29,29,27,.4);transition:background-color .2s,color .2s}
-.blmd-ko-qty button:hover:not(:disabled){background:var(--blmd-violet);color:#fff}
-.blmd-ko-qty button:disabled{opacity:.4;cursor:default;box-shadow:none}
-.blmd-ko-qty button svg{width:16px;height:16px}
-.blmd-ko-minus i{display:block;width:14px;height:2px;border-radius:2px;background:currentColor}
-.blmd-ko-qty input{width:44px;height:44px;padding:0;border:0;background:transparent;text-align:center;font-size:17px;font-weight:600;color:var(--blmd-ink);-moz-appearance:textfield;appearance:textfield}
-.blmd-ko-qty input::-webkit-outer-spin-button,.blmd-ko-qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.blmd-ko-sum{grid-area:sum;display:grid;justify-items:end;gap:2px;min-width:110px}
-.blmd-ko-sum strong{font-size:18px;color:var(--blmd-ink);white-space:nowrap}
-.blmd-ko-rm{display:inline-flex;align-items:center;min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:14.5px;font-weight:500;color:var(--blmd-txt);text-decoration:underline;text-decoration-color:var(--blmd-lav-2);text-underline-offset:4px;cursor:pointer}
-.blmd-ko-rm:hover{color:var(--blmd-ink);text-decoration-color:currentColor}
-.blmd-ko-undo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 16px;padding:14px 0;font-size:15.5px;color:var(--blmd-txt)}
-.blmd-ko-undo button{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:var(--blmd-lav);font:inherit;font-size:15px;font-weight:600;color:var(--blmd-violet-dd);cursor:pointer}
-.blmd-ko-undo button:hover{background:var(--blmd-lav-2)}
-.blmd-ko-listfoot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;margin-top:14px}
-html.blmd-js .blmd-ko-update{display:none}
-.blmd-ko-empty{display:grid;justify-items:center;gap:14px;padding:clamp(40px,6vw,72px) 24px;border-radius:var(--blmd-r);background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);text-align:center}
-.blmd-ko-empty[hidden]{display:none}
-.blmd-ko-empty-ico{display:grid;place-items:center;width:72px;height:72px;border-radius:24px;background:var(--blmd-lav-3);color:var(--blmd-violet-d)}
-.blmd-ko-empty-ico svg{width:32px;height:32px}
-.blmd-ko-empty h2{font-size:26px}
-.blmd-ko-empty p{color:var(--blmd-txt);max-width:440px}
-.blmd-ko-empty div{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
-.blmd-ko.is-empty .blmd-ko-main,.blmd-ko.is-empty .blmd-ko-side,.blmd-ko.is-empty~.blmd-ko-sticky{display:none}
-.blmd-ko.is-empty .blmd-ko-grid{grid-template-columns:1fr}
-/* Podsumowanie */
-.blmd-ko-side{position:sticky;top:100px;display:grid;gap:14px}
-.blmd-ko-card{padding:clamp(22px,2.4vw,30px);border-radius:var(--blmd-r);background:#fff;box-shadow:var(--blmd-shadow),inset 0 0 0 1px var(--blmd-line)}
-.blmd-ko-card h2{font-size:24px;letter-spacing:-.02em;margin-bottom:14px}
-.blmd-ko-rows{display:grid;gap:0}
-.blmd-ko-rows>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:10px 0;font-size:16px;color:var(--blmd-ink-2)}
-.blmd-ko-rows>div+div{border-top:1px dashed var(--blmd-lav-2)}
-.blmd-ko-rows dt{color:var(--blmd-txt)}
-.blmd-ko-rows dd{margin:0;text-align:right;font-weight:600;color:var(--blmd-ink)}
-.blmd-ko-rows dd small{display:block;font-weight:400;font-size:14px;color:var(--blmd-mute)}
-.blmd-ko-rows .blmd-ko-free{color:#1f6b45}
-.blmd-ko-total{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:6px;padding-top:16px;border-top:1.5px solid var(--blmd-ink)}
-.blmd-ko-total span{font-size:16px;font-weight:600;color:var(--blmd-ink)}
-.blmd-ko-total span small{display:block;font-weight:400;font-size:14px;color:var(--blmd-mute)}
-.blmd-ko-total strong{font-size:30px;line-height:1;letter-spacing:-.03em;color:var(--blmd-ink);white-space:nowrap}
-.blmd-ko-cta{width:100%;justify-content:space-between;margin-top:20px;min-height:60px;font-size:17.5px}
-.blmd-ko-note{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:14.5px;color:var(--blmd-txt);text-align:center}
+
+/* Tabela koszyka (table.shop_table.cart) */
+.blmd-page .woocommerce table.cart{border-radius:var(--blmd-r)}
+.blmd-page .woocommerce table.cart thead th{padding-block:12px}
+.blmd-page .woocommerce table.cart td{padding:18px 14px}
+.blmd-page .woocommerce table.cart .product-remove{width:56px;padding-right:0}
+.blmd-page .woocommerce table.cart .product-thumbnail{width:112px;padding-inline:8px}
+.blmd-page .woocommerce table.cart .product-thumbnail a{display:block;overflow:hidden;border-radius:16px;background:var(--blmd-photo);aspect-ratio:3/4}
+.blmd-page .woocommerce table.cart .product-thumbnail img{width:100%;height:100%;object-fit:cover;object-position:50% 14%}
+.blmd-page .woocommerce table.cart .product-name>a{font-size:17px;font-weight:600;line-height:1.35;color:var(--blmd-ink);letter-spacing:-.01em}
+.blmd-page .woocommerce table.cart .product-name>a:hover{text-decoration:underline;text-underline-offset:3px}
+.blmd-page .woocommerce table.cart .product-price{white-space:nowrap}
+.blmd-page .woocommerce table.cart .product-price del,.blmd-page .woocommerce table.cart .product-price ins{display:block;margin:0}
+.blmd-page .woocommerce table.cart .product-price del .amount{font-size:14px}
+.blmd-page .woocommerce table.cart .product-subtotal{text-align:right}
+.blmd-page .woocommerce table.cart .product-subtotal .amount{font-size:18px}
+.blmd-page .woocommerce table.cart thead .product-subtotal{text-align:right}
+/* Wiersz akcji: kupon + aktualizacja */
+.blmd-page .woocommerce table.cart td.actions{padding:16px 18px;background:var(--blmd-bg)}
+.blmd-page .woocommerce table.cart td.actions .coupon{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.blmd-page .woocommerce table.cart td.actions .coupon .input-text{flex:1 1 200px;width:auto;min-height:50px;border-radius:999px;text-transform:uppercase}
+.blmd-page .woocommerce table.cart td.actions .coupon .input-text::placeholder{text-transform:none}
+.blmd-page .woocommerce table.cart td.actions .coupon .button{min-height:50px}
+.blmd-page .woocommerce table.cart td.actions>.button{margin-top:10px;background:#fff;color:var(--blmd-ink);box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2)}
+html.blmd-js .blmd-page .woocommerce table.cart td.actions>.button[name=update_cart]{display:none}
+.blmd-ko-student{flex-basis:100%;font-size:14.5px;color:var(--blmd-txt)}
+.blmd-ko-student a{color:var(--blmd-violet-d);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* Podsumowanie (div.cart-collaterals > div.cart_totals) */
+.blmd-page .woocommerce .cart-collaterals{position:sticky;top:100px;display:grid;gap:14px}
+.blmd-page .woocommerce .cart_totals{padding:clamp(20px,2.4vw,28px);border-radius:var(--blmd-r);background:#fff;box-shadow:var(--blmd-shadow),inset 0 0 0 1px var(--blmd-line)}
+.blmd-page .woocommerce .cart_totals h2{font-size:24px;letter-spacing:-.02em;margin-bottom:8px}
+.blmd-page .woocommerce .cart_totals table.shop_table,.blmd-page .woocommerce .cart_totals table.shop_table tbody{display:block;box-shadow:none;border-radius:0;background:transparent}
+.blmd-page .woocommerce .cart_totals table.shop_table tr{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.blmd-page .woocommerce .cart_totals table.shop_table tr>*{flex:none}
+.blmd-page .woocommerce .cart_totals table.shop_table th,.blmd-page .woocommerce .cart_totals table.shop_table td{padding:12px 0;border-bottom:0}
+.blmd-page .woocommerce .cart_totals table.shop_table tr{border-bottom:1px dashed var(--blmd-lav-2)}
+.blmd-page .woocommerce .cart_totals table.shop_table th{font-weight:500;color:var(--blmd-txt)}
+.blmd-page .woocommerce .cart_totals table.shop_table td{text-align:right}
+.blmd-page .woocommerce .cart_totals table.shop_table tr.woocommerce-shipping-totals{display:grid;gap:10px;padding:12px 0;border-bottom:1px dashed var(--blmd-lav-2)}
+.blmd-page .woocommerce .cart_totals tr.woocommerce-shipping-totals>*{padding:0;border:0;text-align:left}
+.blmd-page .woocommerce .cart_totals table.shop_table tr.order-total{border-top:1.5px solid var(--blmd-ink);margin-top:-1px}
+.blmd-page .woocommerce .cart_totals table.shop_table tr.order-total>*{padding-top:16px;border-bottom:0}
+.blmd-page .woocommerce .cart_totals tr.order-total th{font-weight:600}
+.blmd-page .woocommerce .cart_totals tr.order-total .amount{font-size:30px;line-height:1;letter-spacing:-.03em}
+.blmd-page .woocommerce .wc-proceed-to-checkout{padding-top:16px}
+.blmd-page .woocommerce .wc-proceed-to-checkout .checkout-button{display:flex;width:100%;min-height:60px;font-size:17.5px}
+.blmd-ko-note{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-size:14.5px;color:var(--blmd-txt);text-align:center}
 .blmd-ko-note svg{width:16px;height:16px;color:var(--blmd-violet-d);flex:none}
-.blmd-ko-coupon{margin-top:18px;border-top:1px solid var(--blmd-line)}
-.blmd-ko-coupon>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;font-weight:600;font-size:16px;color:var(--blmd-ink);cursor:pointer}
-.blmd-ko-coupon>summary::-webkit-details-marker{display:none}
-.blmd-ko-coupon[open] .blmd-caret{transform:rotate(180deg)}
-.blmd-ko-coupon form{display:flex;gap:8px;padding-bottom:6px}
-.blmd-ko-coupon input{flex:1;min-width:0;min-height:50px;padding:0 18px;border:1.5px solid var(--blmd-lav-2);border-radius:999px;background:var(--blmd-bg);font-size:16px;color:var(--blmd-ink);text-transform:uppercase}
-.blmd-ko-coupon input::placeholder{text-transform:none;color:var(--blmd-mute)}
-.blmd-ko-coupon input:focus{outline:none;border-color:var(--blmd-violet);background:#fff}
-.blmd-ko-coupon .blmd-btn{min-height:50px}
-.blmd-ko-coupon p{font-size:14px;color:var(--blmd-txt);padding-bottom:10px}
-.blmd-ko-coupon p a{color:var(--blmd-violet-d);text-decoration:underline;text-underline-offset:3px}
-.blmd-ko-pay{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.blmd-ko-pay span{display:inline-flex;align-items:center;min-height:30px;padding:0 10px;border-radius:9px;background:var(--blmd-bg);box-shadow:inset 0 0 0 1px var(--blmd-line);font-size:13px;font-weight:600;color:var(--blmd-ink-2)}
+.blmd-page .woocommerce .izi-widget-cart{margin-top:16px}
+/* Zaufanie (nasz dodatek, hook woocommerce_after_cart_totals) */
 .blmd-ko-trust{display:grid;gap:2px;padding:10px;border-radius:24px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
 .blmd-ko-trust li{display:flex;align-items:center;gap:14px;padding:8px 10px;font-size:14.5px;line-height:1.4;color:var(--blmd-txt)}
 .blmd-ko-trust strong{display:block;font-size:15.5px;font-weight:600;color:var(--blmd-ink)}
 .blmd-ko-trust a{color:var(--blmd-violet-d);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .blmd-ko-trust-ico{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:var(--blmd-lav-3);color:var(--blmd-violet-d);flex:none}
 .blmd-ko-trust-ico svg{width:20px;height:20px}
-/* Uzupełnij komplet */
+
+/* Pusty koszyk (cart-empty.php + nasz dodatek przez hook woocommerce_cart_is_empty) */
+.blmd-ko-emptywrap{display:grid;justify-items:center;gap:16px;padding:clamp(36px,6vw,72px) 24px;border-radius:var(--blmd-r);background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);text-align:center}
+.blmd-ko-emptywrap[hidden]{display:none}
+.blmd-page .woocommerce .blmd-ko-emptywrap .cart-empty{margin:0;background:none;box-shadow:none;padding:0;justify-content:center;font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--blmd-ink)}
+.blmd-ko-empty-ico{display:grid;place-items:center;width:72px;height:72px;border-radius:24px;background:var(--blmd-lav-3);color:var(--blmd-violet-d)}
+.blmd-ko-empty-ico svg{width:32px;height:32px}
+.blmd-ko-empty-txt{max-width:460px;color:var(--blmd-txt)}
+.blmd-ko-empty-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.blmd-page .woocommerce .return-to-shop .button{background:transparent;color:var(--blmd-violet-d);box-shadow:none;text-decoration:underline;text-underline-offset:4px}
+
+/* Uzupełnij komplet (nasz dodatek; w WP cross-sells WooCommerce) */
 .blmd-ko-up{padding-top:0}
 .blmd-ko-media{position:relative}
-.blmd-ko-add{position:absolute;right:10px;bottom:10px;z-index:3;display:grid;place-items:center;width:46px;height:46px;border:0;border-radius:50%;background:#fff;color:var(--blmd-ink);cursor:pointer;box-shadow:0 10px 24px -12px rgba(29,29,27,.5);transition:background-color .2s,color .2s,transform .2s}
+.blmd-ko-add{position:absolute;right:10px;bottom:10px;z-index:3;display:none;place-items:center;width:46px;height:46px;border:0;border-radius:50%;background:#fff;color:var(--blmd-ink);cursor:pointer;box-shadow:0 10px 24px -12px rgba(29,29,27,.5);transition:background-color .2s,color .2s,transform .2s}
+html.blmd-js .blmd-ko-add{display:grid}
 .blmd-ko-add:hover{background:var(--blmd-violet);color:#fff;transform:scale(1.05)}
 .blmd-ko-add svg{width:20px;height:20px}
 .blmd-ko-add[aria-expanded=true]{opacity:0;pointer-events:none}
@@ -413,32 +528,43 @@ html.blmd-js .blmd-ko-update{display:none}
 .blmd-ko-sizes-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;border-radius:50%;background:var(--blmd-lav);cursor:pointer}
 .blmd-ko-sizes-x i{position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;border-radius:2px;background:var(--blmd-ink);transform:rotate(45deg)}
 .blmd-ko-sizes-x i+i{transform:rotate(-45deg)}
-.blmd-ko-add{display:none}
-html.blmd-js .blmd-ko-add{display:grid}
-/* Przyklejony pasek na mobile */
+
+/* Przyklejona suma na mobile (nasz dodatek, hook woocommerce_after_cart) */
 .blmd-ko-sticky{display:none}
-@media (max-width:960px){
- .blmd-ko-grid{grid-template-columns:1fr}
- .blmd-ko-side{position:static}
+@media (max-width:1020px){
+ .blmd-page .woocommerce .kadence-woo-cart-form-wrap{grid-template-columns:1fr}
+ .blmd-page .woocommerce .cart-collaterals{position:static}
 }
 @media (max-width:860px){
  .blmd-ko-sticky{position:fixed;left:0;right:0;bottom:0;z-index:57;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);box-shadow:0 -18px 40px -24px rgba(58,59,110,.5),inset 0 1px 0 var(--blmd-line);transition:transform .3s var(--blmd-ease)}
- .blmd-ko-sticky.is-hidden{transform:translateY(110%)}
+ .blmd-ko-sticky[hidden],.blmd-ko-sticky.is-hidden{transform:translateY(110%)}
+ .blmd-ko-sticky[hidden]{display:none}
  .blmd-ko-sticky span{font-size:13.5px;line-height:1.3;color:var(--blmd-txt)}
  .blmd-ko-sticky strong{display:block;font-size:20px;letter-spacing:-.02em;color:var(--blmd-ink)}
  .blmd-ko-sticky .blmd-btn{flex:none}
 }
-@media (max-width:620px){
- .blmd-ko-list{padding:4px 16px}
- .blmd-ko-item{grid-template-columns:84px minmax(0,1fr);grid-template-areas:"img info" "qty sum";gap:14px 14px;padding:16px 0}
- .blmd-ko-img{align-self:start}
- .blmd-ko-info h3{font-size:16px}
- .blmd-ko-qty{justify-self:start}
- .blmd-ko-sum{align-self:center}
- .blmd-ko-ship{padding:16px 16px 18px}
+/* Mobile: tabela koszyka jako karty (shop_table_responsive) */
+@media (max-width:760px){
+ .blmd-page .woocommerce table.cart,.blmd-page .woocommerce table.cart tbody{display:block}
+ .blmd-page .woocommerce table.cart thead{display:none}
+ .blmd-page .woocommerce table.cart tr.cart_item{display:grid;grid-template-columns:88px minmax(0,1fr) auto;grid-template-areas:"thumb name rm" "thumb price price" "qty qty sub";gap:6px 14px;padding:16px;border-bottom:1px solid var(--blmd-line)}
+ .blmd-page .woocommerce table.cart tr.cart_item>td{display:block;padding:0;border:0;width:auto}
+ .blmd-page .woocommerce table.cart td.product-thumbnail{grid-area:thumb;align-self:start}
+ .blmd-page .woocommerce table.cart td.product-name{grid-area:name;align-self:start;padding-top:4px}
+ .blmd-page .woocommerce table.cart td.product-name>a{font-size:16px}
+ .blmd-page .woocommerce table.cart td.product-remove{grid-area:rm;justify-self:end;margin:-6px -6px 0 0}
+ .blmd-page .woocommerce table.cart td.product-price{grid-area:price;align-self:start;font-size:15px}
+ .blmd-page .woocommerce table.cart td.product-price del,.blmd-page .woocommerce table.cart td.product-price ins{display:inline}
+ .blmd-page .woocommerce table.cart td.product-price del{margin-right:6px}
+ .blmd-page .woocommerce table.cart td.product-quantity{grid-area:qty;align-self:center;margin-top:8px}
+ .blmd-page .woocommerce table.cart td.product-subtotal{grid-area:sub;align-self:center;text-align:right;margin-top:8px;white-space:nowrap}
+ .blmd-page .woocommerce table.cart td.product-subtotal::before{content:attr(data-title);display:block;font-size:13px;font-weight:500;color:var(--blmd-mute)}
+ .blmd-page .woocommerce table.cart tr:not(.cart_item){display:block}
+ .blmd-page .woocommerce table.cart td.actions{display:block;padding:16px}
+ .blmd-page .woocommerce table.cart td.actions .coupon .button{flex:1 1 100%}
+ .blmd-ko-ship{padding:14px 16px 16px}
  .blmd-ko-ship p{font-size:15.5px}
- .blmd-ko-back svg{transform:scaleX(-1)}
-.blmd-ko-head h1 small{display:block;margin:6px 0 0}
+ .blmd-ko-head h1 small{display:block;margin:6px 0 0}
  .blmd-ko-steps{flex-wrap:nowrap;gap:4px}
  .blmd-ko-steps li{gap:7px;min-height:38px;padding:0 10px 0 5px;font-size:13.5px;white-space:nowrap}
  .blmd-ko-steps li::before{width:26px;height:26px;font-size:12.5px}
@@ -589,7 +715,7 @@ html.blmd-js .blmd-ko-add{display:grid}
      <div class="blmd-search-hints"><span>Często szukane:</span><a href="KATEGORIA.html">Joggery</a><a href="KATEGORIA.html">Komplety</a><a href="KATEGORIA.html">Tuniki</a><a href="KATEGORIA.html">Outlet</a></div>
     </div>
    </details>
-   <a class="blmd-ico-btn blmd-acc-link" href="https://blancomed.com/moje-konto/" aria-label="Moje konto"><svg aria-hidden="true"><use href="#blmd-i-user"/></svg></a>
+   <a class="blmd-ico-btn blmd-acc-link" href="MOJE-KONTO-LOGOWANIE.html" data-href="https://blancomed.com/moje-konto/" aria-label="Moje konto"><svg aria-hidden="true"><use href="#blmd-i-user"/></svg></a>
    <a class="blmd-ico-btn" href="KOSZYK.html" data-href="https://blancomed.com/koszyk/" aria-label="Koszyk, 2 produkty"><svg aria-hidden="true"><use href="#blmd-i-bag"/></svg><span class="blmd-cart-n" aria-hidden="true">2</span></a>
   </div>
  </nav>
@@ -605,191 +731,218 @@ html.blmd-js .blmd-ko-add{display:grid}
 </div></section>
 
 <section class="wp-section alignfull blmd-ko-top" aria-labelledby="blmd-ko-h1"><div class="wp-content-wrap blmd-wrap blmd-ko">
+ <!-- WDROŻENIE: kroki i nagłówek to blok GLAI na stronie /koszyk/ nad shortcode [woocommerce_cart]. Tytuł strony Kadence wyłączyć (H1 jest tutaj). -->
  <ol class="blmd-ko-steps" aria-label="Etapy zamówienia">
   <li aria-current="step">Koszyk</li>
-  <li>Dane i dostawa</li>
+  <li>Dane i adres</li>
   <li>Płatność</li>
  </ol>
  <div class="blmd-ko-head">
-  <h1 id="blmd-ko-h1">Twój koszyk <small data-ko-count>2 produkty</small></h1>
+  <h1 id="blmd-ko-h1">Twój koszyk <small data-ko-count>1 produkt</small></h1>
   <a class="blmd-link blmd-ko-back" href="KATEGORIA.html" data-href="https://blancomed.com/sklep/"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg>Wróć do zakupów</a>
  </div>
 
- <!-- Pusty koszyk (WooCommerce: cart-empty). W makiecie pokazuje się po usunięciu wszystkich produktów. -->
- <div class="blmd-ko-empty" data-ko-empty hidden>
-  <span class="blmd-ko-empty-ico"><svg aria-hidden="true"><use href="#blmd-i-bag"/></svg></span>
-  <h2>Twój koszyk jest pusty</h2>
-  <p>Zajrzyj do nowej kolekcji FlexCare albo wybierz bluzę i spodnie w ulubionym kolorze.</p>
-  <div>
-   <a class="blmd-btn blmd-btn--violet" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/">Dla niej <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
-   <a class="blmd-btn blmd-btn--light" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/">Dla niego <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
-  </div>
- </div>
+ <!-- Od tego miejsca: HTML szablonów WooCommerce (shortcode [woocommerce_cart]) w opakowaniu Kadence. Makieta: ?pusty=1 w adresie pokazuje pusty koszyk. -->
+ <div class="woocommerce">
+  <!-- Komunikaty WooCommerce (Kadence pokazuje je jako kwsb-snackbar-notice). W makiecie: usunięcie z „Cofnij?”, kupon, dodanie z „Uzupełnij komplet”. -->
+  <div class="woocommerce-notices-wrapper" data-ko-notices></div>
 
- <div class="blmd-ko-grid">
-  <div class="blmd-ko-main">
-   <div class="blmd-ko-ship" data-ko-ship>
-    <p aria-live="polite"><span class="blmd-ko-ship-ico"><svg aria-hidden="true"><use href="#blmd-i-truck"/></svg></span><span data-ko-shipmsg>Dodaj produkty za <strong>152,00&nbsp;zł</strong>, a dostawę dostaniesz gratis.</span></p>
-    <progress class="blmd-ko-bar" max="500" value="348" aria-label="Postęp do darmowej dostawy od 500 zł" data-ko-bar>348 z 500 zł</progress>
-   </div>
+  <div class="kadence-woo-cart-form-wrap" data-ko-full>
+   <form class="woocommerce-cart-form" action="KOSZYK.html" method="get" data-ko-form>
 
-   <!-- W WP: blok koszyka WooCommerce. Bez JS formularz wysyła ilości przyciskiem „Zaktualizuj koszyk”. -->
-   <form class="blmd-ko-form" action="KOSZYK.html" method="get" aria-labelledby="blmd-ko-list-h">
-    <h2 class="blmd-sr" id="blmd-ko-list-h">Produkty w koszyku</h2>
-    <div class="blmd-ko-list" data-ko-list>
-     <article class="blmd-ko-item" data-ko-item data-price="169" data-key="focus-magenta-s">
-      <a class="blmd-ko-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-focus-flexcare-magenta-dark-hibiscus/" tabindex="-1" aria-hidden="true"><img src="img/2026-01-bt1a0117.webp" width="1200" height="1824" alt=""></a>
-      <div class="blmd-ko-info">
-       <span class="blmd-ko-coll">FlexCare</span>
-       <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-focus-flexcare-magenta-dark-hibiscus/" data-ko-name>Bluza medyczna damska Focus FlexCare magenta Dark Hibiscus</a></h3>
-       <p class="blmd-ko-attr"><span><i style="--c:#8e1f55" aria-hidden="true"></i>Magenta Dark Hibiscus</span><span>Rozmiar: S</span></p>
-       <p class="blmd-ko-unit">169,00 zł za sztukę</p>
-      </div>
-      <div class="blmd-ko-qty" role="group" aria-label="Ilość: bluza Focus FlexCare magenta, rozmiar S">
-       <button class="blmd-ko-minus" type="button" aria-label="Zmniejsz ilość" data-ko-step="-1" disabled><i aria-hidden="true"></i></button>
-       <input type="number" name="ilosc[focus-magenta-s]" value="1" min="1" max="99" inputmode="numeric" aria-label="Ilość" data-ko-qty>
-       <button type="button" aria-label="Zwiększ ilość" data-ko-step="1"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
-      </div>
-      <div class="blmd-ko-sum">
-       <strong data-ko-line>169,00 zł</strong>
-       <button class="blmd-ko-rm" type="submit" name="usun" value="focus-magenta-s" data-ko-rm>Usuń<span class="blmd-sr">: bluza Focus FlexCare magenta, rozmiar S</span></button>
-      </div>
-     </article>
-     <article class="blmd-ko-item" data-ko-item data-price="179" data-key="pure-magenta-s">
-      <a class="blmd-ko-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-pure-flexcare-magenta-dark-hibiscus/" tabindex="-1" aria-hidden="true"><img src="img/2026-01-bt1a0103.webp" width="1200" height="1824" alt=""></a>
-      <div class="blmd-ko-info">
-       <span class="blmd-ko-coll">FlexCare</span>
-       <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-pure-flexcare-magenta-dark-hibiscus/" data-ko-name>Spodnie medyczne damskie Pure FlexCare magenta Dark Hibiscus</a></h3>
-       <p class="blmd-ko-attr"><span><i style="--c:#8e1f55" aria-hidden="true"></i>Magenta Dark Hibiscus</span><span>Rozmiar: S</span></p>
-       <p class="blmd-ko-unit">179,00 zł za sztukę</p>
-      </div>
-      <div class="blmd-ko-qty" role="group" aria-label="Ilość: spodnie Pure FlexCare magenta, rozmiar S">
-       <button class="blmd-ko-minus" type="button" aria-label="Zmniejsz ilość" data-ko-step="-1" disabled><i aria-hidden="true"></i></button>
-       <input type="number" name="ilosc[pure-magenta-s]" value="1" min="1" max="99" inputmode="numeric" aria-label="Ilość" data-ko-qty>
-       <button type="button" aria-label="Zwiększ ilość" data-ko-step="1"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
-      </div>
-      <div class="blmd-ko-sum">
-       <strong data-ko-line>179,00 zł</strong>
-       <button class="blmd-ko-rm" type="submit" name="usun" value="pure-magenta-s" data-ko-rm>Usuń<span class="blmd-sr">: spodnie Pure FlexCare magenta, rozmiar S</span></button>
-      </div>
-     </article>
+    <!-- Nasz dodatek. WDROŻENIE: add_action('woocommerce_before_cart_table', ...) w motywie potomnym; kwotę liczy PHP z WC()->cart->get_displayed_subtotal(), próg 500 zł z ustawień darmowej wysyłki. Odświeża się razem z formularzem po AJAX-ie koszyka. -->
+    <div class="blmd-ko-ship" data-ko-ship>
+     <p aria-live="polite"><span class="blmd-ko-ship-ico"><svg aria-hidden="true"><use href="#blmd-i-truck"/></svg></span><span data-ko-shipmsg>Do darmowej dostawy brakuje Ci <strong>401,00&nbsp;zł</strong>.</span></p>
+     <progress class="blmd-ko-bar" max="500" value="99" aria-label="Postęp do darmowej dostawy od 500 zł" data-ko-bar>99 z 500 zł</progress>
     </div>
-    <div class="blmd-ko-listfoot">
-     <button class="blmd-btn blmd-btn--light blmd-btn--plain blmd-btn--sm blmd-ko-update" type="submit">Zaktualizuj koszyk</button>
-    </div>
+
+    <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+     <thead>
+      <tr>
+       <th scope="col" class="product-remove"><span class="screen-reader-text">Usuń produkt</span></th>
+       <th scope="col" class="product-thumbnail"><span class="screen-reader-text">Miniatura</span></th>
+       <th scope="col" class="product-name">Produkt</th>
+       <th scope="col" class="product-price">Cena</th>
+       <th scope="col" class="product-quantity">Ilość</th>
+       <th scope="col" class="product-subtotal">Kwota</th>
+      </tr>
+     </thead>
+     <tbody data-ko-list>
+      <!-- Cena z przekreśleniem: WDROŻENIE filtr woocommerce_cart_item_price (domyślnie Woo pokazuje tylko cenę aktualną). Stan XS: 3 szt. (crawl), stąd max="3". -->
+      <tr class="woocommerce-cart-form__cart-item cart_item" data-ko-item data-price="99" data-key="comfy-lila-xs">
+       <td class="product-remove">
+        <a role="button" href="KOSZYK.html?remove_item=comfy-lila-xs" class="remove" aria-label="Usuń Spodnie medyczne damskie Comfy PROline liliowy VIOLET MIST z koszyka" data-product_id="10087" data-product_sku="">&times;</a>
+       </td>
+       <td class="product-thumbnail"><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-comfy-proline-liliowy-violet-mist/" tabindex="-1" aria-hidden="true"><img src="img/2024-07-spodnie-medyczne-damskie-comfy-proline-lila.webp" width="1200" height="1804" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""></a></td>
+       <td role="rowheader" class="product-name" data-title="Produkt">
+        <a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-comfy-proline-liliowy-violet-mist/" data-ko-name>Spodnie medyczne damskie Comfy PROline liliowy VIOLET MIST</a>
+        <dl class="variation"><dt class="variation-Rozmiar">Rozmiar:</dt><dd class="variation-Rozmiar"><p>XS</p></dd></dl>
+       </td>
+       <td class="product-price" data-title="Cena"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>170,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></del> <span class="screen-reader-text">Cena regularna: 170,00 zł. Cena promocyjna:</span> <ins><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></ins></td>
+       <td class="product-quantity" data-title="Ilość">
+        <div class="quantity">
+         <input type="button" value="-" class="minus" aria-label="Zmniejsz ilość">
+         <label class="screen-reader-text" for="quantity_comfy-lila-xs">Spodnie medyczne damskie Comfy PROline liliowy VIOLET MIST, ilość</label>
+         <input type="number" id="quantity_comfy-lila-xs" class="input-text qty text" name="cart[comfy-lila-xs][qty]" value="1" aria-label="Ilość produktu" size="4" min="0" max="3" step="1" placeholder="" inputmode="numeric" autocomplete="off" data-ko-qty>
+         <input type="button" value="+" class="plus" aria-label="Zwiększ ilość">
+        </div>
+       </td>
+       <td class="product-subtotal" data-title="Kwota" data-ko-line><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td>
+      </tr>
+
+      <tr>
+       <td colspan="6" class="actions">
+        <div class="coupon">
+         <label for="coupon_code" class="screen-reader-text">Kupon:</label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Kod rabatowy" autocomplete="off" spellcheck="false"> <button type="submit" class="button" name="apply_coupon" value="Zastosuj kupon" data-ko-coupon>Zastosuj kod</button>
+         <!-- Nasz dodatek. WDROŻENIE: add_action('woocommerce_cart_coupon', ...). -->
+         <p class="blmd-ko-student">Studiujesz? <a href="STUDENCI.html" data-href="https://blancomed.com/studenci/">Odbierz kod -15% dla studentów</a></p>
+        </div>
+        <!-- Bez JS: przycisk wysyła nowe ilości. Z JS: ukryty, koszyk przelicza się sam. WDROŻENIE: krótki skrypt w motywie, który po zmianie ilości (z opóźnieniem ok. 0,6 s) klika [name=update_cart]; Woo odświeża formularz i podsumowanie przez AJAX. -->
+        <button type="submit" class="button" name="update_cart" value="Zaktualizuj koszyk">Zaktualizuj koszyk</button>
+        <input type="hidden" id="woocommerce-cart-nonce" name="woocommerce-cart-nonce" value="makieta">
+       </td>
+      </tr>
+     </tbody>
+    </table>
    </form>
+
+   <div class="cart-collaterals">
+    <div class="cart_totals">
+     <h2>Podsumowanie koszyka</h2>
+     <table cellspacing="0" class="shop_table shop_table_responsive">
+      <tr class="cart-subtotal">
+       <th>Kwota</th>
+       <td data-title="Kwota" data-ko-sub><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td>
+      </tr>
+      <!-- Metody dostawy z crawlu (Kurier InPost 18,00 zł, Paczkomaty InPost 15,00 zł). Identyfikatory metod przyjęte jak we wtyczce InPost (easypack_*). DO-POTWIERDZENIA: id metod i to, która jest domyślna (na żywym zamówieniu suma 117,00 zł = 99 + 18, więc dziś domyślny jest kurier). Powyżej 500 zł koszt 0 zł (darmowa dostawa). -->
+      <tr class="woocommerce-shipping-totals shipping">
+       <th>Wysyłka</th>
+       <td data-title="Wysyłka">
+        <ul id="shipping_method" class="woocommerce-shipping-methods">
+         <li><input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_easypack_shipping_courier" value="easypack_shipping_courier" class="shipping_method" checked data-cost="18"><label for="shipping_method_0_easypack_shipping_courier">Kurier InPost: <span class="woocommerce-Price-amount amount"><bdi>18,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></label></li>
+         <li><input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_easypack_parcel_machines" value="easypack_parcel_machines" class="shipping_method" data-cost="15"><label for="shipping_method_0_easypack_parcel_machines">Paczkomaty InPost: <span class="woocommerce-Price-amount amount"><bdi>15,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></label></li>
+        </ul>
+        <!-- Tekst przez filtr woocommerce_shipping_estimate_html. -->
+        <p class="woocommerce-shipping-destination">Paczkomat albo adres dla kuriera podasz w następnym kroku.</p>
+       </td>
+      </tr>
+      <tr class="order-total">
+       <th>Łącznie</th>
+       <td data-title="Łącznie"><strong data-ko-total><span class="woocommerce-Price-amount amount"><bdi>117,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></strong></td>
+      </tr>
+     </table>
+     <!-- DO-POTWIERDZENIA: dopisek WooCommerce o VAT przy kwocie łącznej (zależy od ustawień podatków). -->
+
+     <div class="wc-proceed-to-checkout">
+      <!-- Dziś „Przejdź do płatności”. Zmieniamy na „Przejdź do zamówienia”, bo następny krok to dane i adres, nie płatność. WDROŻENIE: tłumaczenie (Loco Translate) lub filtr gettext. -->
+      <a href="ZAMOWIENIE.html" data-href="https://blancomed.com/zamowienie/" class="checkout-button button alt wc-forward" data-ko-cta>Przejdź do zamówienia</a>
+     </div>
+     <p class="blmd-ko-note"><svg aria-hidden="true"><use href="#blmd-i-user"/></svg>Zamówisz bez zakładania konta</p>
+
+     <!-- InPost Pay. WDROŻENIE: przycisk renderuje wtyczka (inpost-izi-button, binding_place=BASKET_SUMMARY) w shadow DOM; w makiecie podgląd .blmd-izi.
+          Dziś stoi NAD tabelą sum, przed naszym przyciskiem. Przenosimy go POD „Przejdź do zamówienia”, żeby czarna pigułka nie konkurowała z głównym przyciskiem
+          (ustawienie miejsca we wtyczce albo przeniesienie placeholdera hookiem woocommerce_proceed_to_checkout z priorytetem 30). DO-POTWIERDZENIA: czy wtyczka pozwala zmienić miejsce i rozmiar przycisku. -->
+     <div class="izi-widget-placeholder izi-widget-cart">
+      <p class="blmd-izi-or">albo kup szybciej przez aplikację InPost</p>
+      <div class="blmd-izi blmd-izi--sub">
+       <span class="blmd-izi-btn"><span class="blmd-izi-tag">Paczkomat taniej</span>Kup z <b><i aria-hidden="true"></i>InPost</b></span>
+       <span class="blmd-izi-note">Wymieniaj InCoiny na dostawę tańszą o 3 zł!</span>
+      </div>
+     </div>
+    </div>
+
+    <!-- Nasz dodatek. WDROŻENIE: add_action('woocommerce_after_cart_totals', ...) albo blok GLAI w kolumnie (Kadence pozwala na treść po koszyku). Fakty z FAQ i strony głównej. -->
+    <ul class="blmd-ko-trust">
+     <li><span class="blmd-ko-trust-ico"><svg aria-hidden="true"><use href="#blmd-i-return"/></svg></span><span><strong>14 dni na zwrot lub wymianę</strong>Rozmiar nie pasuje? Wymienisz go bez kłopotu</span></li>
+     <li><span class="blmd-ko-trust-ico"><svg aria-hidden="true"><use href="#blmd-i-truck"/></svg></span><span><strong>Wysyłka w 3 do 5 dni roboczych</strong>od zaksięgowania płatności</span></li>
+     <li><span class="blmd-ko-trust-ico"><svg aria-hidden="true"><use href="#blmd-i-phone"/></svg></span><span><strong>Pomożemy przy zamówieniu</strong><a href="tel:+48665502476">665 502 476</a>, pn. do pt. 9:00 do 15:00</span></li>
+    </ul>
+   </div>
   </div>
 
-  <aside class="blmd-ko-side" aria-labelledby="blmd-ko-sum-h">
-   <div class="blmd-ko-card">
-    <h2 id="blmd-ko-sum-h">Podsumowanie</h2>
-    <dl class="blmd-ko-rows">
-     <div><dt>Wartość produktów</dt><dd data-ko-sub>348,00 zł</dd></div>
-     <div><dt>Dostawa</dt><dd data-ko-shipcost>Wyliczymy w następnym kroku<small>Zależy od formy dostawy</small></dd></div>
-    </dl>
-    <div class="blmd-ko-total"><span>Razem<small>bez kosztu dostawy</small></span><strong data-ko-total>348,00 zł</strong></div>
-    <!-- DO-POTWIERDZENIA: adres strony zamówienia WooCommerce (w sitemapie brak; przyjęto /zamowienie/). -->
-    <a class="blmd-btn blmd-btn--violet blmd-ko-cta" href="https://blancomed.com/zamowienie/" data-href="https://blancomed.com/zamowienie/" data-ko-cta>Przejdź do zamówienia <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
-    <p class="blmd-ko-note"><svg aria-hidden="true"><use href="#blmd-i-user"/></svg>Zamówisz bez zakładania konta</p>
-    <details class="blmd-ko-coupon">
-     <summary>Masz kod rabatowy? <svg class="blmd-caret" aria-hidden="true"><use href="#blmd-i-caret"/></svg></summary>
-     <!-- W WP: pole kuponu WooCommerce (apply_coupon). -->
-     <form action="KOSZYK.html" method="get">
-      <label class="blmd-sr" for="blmd-ko-code"><span>Kod rabatowy</span></label>
-      <input id="blmd-ko-code" type="text" name="kupon" placeholder="Wpisz kod" autocomplete="off" spellcheck="false">
-      <button class="blmd-btn blmd-btn--dark blmd-btn--plain" type="submit">Zastosuj</button>
-     </form>
-     <p>Studiujesz? <a href="STUDENCI.html" data-href="https://blancomed.com/studenci/">Odbierz kod -15% dla studentów</a></p>
-    </details>
-    <div class="blmd-ko-pay"><span class="blmd-sr">Metody płatności:</span><span>BLIK</span><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Google Pay</span><span>PayU</span><span>Płatność odroczona</span></div>
+  <!-- Pusty koszyk: cart/cart-empty.php (p.cart-empty.wc-empty-cart-message + p.return-to-shop). W makiecie widoczny przy ?pusty=1 albo po usunięciu wszystkich produktów; bez JS ukryty.
+       Ikona, opis i skróty do kategorii to nasz dodatek. WDROŻENIE: add_action('woocommerce_cart_is_empty', ..., 20). -->
+  <div class="blmd-ko-emptywrap" data-ko-empty hidden>
+   <span class="blmd-ko-empty-ico"><svg aria-hidden="true"><use href="#blmd-i-bag"/></svg></span>
+   <p class="cart-empty woocommerce-info wc-empty-cart-message" role="status">Twój koszyk jest pusty.</p>
+   <p class="blmd-ko-empty-txt">Zajrzyj do nowej kolekcji FlexCare albo wybierz bluzę i spodnie w ulubionym kolorze.</p>
+   <div class="blmd-ko-empty-links">
+    <a class="blmd-btn blmd-btn--violet" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/">Dla niej <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
+    <a class="blmd-btn blmd-btn--light" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/">Dla niego <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
    </div>
-   <ul class="blmd-ko-trust">
-    <li><span class="blmd-ko-trust-ico"><svg aria-hidden="true"><use href="#blmd-i-return"/></svg></span><span><strong>14 dni na zwrot lub wymianę</strong>Rozmiar nie pasuje? Wymienisz go bez kłopotu</span></li>
-    <li><span class="blmd-ko-trust-ico"><svg aria-hidden="true"><use href="#blmd-i-truck"/></svg></span><span><strong>Wysyłka w 3 do 5 dni roboczych</strong>od zaksięgowania płatności</span></li>
-    <li><span class="blmd-ko-trust-ico"><svg aria-hidden="true"><use href="#blmd-i-phone"/></svg></span><span><strong>Pomożemy przy zamówieniu</strong><a href="tel:+48665502476">665 502 476</a>, pn. do pt. 9:00 do 15:00</span></li>
-   </ul>
-  </aside>
+   <p class="return-to-shop"><a class="button wc-backward" href="KATEGORIA.html" data-href="https://blancomed.com/sklep/">Wróć do sklepu</a></p>
+  </div>
  </div>
 </div>
+
+<!-- Nasz dodatek (mobile). WDROŻENIE: add_action('woocommerce_after_cart', ...); kwotę odświeża fragment AJAX (woocommerce_add_to_cart_fragments / updated_cart_totals). -->
 <div class="blmd-ko-sticky" data-ko-sticky>
- <span>Razem, bez dostawy<strong data-ko-total>348,00 zł</strong></span>
- <a class="blmd-btn blmd-btn--violet blmd-btn--sm" href="https://blancomed.com/zamowienie/" data-href="https://blancomed.com/zamowienie/">Do zamówienia <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
+ <span>Łącznie z dostawą<strong data-ko-total><span class="woocommerce-Price-amount amount"><bdi>117,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></strong></span>
+ <a class="blmd-btn blmd-btn--violet blmd-btn--sm" href="ZAMOWIENIE.html" data-href="https://blancomed.com/zamowienie/">Do zamówienia <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
 </div>
 </section>
 
-<section class="wp-section alignfull blmd-sec blmd-ko-up" aria-labelledby="blmd-ko-up-h"><div class="wp-content-wrap blmd-wrap">
+<!-- Nasz dodatek. WDROŻENIE: zamiast domyślnego woocommerce_cross_sell_display w cart-collaterals (remove_action) wyświetlamy cross-sells w tej sekcji (hook woocommerce_after_cart), z kartą blmd-pcard. Szybkie dodanie rozmiaru: AJAX add-to-cart z variation_id. -->
+<section class="wp-section alignfull blmd-sec blmd-ko-up" aria-labelledby="blmd-ko-up-h" data-ko-upsec><div class="wp-content-wrap blmd-wrap">
  <div class="blmd-sec-head">
-  <div><span class="blmd-eyebrow">Pasuje do Twojego koszyka</span><h2 class="blmd-h2" id="blmd-ko-up-h">Uzupełnij <span class="blmd-acc">komplet</span></h2></div>
-  <p>Druga bluza na zmianę albo spodnie w innym kroju z tej samej kolekcji. Wybierz rozmiar i dodaj bez wychodzenia z koszyka.</p>
+  <div><span class="blmd-eyebrow">Ten sam odcień Violet Mist</span><h2 class="blmd-h2" id="blmd-ko-up-h">Uzupełnij <span class="blmd-acc">komplet</span></h2></div>
+  <p>Bluza z kolekcji PROline w tym samym kolorze albo druga para spodni na zmianę. Wybierz rozmiar i dodaj bez wychodzenia z koszyka.</p>
  </div>
- <div class="blmd-pgrid blmd-ko-upgrid">
-  <article class="blmd-pcard" data-ko-prod data-name="Bluza medyczna damska Snaps FlexCare magenta Dark Hibiscus" data-price="159" data-img="img/2026-01-bt1a0135.webp" data-h="1823" data-color="Magenta Dark Hibiscus" data-c="#8e1f55" data-coll="FlexCare" data-url="https://blancomed.com/produkt/bluza-medyczna-damska-snaps-flexcare-magenta-dark-hibiscus/">
+ <!-- DO-POTWIERDZENIA: rozmiary w szybkim wyborze (w makiecie XS do XXL) i cena bluzy Clever PROline liliowej (160,00 zł przyjęte jak na karcie produktu). -->
+ <div class="blmd-pgrid">
+  <article class="blmd-pcard" data-ko-prod data-name="Bluza medyczna damska Smart PROline liliowy VIOLET MIST" data-price="99" data-reg="160" data-img="img/2024-09-bluza-medyczna-damska-smart-prolina-lila.webp" data-h="1804" data-url="https://blancomed.com/produkt/bluza-medyczna-damska-smart-proline-liliowy-violet-mist/">
    <div class="blmd-ko-media">
-    <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-snaps-flexcare-magenta-dark-hibiscus/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><img src="img/2026-01-bt1a0135.webp" width="1200" height="1823" alt="" loading="lazy"></a>
-    <button class="blmd-ko-add" type="button" aria-expanded="false" aria-controls="blmd-ko-s1" aria-label="Wybierz rozmiar i dodaj do koszyka: bluza Snaps FlexCare magenta"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
-    <div class="blmd-ko-sizes" id="blmd-ko-s1" role="group" aria-label="Rozmiar: bluza Snaps FlexCare magenta" hidden><p>Wybierz rozmiar</p><div class="blmd-ko-sizes-g"><button type="button">XS</button><button type="button">S</button><button type="button">M</button><button type="button">L</button><button type="button">XL</button><button type="button">XXL</button></div><button class="blmd-ko-sizes-x" type="button" aria-label="Zamknij wybór rozmiaru"><i></i><i></i></button></div>
+    <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-smart-proline-liliowy-violet-mist/" tabindex="-1" aria-hidden="true"><span class="blmd-badge blmd-badge--sale">-38%</span><img src="img/2024-09-bluza-medyczna-damska-smart-prolina-lila.webp" width="1200" height="1804" alt="" loading="lazy"></a>
+    <button class="blmd-ko-add" type="button" aria-expanded="false" aria-controls="blmd-ko-s1" aria-label="Wybierz rozmiar i dodaj do koszyka: bluza Smart PROline liliowa"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
+    <div class="blmd-ko-sizes" id="blmd-ko-s1" role="group" aria-label="Rozmiar: bluza Smart PROline liliowa" hidden><p>Wybierz rozmiar</p><div class="blmd-ko-sizes-g"><button type="button">XS</button><button type="button">S</button><button type="button">M</button><button type="button">L</button><button type="button">XL</button><button type="button">XXL</button></div><button class="blmd-ko-sizes-x" type="button" aria-label="Zamknij wybór rozmiaru"><i></i><i></i></button></div>
    </div>
-   <span class="blmd-pcard-coll">FlexCare</span>
-   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-snaps-flexcare-magenta-dark-hibiscus/">Bluza medyczna damska Snaps FlexCare magenta Dark Hibiscus</a></h3>
-   <div class="blmd-sw"><i style="--c:#8e1f55" title="Dark Hibiscus"></i><i style="--c:#4a2e25" title="Dark Chocolate"></i><i style="--c:#e3b7bd" title="Powder Rose"></i><small>3 kolory</small></div>
-   <p class="blmd-pcard-price">159,00 zł</p>
+   <span class="blmd-pcard-coll">PROline</span>
+   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-smart-proline-liliowy-violet-mist/">Bluza medyczna damska Smart PROline liliowy</a></h3>
+   <p class="blmd-pcard-price"><del>160,00 zł</del><ins>99,00 zł</ins><span class="blmd-pcard-low">Najniższa cena z 30 dni: 99,00 zł</span></p>
   </article>
-  <article class="blmd-pcard" data-ko-prod data-name="Spodnie medyczne damskie Elegance FlexCare magenta Dark Hibiscus" data-price="189" data-img="img/2026-01-bt1a0162.webp" data-h="1800" data-color="Magenta Dark Hibiscus" data-c="#8e1f55" data-coll="FlexCare" data-url="https://blancomed.com/produkt/spodnie-medyczne-damskie-elegance-flexcare-magenta-dark-hibiscus/">
+  <article class="blmd-pcard" data-ko-prod data-name="Bluza medyczna damska Clever PROline liliowy VIOLET MIST" data-price="160" data-img="img/2024-07-komplet-medyczny-damski-clever-proline-lila.webp" data-h="1805" data-url="https://blancomed.com/produkt/bluza-medyczna-damska-clever-proline-liliowy-violet-mist/">
    <div class="blmd-ko-media">
-    <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-elegance-flexcare-magenta-dark-hibiscus/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><img src="img/2026-01-bt1a0162.webp" width="1200" height="1800" alt="" loading="lazy"></a>
-    <button class="blmd-ko-add" type="button" aria-expanded="false" aria-controls="blmd-ko-s2" aria-label="Wybierz rozmiar i dodaj do koszyka: spodnie Elegance FlexCare magenta"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
-    <div class="blmd-ko-sizes" id="blmd-ko-s2" role="group" aria-label="Rozmiar: spodnie Elegance FlexCare magenta" hidden><p>Wybierz rozmiar</p><div class="blmd-ko-sizes-g"><button type="button">XS</button><button type="button">S</button><button type="button">M</button><button type="button">L</button><button type="button">XL</button><button type="button">XXL</button></div><button class="blmd-ko-sizes-x" type="button" aria-label="Zamknij wybór rozmiaru"><i></i><i></i></button></div>
+    <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-clever-proline-liliowy-violet-mist/" tabindex="-1" aria-hidden="true"><img src="img/2024-07-komplet-medyczny-damski-clever-proline-lila.webp" width="1200" height="1805" alt="" loading="lazy"></a>
+    <button class="blmd-ko-add" type="button" aria-expanded="false" aria-controls="blmd-ko-s2" aria-label="Wybierz rozmiar i dodaj do koszyka: bluza Clever PROline liliowa"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
+    <div class="blmd-ko-sizes" id="blmd-ko-s2" role="group" aria-label="Rozmiar: bluza Clever PROline liliowa" hidden><p>Wybierz rozmiar</p><div class="blmd-ko-sizes-g"><button type="button">XS</button><button type="button">S</button><button type="button">M</button><button type="button">L</button><button type="button">XL</button><button type="button">XXL</button></div><button class="blmd-ko-sizes-x" type="button" aria-label="Zamknij wybór rozmiaru"><i></i><i></i></button></div>
    </div>
-   <span class="blmd-pcard-coll">FlexCare</span>
-   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-elegance-flexcare-magenta-dark-hibiscus/">Spodnie medyczne damskie Elegance FlexCare magenta Dark Hibiscus</a></h3>
-   <div class="blmd-sw"><i style="--c:#8e1f55" title="Dark Hibiscus"></i><i style="--c:#4a2e25" title="Dark Chocolate"></i><i style="--c:#e3b7bd" title="Powder Rose"></i><small>3 kolory</small></div>
-   <p class="blmd-pcard-price">189,00 zł</p>
+   <span class="blmd-pcard-coll">PROline</span>
+   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-clever-proline-liliowy-violet-mist/">Bluza medyczna damska Clever PROline liliowy</a></h3>
+   <p class="blmd-pcard-price">160,00 zł</p>
   </article>
-  <article class="blmd-pcard" data-ko-prod data-name="Bluza medyczna damska Focus FlexCare różowa Powder Rose" data-price="169" data-img="img/2026-01-bluzka-medyczna-damska-ze-stojka-focus-pudrowy-roz.webp" data-h="1696" data-color="Powder Rose" data-c="#e3b7bd" data-coll="FlexCare" data-url="https://blancomed.com/produkt/bluza-medyczna-damska-focus-flexcare-rozowa-powder-rose/">
+  <article class="blmd-pcard" data-ko-prod data-name="Spodnie medyczne damskie Jogger PROline liliowy VIOLET MIST" data-price="99" data-reg="165" data-img="img/2024-07-komplet-medyczny-damski-smart-proline-lila.webp" data-h="1804" data-url="https://blancomed.com/produkt/spodnie-medyczne-damskie-jogger-proline-liliowy-violet-mist/">
    <div class="blmd-ko-media">
-    <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-focus-flexcare-rozowa-powder-rose/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><img src="img/2026-01-bluzka-medyczna-damska-ze-stojka-focus-pudrowy-roz.webp" width="1200" height="1696" alt="" loading="lazy"></a>
-    <button class="blmd-ko-add" type="button" aria-expanded="false" aria-controls="blmd-ko-s3" aria-label="Wybierz rozmiar i dodaj do koszyka: bluza Focus FlexCare pudrowy róż"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
-    <div class="blmd-ko-sizes" id="blmd-ko-s3" role="group" aria-label="Rozmiar: bluza Focus FlexCare pudrowy róż" hidden><p>Wybierz rozmiar</p><div class="blmd-ko-sizes-g"><button type="button">XS</button><button type="button">S</button><button type="button">M</button><button type="button">L</button><button type="button">XL</button><button type="button">XXL</button></div><button class="blmd-ko-sizes-x" type="button" aria-label="Zamknij wybór rozmiaru"><i></i><i></i></button></div>
+    <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-jogger-proline-liliowy-violet-mist/" tabindex="-1" aria-hidden="true"><span class="blmd-badge blmd-badge--sale">-40%</span><img src="img/2024-07-komplet-medyczny-damski-smart-proline-lila.webp" width="1200" height="1804" alt="" loading="lazy"></a>
+    <button class="blmd-ko-add" type="button" aria-expanded="false" aria-controls="blmd-ko-s3" aria-label="Wybierz rozmiar i dodaj do koszyka: spodnie Jogger PROline liliowe"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
+    <div class="blmd-ko-sizes" id="blmd-ko-s3" role="group" aria-label="Rozmiar: spodnie Jogger PROline liliowe" hidden><p>Wybierz rozmiar</p><div class="blmd-ko-sizes-g"><button type="button">XS</button><button type="button">S</button><button type="button">M</button><button type="button">L</button><button type="button">XL</button><button type="button">XXL</button></div><button class="blmd-ko-sizes-x" type="button" aria-label="Zamknij wybór rozmiaru"><i></i><i></i></button></div>
    </div>
-   <span class="blmd-pcard-coll">FlexCare</span>
-   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-focus-flexcare-rozowa-powder-rose/">Bluza medyczna damska Focus FlexCare różowa Powder Rose</a></h3>
-   <div class="blmd-sw"><i style="--c:#e3b7bd" title="Powder Rose"></i><i style="--c:#8e1f55" title="Dark Hibiscus"></i><i style="--c:#4a2e25" title="Dark Chocolate"></i><small>3 kolory</small></div>
-   <p class="blmd-pcard-price">169,00 zł</p>
+   <span class="blmd-pcard-coll">PROline</span>
+   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-jogger-proline-liliowy-violet-mist/">Spodnie medyczne damskie Jogger PROline liliowy</a></h3>
+   <p class="blmd-pcard-price"><del>165,00 zł</del><ins>99,00 zł</ins><span class="blmd-pcard-low">Najniższa cena z 30 dni: 99,00 zł</span></p>
   </article>
-  <article class="blmd-pcard" data-ko-prod data-name="Spodnie medyczne damskie Pure FlexCare brązowe Dark Chocolate" data-price="179" data-img="img/2026-01-bt1a9930.webp" data-h="1824" data-color="Dark Chocolate" data-c="#4a2e25" data-coll="FlexCare" data-url="https://blancomed.com/produkt/spodnie-medyczne-damskie-pure-flexcare-brazowe-dark-chocolate/">
+  <article class="blmd-pcard" data-ko-prod data-name="Spodnie medyczne damskie Comfy PROline fioletowy PLUM PERFECT" data-price="170" data-img="img/2024-07-komplet-medyczny-damski-clever-proline-fioletowy.webp" data-h="1804" data-url="https://blancomed.com/produkt/spodnie-medyczne-damskie-comfy-proline-fioletowy-plum-perfect/">
    <div class="blmd-ko-media">
-    <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-pure-flexcare-brazowe-dark-chocolate/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><img src="img/2026-01-bt1a9930.webp" width="1200" height="1824" alt="" loading="lazy"></a>
-    <button class="blmd-ko-add" type="button" aria-expanded="false" aria-controls="blmd-ko-s4" aria-label="Wybierz rozmiar i dodaj do koszyka: spodnie Pure FlexCare brązowe"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
-    <div class="blmd-ko-sizes" id="blmd-ko-s4" role="group" aria-label="Rozmiar: spodnie Pure FlexCare brązowe" hidden><p>Wybierz rozmiar</p><div class="blmd-ko-sizes-g"><button type="button">XS</button><button type="button">S</button><button type="button">M</button><button type="button">L</button><button type="button">XL</button><button type="button">XXL</button></div><button class="blmd-ko-sizes-x" type="button" aria-label="Zamknij wybór rozmiaru"><i></i><i></i></button></div>
+    <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-comfy-proline-fioletowy-plum-perfect/" tabindex="-1" aria-hidden="true"><img src="img/2024-07-komplet-medyczny-damski-clever-proline-fioletowy.webp" width="1200" height="1804" alt="" loading="lazy"></a>
+    <button class="blmd-ko-add" type="button" aria-expanded="false" aria-controls="blmd-ko-s4" aria-label="Wybierz rozmiar i dodaj do koszyka: spodnie Comfy PROline fioletowe"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
+    <div class="blmd-ko-sizes" id="blmd-ko-s4" role="group" aria-label="Rozmiar: spodnie Comfy PROline fioletowe" hidden><p>Wybierz rozmiar</p><div class="blmd-ko-sizes-g"><button type="button">XS</button><button type="button">S</button><button type="button">M</button><button type="button">L</button><button type="button">XL</button><button type="button">XXL</button></div><button class="blmd-ko-sizes-x" type="button" aria-label="Zamknij wybór rozmiaru"><i></i><i></i></button></div>
    </div>
-   <span class="blmd-pcard-coll">FlexCare</span>
-   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-pure-flexcare-brazowe-dark-chocolate/">Spodnie medyczne damskie Pure FlexCare brązowe Dark Chocolate</a></h3>
-   <div class="blmd-sw"><i style="--c:#4a2e25" title="Dark Chocolate"></i><i style="--c:#8e1f55" title="Dark Hibiscus"></i><i style="--c:#e3b7bd" title="Powder Rose"></i><small>3 kolory</small></div>
-   <p class="blmd-pcard-price">179,00 zł</p>
+   <span class="blmd-pcard-coll">PROline</span>
+   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-comfy-proline-fioletowy-plum-perfect/">Spodnie medyczne damskie Comfy PROline fioletowy</a></h3>
+   <p class="blmd-pcard-price">170,00 zł</p>
   </article>
  </div>
- <!-- DO-POTWIERDZENIA: rozmiary FlexCare (w makiecie XS do XXL). W WP lista z „Produkty powiązane / cross-sell” WooCommerce. -->
 </div></section>
 
+<!-- Wzór nowego wiersza koszyka (makieta, dodawanie z „Uzupełnij komplet”) -->
 <template id="blmd-ko-tpl">
- <article class="blmd-ko-item" data-ko-item data-price="0" data-key="">
-  <a class="blmd-ko-img" href="PRODUKT.html" tabindex="-1" aria-hidden="true"><img src="" width="1200" height="1800" alt=""></a>
-  <div class="blmd-ko-info">
-   <span class="blmd-ko-coll"></span>
-   <h3><a href="PRODUKT.html" data-ko-name></a></h3>
-   <p class="blmd-ko-attr"><span><i aria-hidden="true"></i></span><span></span></p>
-   <p class="blmd-ko-unit"></p>
-  </div>
-  <div class="blmd-ko-qty" role="group">
-   <button class="blmd-ko-minus" type="button" aria-label="Zmniejsz ilość" data-ko-step="-1" disabled><i aria-hidden="true"></i></button>
-   <input type="number" value="1" min="1" max="99" inputmode="numeric" aria-label="Ilość" data-ko-qty>
-   <button type="button" aria-label="Zwiększ ilość" data-ko-step="1"><svg aria-hidden="true"><use href="#blmd-i-plus"/></svg></button>
-  </div>
-  <div class="blmd-ko-sum">
-   <strong data-ko-line></strong>
-   <button class="blmd-ko-rm" type="button" data-ko-rm>Usuń<span class="blmd-sr"></span></button>
-  </div>
- </article>
+ <tr class="woocommerce-cart-form__cart-item cart_item" data-ko-item data-price="0" data-key="">
+  <td class="product-remove"><a role="button" href="KOSZYK.html" class="remove" aria-label="">&times;</a></td>
+  <td class="product-thumbnail"><a href="PRODUKT.html" tabindex="-1" aria-hidden="true"><img src="" width="1200" height="1800" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""></a></td>
+  <td role="rowheader" class="product-name" data-title="Produkt"><a href="PRODUKT.html" data-ko-name></a><dl class="variation"><dt class="variation-Rozmiar">Rozmiar:</dt><dd class="variation-Rozmiar"><p></p></dd></dl></td>
+  <td class="product-price" data-title="Cena"></td>
+  <td class="product-quantity" data-title="Ilość"><div class="quantity"><input type="button" value="-" class="minus" aria-label="Zmniejsz ilość"><label class="screen-reader-text"></label><input type="number" class="input-text qty text" value="1" aria-label="Ilość produktu" size="4" min="0" max="10" step="1" inputmode="numeric" autocomplete="off" data-ko-qty><input type="button" value="+" class="plus" aria-label="Zwiększ ilość"></div></td>
+  <td class="product-subtotal" data-title="Kwota" data-ko-line></td>
+ </tr>
 </template>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blanco Med","item":"https://blancomed.com/"},{"@type":"ListItem","position":2,"name":"Koszyk","item":"https://blancomed.com/koszyk/"}]}</script>
@@ -916,47 +1069,69 @@ if(cookie){
 </script>
 <!-- SHELL:END js -->
 <script data-wp-block-html="js">
-/* Koszyk: ilości, usuwanie z cofnięciem, sumy, pasek darmowej dostawy, dodawanie z „Uzupełnij komplet”, pasek na mobile.
-   Makieta liczy w przeglądarce; w WP sumy liczy WooCommerce (Store API). */
+/* Koszyk (makieta): ilości (Kadence minus/plus), usuwanie z „Cofnij?”, wybór dostawy, sumy, pasek darmowej dostawy, kupon, „Uzupełnij komplet”, pasek na mobile, ?pusty=1.
+   W WP sumy i komunikaty liczy WooCommerce (AJAX koszyka); tu przeliczamy w przeglądarce, żeby pokazać zachowanie. */
 (()=>{'use strict';
 const root=document.querySelector('.blmd-ko');if(!root)return;
 const FREE=500;
-const list=root.querySelector('[data-ko-list]'),tpl=document.getElementById('blmd-ko-tpl');
-const sub=root.querySelector('[data-ko-sub]'),totals=document.querySelectorAll('[data-ko-total]'),shipCost=root.querySelector('[data-ko-shipcost]');
-const ship=root.querySelector('[data-ko-ship]'),shipMsg=root.querySelector('[data-ko-shipmsg]'),bar=root.querySelector('[data-ko-bar]');
-const countEl=root.querySelector('[data-ko-count]'),empty=root.querySelector('[data-ko-empty]'),sticky=document.querySelector('[data-ko-sticky]');
-const cartN=document.querySelector('.blmd-cart-n');
-const zl=n=>n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/\s/g,' ')+' zł';
+const $=s=>root.querySelector(s);
+const list=$('[data-ko-list]'),actionsRow=list.querySelector('td.actions').parentElement,tpl=document.getElementById('blmd-ko-tpl');
+const full=$('[data-ko-full]'),empty=$('[data-ko-empty]'),notices=$('[data-ko-notices]');
+const sub=$('[data-ko-sub]'),totals=document.querySelectorAll('[data-ko-total]');
+const ship=$('[data-ko-ship]'),shipMsg=$('[data-ko-shipmsg]'),bar=$('[data-ko-bar]'),countEl=$('[data-ko-count]');
+const methods=[...root.querySelectorAll('input.shipping_method')];
+const sticky=document.querySelector('[data-ko-sticky]'),upsec=document.querySelector('[data-ko-upsec]'),cartN=document.querySelector('.blmd-cart-n');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const num=n=>n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/\s/g,' ');
+const money=n=>'<span class="woocommerce-Price-amount amount"><bdi>'+num(n)+'&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span>';
 const pl=n=>n===1?'produkt':(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?'produkty':'produktów';
 const items=()=>[...list.querySelectorAll('[data-ko-item]')];
-const shipDefault=shipCost.innerHTML;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function notice(html,type){notices.innerHTML=type==='error'?'<ul class="woocommerce-error" role="alert"><li>'+html+'</li></ul>':'<div class="woocommerce-message" role="alert">'+html+'</div>';}
 function recalc(){
  let s=0,q=0;
- items().forEach(it=>{const inp=it.querySelector('[data-ko-qty]');let v=Math.max(1,Math.min(99,parseInt(inp.value,10)||1));inp.value=v;q+=v;const line=v*(+it.dataset.price);s+=line;it.querySelector('[data-ko-line]').textContent=zl(line);it.querySelector('[data-ko-step="-1"]').disabled=v<=1;it.querySelector('[data-ko-step="1"]').disabled=v>=99;});
- sub.textContent=zl(s);totals.forEach(t=>t.textContent=zl(s));
+ items().forEach(it=>{const inp=it.querySelector('[data-ko-qty]'),mx=parseInt(inp.max,10)||99;let v=Math.max(1,Math.min(mx,parseInt(inp.value,10)||1));inp.value=v;q+=v;const line=v*(+it.dataset.price);s+=line;it.querySelector('[data-ko-line]').innerHTML=money(line);});
+ const free=s>=FREE;
+ methods.forEach(m=>{const amt=m.nextElementSibling.querySelector('.amount');if(amt)amt.outerHTML=money(free?0:+m.dataset.cost);});
+ const chosen=methods.find(m=>m.checked)||methods[0];const sc=free?0:+chosen.dataset.cost;
+ sub.innerHTML=money(s);totals.forEach(t=>t.innerHTML=money(s+sc));
  bar.value=Math.min(s,FREE);bar.textContent=Math.round(Math.min(s,FREE))+' z '+FREE+' zł';
- if(s>=FREE){ship.classList.add('is-free');shipMsg.innerHTML='<strong>Masz darmową dostawę.</strong> Wyślemy paczkę bez opłaty za kuriera.';shipCost.innerHTML='<span class="blmd-ko-free">Gratis</span>';}
- else{ship.classList.remove('is-free');shipMsg.innerHTML='Dodaj produkty za <strong>'+zl(FREE-s)+'</strong>, a dostawę dostaniesz gratis.';shipCost.innerHTML=shipDefault;}
+ ship.classList.toggle('is-free',free);
+ shipMsg.innerHTML=free?'<strong>Masz darmową dostawę.</strong> Wyślemy paczkę bez opłaty.':'Do darmowej dostawy brakuje Ci <strong>'+num(FREE-s)+'&nbsp;zł</strong>.';
  countEl.textContent=q+' '+pl(q);
  if(cartN){cartN.textContent=q;cartN.parentElement.setAttribute('aria-label','Koszyk, '+q+' '+pl(q));}
- const none=!items().length;root.classList.toggle('is-empty',none);empty.hidden=!none;
- if(sticky)sticky.hidden=none;
+ const none=!items().length;full.hidden=none;empty.hidden=!none;countEl.hidden=none;if(sticky)sticky.hidden=none;if(upsec)upsec.hidden=none;
 }
-/* ilość i usuwanie (delegacja: działa też dla dodanych pozycji) */
+/* Ilość: przyciski Kadence (input.minus / input.plus) i wpisanie liczby; 0 = usunięcie jak w WooCommerce */
 list.addEventListener('click',e=>{
- const st=e.target.closest('[data-ko-step]');
- if(st){const inp=st.closest('[data-ko-item]').querySelector('[data-ko-qty]');inp.value=(parseInt(inp.value,10)||1)+(+st.dataset.koStep);recalc();if(st.disabled)st.parentElement.querySelector('[data-ko-qty]').focus();return;}
- const rm=e.target.closest('[data-ko-rm]');
- if(rm){e.preventDefault();const it=rm.closest('[data-ko-item]'),name=it.querySelector('[data-ko-name]').textContent;
-  list.querySelectorAll('.blmd-ko-undo').forEach(u=>u.remove());
-  const u=document.createElement('div');u.className='blmd-ko-undo';u.setAttribute('role','status');u.innerHTML='<span></span><button type="button">Cofnij</button>';u.firstChild.textContent='Usunięto: '+name+'.';
-  it.replaceWith(u);u._item=it;recalc();u.querySelector('button').focus();
-  u.querySelector('button').addEventListener('click',()=>{u.replaceWith(u._item);recalc();const b=u._item.querySelector('[data-ko-rm]');if(b)b.focus();});
- }
+ const b=e.target.closest('input.minus,input.plus');
+ if(b){const inp=b.parentElement.querySelector('[data-ko-qty]'),mx=parseInt(inp.max,10)||99,v=(parseInt(inp.value,10)||1)+(b.classList.contains('plus')?1:-1);
+  if(v<1){removeItem(b.closest('[data-ko-item]'));return;}
+  if(v>mx){notice('Nie możesz dodać więcej sztuk tego rozmiaru: mamy ich '+mx+' na stanie.','error');return;}
+  inp.value=v;recalc();return;}
+ const rm=e.target.closest('a.remove');
+ if(rm){e.preventDefault();removeItem(rm.closest('[data-ko-item]'));}
 });
-list.addEventListener('change',e=>{if(e.target.matches('[data-ko-qty]'))recalc();});
-list.addEventListener('keydown',e=>{if(e.target.matches('[data-ko-qty]')&&e.key==='Enter'){e.preventDefault();recalc();}});
-/* Uzupełnij komplet: wybór rozmiaru i dodanie pozycji do listy */
+list.addEventListener('change',e=>{if(!e.target.matches('[data-ko-qty]'))return;const v=parseInt(e.target.value,10);if(v===0){removeItem(e.target.closest('[data-ko-item]'));return;}recalc();});
+list.addEventListener('keydown',e=>{if(e.target.matches('[data-ko-qty]')&&e.key==='Enter'){e.preventDefault();e.target.dispatchEvent(new Event('change',{bubbles:true}));}});
+/* Usunięcie z „Cofnij?” (komunikat WooCommerce) */
+function removeItem(it){
+ const name=it.querySelector('[data-ko-name]').textContent,next=it.nextElementSibling;
+ it.remove();recalc();
+ notice('„'+esc(name)+'” usunięto z koszyka. <a href="KOSZYK.html" class="restore-item">Cofnij?</a>');
+ const a=notices.querySelector('.restore-item');
+ a.addEventListener('click',ev=>{ev.preventDefault();list.insertBefore(it,next&&next.isConnected?next:actionsRow);notices.innerHTML='';recalc();const r=it.querySelector('a.remove');if(r)r.focus();});
+ (items().length?a:empty.querySelector('a')).focus({preventScroll:false});
+}
+/* Wybór dostawy */
+methods.forEach(m=>m.addEventListener('change',recalc));
+/* Kupon: makieta nie sprawdza kodów; pokazuje komunikat WooCommerce */
+const cpn=$('[data-ko-coupon]'),code=$('#coupon_code');
+cpn.addEventListener('click',e=>{e.preventDefault();const v=code.value.trim();
+ notice(v?'Kod „'+esc(v.toUpperCase())+'” nie istnieje. Sprawdź pisownię albo napisz do nas.':'Wpisz kod rabatowy.','error');
+ notices.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});});
+code.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();cpn.click();}});
+/* Uzupełnij komplet: wybór rozmiaru i dodanie wiersza */
 const prods=[...document.querySelectorAll('[data-ko-prod]')];
 const closeP=(p,back)=>{if(!p||p.hidden)return;p.hidden=true;const b=p.parentElement.querySelector('.blmd-ko-add');b.setAttribute('aria-expanded','false');if(back)b.focus();};
 prods.forEach(card=>{const b=card.querySelector('.blmd-ko-add'),p=card.querySelector('.blmd-ko-sizes');
@@ -971,27 +1146,27 @@ prods.forEach(card=>{const b=card.querySelector('.blmd-ko-add'),p=card.querySele
    it=tpl.content.firstElementChild.cloneNode(true);
    it.dataset.price=d.price;it.dataset.key=key;
    const img=it.querySelector('img');img.src=d.img;img.height=+d.h;
-   it.querySelectorAll('a').forEach(a=>a.dataset.href=d.url);
-   it.querySelector('.blmd-ko-coll').textContent=d.coll;
+   it.querySelectorAll('.product-thumbnail a,.product-name a').forEach(a=>a.dataset.href=d.url);
    it.querySelector('[data-ko-name]').textContent=d.name;
-   const at=it.querySelectorAll('.blmd-ko-attr>span');at[0].querySelector('i').style.setProperty('--c',d.c);at[0].append(d.color);at[1].textContent='Rozmiar: '+size;
-   it.querySelector('.blmd-ko-unit').textContent=zl(+d.price)+' za sztukę';
-   it.querySelector('.blmd-ko-qty').setAttribute('aria-label','Ilość: '+d.name+', rozmiar '+size);
-   it.querySelector('.blmd-ko-rm .blmd-sr').textContent=': '+d.name+', rozmiar '+size;
-   list.querySelectorAll('.blmd-ko-undo').forEach(u=>u.remove());
-   list.appendChild(it);
+   it.querySelector('.variation dd p').textContent=size;
+   it.querySelector('.product-price').innerHTML=d.reg?'<del aria-hidden="true">'+money(+d.reg)+'</del> <ins>'+money(+d.price)+'</ins>':money(+d.price);
+   it.querySelector('a.remove').setAttribute('aria-label','Usuń '+d.name+' z koszyka');
+   const id='quantity_'+key.replace(/[^a-z0-9]/gi,'');it.querySelector('[data-ko-qty]').id=id;const lb=it.querySelector('.quantity label');lb.htmlFor=id;lb.textContent=d.name+', ilość';
+   list.insertBefore(it,actionsRow);
   }
   closeP(p);recalc();
+  notice('„'+esc(d.name)+'”, rozmiar '+size+', dodano do koszyka. <a href="#blmd-ko-h1" class="button wc-forward">Zobacz koszyk</a>');
   b.innerHTML='<svg aria-hidden="true"><use href="#blmd-i-check"/></svg>';b.setAttribute('aria-label','Dodano do koszyka, rozmiar '+size+'. Dodaj kolejny');
   setTimeout(()=>{b.innerHTML='<svg aria-hidden="true"><use href="#blmd-i-plus"/></svg>';},2200);
   b.focus();
-  it.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
  }));
 });
 document.addEventListener('click',e=>{document.querySelectorAll('.blmd-ko-sizes:not([hidden])').forEach(p=>{if(!p.parentElement.contains(e.target))closeP(p);});});
-/* przyklejony pasek: widoczny, dopóki główny przycisk zamówienia jest niżej na stronie */
-const cta=root.querySelector('[data-ko-cta]');
+/* Pasek na mobile: widoczny, dopóki główny przycisk zamówienia jest niżej */
+const cta=$('[data-ko-cta]');
 if(sticky&&cta&&'IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(en=>sticky.classList.toggle('is-hidden',en.isIntersecting||en.boundingClientRect.top<0)),{threshold:.2}).observe(cta);}
+/* Makieta: ?pusty=1 pokazuje stan pustego koszyka */
+if(/[?&]pusty=1/.test(location.search)){items().forEach(i=>i.remove());}
 recalc();
 })();
 </script>

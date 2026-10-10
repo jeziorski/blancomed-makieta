@@ -295,6 +295,120 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 </style>
 <!-- SHELL:END css -->
 <style data-wp-block-html="css">
+/* WOO-BAZA: wspólny wygląd szablonów WooCommerce (koszyk, zamówienie, Moje konto).
+   WDROŻENIE: ten plik idzie do CSS motywu potomnego (szablony Woo nie są blokami GLAI), selektory bez .blmd-page zostaw z prefiksem .woocommerce. */
+.blmd-page .woocommerce{font-size:17px;color:var(--blmd-ink-2)}
+.blmd-page .woocommerce h2,.blmd-page .woocommerce h3{font-size:22px;line-height:1.25;margin:0 0 16px}
+/* Pola formularzy (form-row z WooCommerce) */
+.blmd-page .woocommerce .form-row{display:flex;flex-direction:column;gap:6px;margin:0 0 16px;padding:0}
+.blmd-page .woocommerce .form-row-first,.blmd-page .woocommerce .form-row-last{width:calc(50% - 8px);display:inline-flex;vertical-align:top}
+.blmd-page .woocommerce .form-row-first{margin-right:12px}
+@media (max-width:620px){.blmd-page .woocommerce .form-row-first,.blmd-page .woocommerce .form-row-last{width:100%;margin-right:0}}
+.blmd-page .woocommerce .form-row label{font-size:15px;font-weight:600;color:var(--blmd-ink)}
+.blmd-page .woocommerce .form-row .required{color:#b42318;text-decoration:none;border:0}
+.blmd-page .woocommerce .form-row .optional{font-weight:400;color:var(--blmd-mute)}
+.blmd-page .woocommerce .input-text,.blmd-page .woocommerce select,.blmd-page .woocommerce textarea{width:100%;min-height:54px;padding:14px 18px;border-radius:14px;border:1.5px solid var(--blmd-lav-2);background:#fff;font-size:17px;color:var(--blmd-ink);transition:border-color .2s,box-shadow .2s}
+.blmd-page .woocommerce textarea{min-height:110px;resize:vertical}
+.blmd-page .woocommerce .input-text::placeholder,.blmd-page .woocommerce textarea::placeholder{color:#8d8da0}
+.blmd-page .woocommerce .input-text:focus,.blmd-page .woocommerce select:focus,.blmd-page .woocommerce textarea:focus{outline:none;border-color:var(--blmd-violet);box-shadow:0 0 0 4px rgba(102,103,171,.16)}
+.blmd-page .woocommerce .woocommerce-invalid .input-text,.blmd-page .woocommerce .woocommerce-invalid select{border-color:#b42318;box-shadow:0 0 0 4px rgba(180,35,24,.1)}
+.blmd-page .woocommerce .woocommerce-validated .input-text{border-color:#2f855a}
+.blmd-page .woocommerce .woocommerce-form__label-for-checkbox,.blmd-page .woocommerce label.checkbox{display:flex;gap:10px;align-items:flex-start;font-weight:500;cursor:pointer}
+.blmd-page .woocommerce input[type=checkbox],.blmd-page .woocommerce input[type=radio]{width:22px;height:22px;margin:1px 0 0;accent-color:var(--blmd-violet);flex:none}
+/* Przyciski WooCommerce */
+.blmd-page .woocommerce .button,.blmd-page .woocommerce button.button,.blmd-page .woocommerce a.button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:0;background:var(--blmd-ink);color:#fff;font-weight:600;font-size:16px;cursor:pointer;text-decoration:none;transition:background-color .2s,transform .2s}
+.blmd-page .woocommerce .button:hover{background:#34343f;transform:translateY(-1px)}
+.blmd-page .woocommerce .button.alt,.blmd-page .woocommerce .checkout-button,.blmd-page .woocommerce #place_order{background:var(--blmd-violet);box-shadow:0 16px 30px -16px rgba(102,103,171,.9)}
+.blmd-page .woocommerce .button.alt:hover,.blmd-page .woocommerce .checkout-button:hover,.blmd-page .woocommerce #place_order:hover{background:var(--blmd-violet-d)}
+.blmd-page .woocommerce .button.blmd-woo-ghost{background:#fff;color:var(--blmd-ink);box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2)}
+.blmd-page .woocommerce .button:disabled,.blmd-page .woocommerce .button.disabled{opacity:.5;cursor:not-allowed;transform:none}
+/* Komunikaty */
+.blmd-page .woocommerce-message,.blmd-page .woocommerce-info,.blmd-page .woocommerce-error{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;list-style:none;margin:0 0 20px;padding:16px 20px;border-radius:16px;font-size:16px;line-height:1.5}
+.blmd-page .woocommerce-message{background:#ecf7f0;color:#1d5c38;box-shadow:inset 0 0 0 1px #c6e7d3}
+.blmd-page .woocommerce-info{background:var(--blmd-lav);color:var(--blmd-ink-2);box-shadow:inset 0 0 0 1px var(--blmd-lav-2)}
+.blmd-page .woocommerce-error{background:#fdf1f0;color:#8a1c12;box-shadow:inset 0 0 0 1px #f4cdc9;display:block}
+.blmd-page .woocommerce-error li+li{margin-top:6px}
+.blmd-page .woocommerce-message .button,.blmd-page .woocommerce-info .button{min-height:44px;padding:0 18px;font-size:15px}
+/* Tabele (shop_table) */
+.blmd-page .woocommerce table.shop_table{width:100%;border-collapse:separate;border-spacing:0;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);overflow:hidden;font-size:16px}
+.blmd-page .woocommerce table.shop_table th,.blmd-page .woocommerce table.shop_table td{padding:16px 18px;text-align:left;vertical-align:middle;border-bottom:1px solid var(--blmd-line)}
+.blmd-page .woocommerce table.shop_table tr:last-child>*{border-bottom:0}
+.blmd-page .woocommerce table.shop_table thead th{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blmd-mute);background:var(--blmd-bg)}
+.blmd-page .woocommerce .amount{font-weight:700;color:var(--blmd-ink);white-space:nowrap}
+.blmd-page .woocommerce del .amount{font-weight:500;color:var(--blmd-mute)}
+.blmd-page .woocommerce ins{text-decoration:none}
+/* Ilość z przyciskami (Kadence: input.minus / input.plus) */
+.blmd-page .woocommerce .quantity{display:inline-flex;align-items:center;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2)}
+.blmd-page .woocommerce .quantity .qty{width:46px;min-height:44px;padding:0;border:0;background:transparent;text-align:center;font-weight:600;font-size:16px;-moz-appearance:textfield}
+.blmd-page .woocommerce .quantity .qty::-webkit-inner-spin-button{-webkit-appearance:none}
+.blmd-page .woocommerce .quantity .minus,.blmd-page .woocommerce .quantity .plus{width:44px;height:44px;border:0;border-radius:50%;background:transparent;font-size:20px;color:var(--blmd-ink);cursor:pointer}
+.blmd-page .woocommerce .quantity .minus:hover,.blmd-page .woocommerce .quantity .plus:hover{background:var(--blmd-lav)}
+/* Karta (wspólny kontener) */
+.blmd-page .blmd-woo-card{padding:clamp(20px,3vw,32px);border-radius:24px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
+/* InPost Pay: podgląd przycisku (w WP renderuje go wtyczka w shadow DOM; stylujemy tylko kontener) */
+.blmd-page .izi-widget-placeholder{margin:12px 0 0}
+.blmd-page .blmd-izi{display:flex;flex-direction:column;align-items:stretch;gap:6px}
+.blmd-page .blmd-izi-btn{display:flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 20px;border-radius:999px;background:#1d1d1b;color:#fff;font-weight:600;font-size:16px;border:0;cursor:pointer;position:relative}
+.blmd-page .blmd-izi-btn b{display:inline-flex;align-items:center;gap:4px;font-weight:800;letter-spacing:-.01em}
+.blmd-page .blmd-izi-btn b i{display:inline-block;width:14px;height:14px;border-radius:3px;background:#ffcd00;transform:rotate(45deg)}
+.blmd-page .blmd-izi-tag{position:absolute;left:14px;top:50%;transform:translateY(-50%);padding:2px 6px;border-radius:6px;background:#ffcd00;color:#1d1d1b;font-size:10px;font-weight:800;line-height:1.1;text-transform:uppercase}
+.blmd-page .blmd-izi-note{font-size:13px;text-align:center;color:var(--blmd-txt)}
+
+/* ===== KOSZYK/ZAMÓWIENIE (dopisane 10.10.2026): reguły ogólne dla koszyka, zamówienia (Flux) i strony „Zamówienie przyjęte”.
+   WDROŻENIE: jak cały plik, do CSS motywu potomnego. Selektory klas WooCommerce, nie bloków GLAI. ===== */
+.blmd-page .woocommerce .screen-reader-text{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Warianty pozycji (dl.variation, np. Rozmiar) */
+.blmd-page .woocommerce dl.variation{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;margin:6px 0 0;font-size:15px;line-height:1.4}
+.blmd-page .woocommerce dl.variation dt{font-weight:500;color:var(--blmd-txt)}
+.blmd-page .woocommerce dl.variation dd{margin:0 12px 0 0;font-weight:700;color:var(--blmd-ink)}
+.blmd-page .woocommerce dl.variation dd p{margin:0}
+/* Usuwanie pozycji (a.remove, w WooCommerce znak ×) */
+.blmd-page .woocommerce a.remove{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-size:26px;line-height:1;font-weight:400;color:var(--blmd-txt);text-decoration:none;transition:background-color .2s,color .2s}
+.blmd-page .woocommerce a.remove:hover{background:#fdf1f0;color:#b42318}
+/* Cena przekreślona i aktualna w jednej komórce */
+.blmd-page .woocommerce del{text-decoration-thickness:1.5px;color:var(--blmd-mute)}
+.blmd-page .woocommerce del+ins,.blmd-page .woocommerce ins+del{margin-left:6px}
+/* Metody dostawy: cała karta klikalna, wybrana podświetlona */
+.blmd-page .woocommerce ul.woocommerce-shipping-methods{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods li{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;min-height:58px;padding:10px 16px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2);transition:box-shadow .2s,background-color .2s}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods li:has(input:checked){background:var(--blmd-lav);box-shadow:inset 0 0 0 2px var(--blmd-violet)}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods li:has(input:focus-visible){outline:3px solid var(--blmd-violet-d);outline-offset:2px}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods input{margin:0}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods label{flex:1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;font-size:16px;font-weight:600;line-height:1.35;color:var(--blmd-ink);cursor:pointer}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods label::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.blmd-page .woocommerce ul.woocommerce-shipping-methods li>:not(input,label){position:relative;z-index:1}
+.blmd-page .woocommerce .woocommerce-shipping-destination{margin-top:10px;font-size:15px;line-height:1.45;color:var(--blmd-txt)}
+/* Metody płatności (ul.wc_payment_methods > li.wc_payment_method); opis pokazuje się przy wybranej metodzie, bez JS przez :has */
+.blmd-page .woocommerce ul.wc_payment_methods{display:grid;gap:8px;margin:0 0 22px;padding:0;list-style:none}
+.blmd-page .woocommerce li.wc_payment_method{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:12px;align-items:center;padding:0 16px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2);transition:box-shadow .2s,background-color .2s}
+.blmd-page .woocommerce li.wc_payment_method:has(>input:checked){background:var(--blmd-lav);box-shadow:inset 0 0 0 2px var(--blmd-violet)}
+.blmd-page .woocommerce li.wc_payment_method:has(>input:focus-visible){outline:3px solid var(--blmd-violet-d);outline-offset:2px}
+.blmd-page .woocommerce li.wc_payment_method>input{grid-column:1;margin:0}
+.blmd-page .woocommerce li.wc_payment_method>label{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;min-height:60px;padding:10px 0;font-size:16.5px;font-weight:600;line-height:1.3;color:var(--blmd-ink);cursor:pointer}
+.blmd-page .woocommerce .payment_box{grid-column:1/-1;margin:0 0 14px;padding:14px 16px;border-radius:12px;background:#fff;font-size:15.5px;line-height:1.5;color:var(--blmd-ink-2)}
+.blmd-page .woocommerce li.wc_payment_method:not(:has(>input:checked))>.payment_box{display:none}
+.blmd-page .woocommerce .payment_box p+p{margin-top:8px}
+/* Błąd przy polu (WooCommerce 8+: p.checkout-inline-error-message) */
+.blmd-page .woocommerce .checkout-inline-error-message{margin:2px 0 0;font-size:15px;font-weight:600;line-height:1.4;color:#b42318}
+.blmd-page .woocommerce .woocommerce-error a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+/* Regulamin, informacja o danych, zgody */
+.blmd-page .woocommerce .woocommerce-terms-and-conditions-wrapper{display:grid;gap:14px;margin:0 0 18px}
+.blmd-page .woocommerce .woocommerce-terms-and-conditions-wrapper .form-row{margin:0}
+.blmd-page .woocommerce .woocommerce-privacy-policy-text p{font-size:14.5px;line-height:1.55;color:var(--blmd-txt)}
+.blmd-page .woocommerce .woocommerce-terms-and-conditions-wrapper a,.blmd-page .woocommerce .woocommerce-privacy-policy-text a{color:var(--blmd-violet-d);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.blmd-page .woocommerce .woocommerce-terms-and-conditions-checkbox-text{font-size:16px;line-height:1.45}
+/* Wiersz sumy w tabelach podsumowania */
+.blmd-page .woocommerce tr.order-total th{font-size:17px;color:var(--blmd-ink)}
+.blmd-page .woocommerce tr.order-total .amount{font-size:24px;letter-spacing:-.02em}
+/* InPost Pay jako opcja dodatkowa pod naszym głównym przyciskiem (fiolet zostaje główny) */
+.blmd-page .blmd-izi-or{display:flex;align-items:center;gap:12px;margin:0 0 8px;font-size:14px;color:var(--blmd-mute)}
+.blmd-page .blmd-izi-or::before,.blmd-page .blmd-izi-or::after{content:"";flex:1;height:1px;background:var(--blmd-line)}
+.blmd-page .blmd-izi--sub .blmd-izi-btn{min-height:48px;font-size:15px;cursor:default}
+.blmd-page .blmd-izi--sub .blmd-izi-tag{left:10px}
+@media (max-width:480px){.blmd-page .blmd-izi--sub .blmd-izi-btn{gap:6px;padding:0 10px;font-size:14px;white-space:nowrap}.blmd-page .blmd-izi--sub .blmd-izi-tag{position:static;transform:none;font-size:9px;padding:2px 4px}}
+
+</style>
+<style data-wp-block-html="css">
 /* Karta produktu (szablon WooCommerce single product), prefiks blmd-pr- */
 .blmd-pr-top{padding-top:clamp(8px,1.5vw,16px);padding-bottom:clamp(56px,7vw,96px)}
 .blmd-pr-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:40px clamp(32px,4.5vw,72px);align-items:start}
@@ -653,7 +767,7 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
      <div class="blmd-search-hints"><span>Często szukane:</span><a href="KATEGORIA.html">Joggery</a><a href="KATEGORIA.html">Komplety</a><a href="KATEGORIA.html">Tuniki</a><a href="KATEGORIA.html">Outlet</a></div>
     </div>
    </details>
-   <a class="blmd-ico-btn blmd-acc-link" href="https://blancomed.com/moje-konto/" aria-label="Moje konto"><svg aria-hidden="true"><use href="#blmd-i-user"/></svg></a>
+   <a class="blmd-ico-btn blmd-acc-link" href="MOJE-KONTO-LOGOWANIE.html" data-href="https://blancomed.com/moje-konto/" aria-label="Moje konto"><svg aria-hidden="true"><use href="#blmd-i-user"/></svg></a>
    <a class="blmd-ico-btn" href="KOSZYK.html" data-href="https://blancomed.com/koszyk/" aria-label="Koszyk, 2 produkty"><svg aria-hidden="true"><use href="#blmd-i-bag"/></svg><span class="blmd-cart-n" aria-hidden="true">2</span></a>
   </div>
  </nav>
@@ -767,6 +881,17 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
       <button class="blmd-btn blmd-btn--violet blmd-pr-atc" type="submit">Dodaj do koszyka <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-bag"/></svg></span></button>
      </div>
      <p class="blmd-pr-ok" role="status" hidden><svg aria-hidden="true"><use href="#blmd-i-check"/></svg><span class="blmd-pr-ok-txt">Dodano do koszyka.</span><a href="KOSZYK.html" data-href="https://blancomed.com/koszyk/">Przejdź do koszyka</a></p>
+     <!-- InPost Pay. WDROŻENIE: przycisk renderuje wtyczka (inpost-izi-button binding_place=PRODUCT_CARD, variation="round size-lg") w shadow DOM; w makiecie podgląd .blmd-izi.
+          Stylujemy tylko kontener (odstęp, separator „albo”). Żeby czarna pigułka nie konkurowała z naszym fioletowym przyciskiem, w ustawieniach wtyczki
+          wybrać mniejszy rozmiar (DO-POTWIERDZENIA: dostępne warianty). UWAGA UX: wtyczka pisze na przycisku „Dodaj do koszyka”, tak jak nasz przycisk;
+          separator wyjaśnia, że to druga droga zakupu. DO-POTWIERDZENIA: czy wtyczka pozwala zmienić ten tekst. -->
+     <div class="izi-widget-placeholder izi-widget-product">
+      <p class="blmd-izi-or">albo kup szybciej przez aplikację InPost</p>
+      <div class="blmd-izi blmd-izi--sub">
+       <span class="blmd-izi-btn"><span class="blmd-izi-tag">Paczkomat taniej</span>Dodaj do koszyka <b><i aria-hidden="true"></i>InPost</b></span>
+       <span class="blmd-izi-note">Wymieniaj InCoiny na dostawę tańszą o 3 zł!</span>
+      </div>
+     </div>
     </div>
 
     <!-- W WP: kwota liczona z wartości koszyka. Makieta liczy z ceny tego produktu i ilości. -->
@@ -835,6 +960,14 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
       <h3>Płatność</h3>
       <p>Płacisz przez PayU: BLIK, szybki przelew, karta Visa lub Mastercard, Apple Pay, Google Pay albo płatność odroczona.</p>
       <p><a href="https://blancomed.com/zwroty-i-reklamacje/">Zwroty i reklamacje krok po kroku</a></p>
+     </div>
+    </details>
+    <!-- GPSR: dane producenta z żywej karty produktu (span#producent). DO-POTWIERDZENIA: GPSR wymaga też adresu elektronicznego producenta (np. e-mail); dziś na stronie go nie ma. Relacja marki Blanco Med i firmy ATORDO jak w BRIEF. -->
+    <details class="blmd-faq" id="producent">
+     <summary>Producent i bezpieczeństwo produktu <span class="blmd-faq-pm" aria-hidden="true"></span></summary>
+     <div class="blmd-faq-a">
+      <p><strong>Producent:</strong> ATORDO Dorota Rychwalska, Świerzyny 75, 98-161 Zapolice</p>
+      <p>NIP: 8291636183, REGON: 521691133</p>
      </div>
     </details>
    </div>
