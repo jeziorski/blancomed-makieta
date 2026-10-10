@@ -670,9 +670,15 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
         </td>
         <td class="woocommerce-table__product-total product-total"><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td>
        </tr>
+       <tr class="woocommerce-table__line-item order_item" data-zp-bump hidden>
+        <td class="woocommerce-table__product-name product-name"><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-smart-proline-liliowy-violet-mist/">Bluza medyczna damska Smart PROline liliowy VIOLET MIST</a> <strong class="product-quantity">&times;&nbsp;1</strong>
+         <ul class="wc-item-meta"><li><strong class="wc-item-meta-label">Rozmiar:</strong> <p>XS</p></li></ul>
+        </td>
+        <td class="woocommerce-table__product-total product-total"><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td>
+       </tr>
       </tbody>
       <tfoot>
-       <tr><th scope="row">Kwota:</th><td><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td></tr>
+       <tr><th scope="row">Kwota:</th><td data-zp-sub><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td></tr>
        <tr><th scope="row">Wysyłka:</th><td data-zp-ship><span class="woocommerce-Price-amount amount"><bdi>18,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span>&nbsp;<small class="shipped_via">przez Kurier InPost</small></td></tr>
        <tr><th scope="row">Metoda płatności:</th><td data-zp-pay>BLIK</td></tr>
        <tr><th scope="row">Łącznie:</th><td data-zp-total><span class="woocommerce-Price-amount amount"><bdi>117,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td></tr>
@@ -896,10 +902,12 @@ if(cookie){
 const q=new URLSearchParams(location.search),pay=q.get('platnosc'),ship=q.get('dostawa');
 const cartN=document.querySelector('.blmd-cart-n');if(cartN){cartN.textContent='0';cartN.parentElement.setAttribute('aria-label','Koszyk, 0 produktów');}
 if(pay)document.querySelectorAll('[data-zp-pay]').forEach(el=>el.textContent=pay);
-if(ship==='easypack_parcel_machines'){
- const amt='<span class="woocommerce-Price-amount amount"><bdi>VAL&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span>';
- const s=document.querySelector('[data-zp-ship]');if(s)s.innerHTML=amt.replace('VAL','15,00')+'&nbsp;<small class="shipped_via">przez Paczkomaty InPost</small>';
- document.querySelectorAll('[data-zp-total]').forEach(el=>el.innerHTML=amt.replace('VAL','114,00'));
+const amt=v=>'<span class="woocommerce-Price-amount amount"><bdi>'+v.toFixed(2).replace('.',',')+'&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span>';
+const bump=q.get('dobierz')==='1',parcel=ship==='easypack_parcel_machines',sub=99+(bump?99:0),sc=sub>=500?0:(parcel?15:18);
+if(bump){document.querySelector('[data-zp-bump]').hidden=false;document.querySelector('[data-zp-sub]').innerHTML=amt(sub);}
+if(bump||parcel)document.querySelectorAll('[data-zp-total]').forEach(el=>el.innerHTML=amt(sub+sc));
+if(parcel){
+ const s=document.querySelector('[data-zp-ship]');if(s)s.innerHTML=amt(sc)+'&nbsp;<small class="shipped_via">przez Paczkomaty InPost</small>';
  const h=document.querySelector('[data-zp-shiph]');if(h)h.textContent='Odbiór w Paczkomacie';
  const a=document.querySelector('[data-zp-addr]');if(a)a.innerHTML='Anna Kowalska<br>Paczkomat ABC01M<br>ul. Przykładowa 1, 00-001 Przykładowo';
 }

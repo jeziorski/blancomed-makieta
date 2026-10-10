@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zamówienie | Blanco Med</title>
-<meta name="description" content="Złóż zamówienie w trzech krokach: dane, adres i dostawa InPost, płatność BLIK, kartą, przelewem lub odroczona przez PayU. Bez zakładania konta.">
+<meta name="description" content="Złóż zamówienie na jednej stronie: dane, dostawa InPost i płatność BLIK, kartą, przelewem lub odroczona przez PayU. Bez zakładania konta.">
 <link rel="icon" href="img/ikona-blancomed.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -409,175 +409,234 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 
 </style>
 <style data-wp-block-html="css">
-/* ZAMÓWIENIE: Flux Checkout (Iconic) na klasycznym form.checkout WooCommerce, wersja Blanco Med. Prefiks naszych klas: blmd-zm-.
-   WDROŻENIE: Flux sam podmienia nagłówek i stopkę na stronie zamówienia (uproszczony nagłówek to standard Flux).
-   W makiecie zloz.py zawsze dokleja nagłówek i stopkę powłoki, więc ukrywamy je TYLKO na tej stronie (reguła niżej nie trafia do WP).
-   Reguły dla klas WooCommerce idą do CSS motywu potomnego (jak woo-baza.css); klasy kontenerów Flux (kroki, kolumna z koszykiem)
-   DO-POTWIERDZENIA po odczycie z żywego DOM, wtedy przepiąć selektory .blmd-zm-step i .blmd-zm-side na klasy Flux. */
+/* ZAMÓWIENIE: KLASYCZNE zamówienie WooCommerce (shortcode [woocommerce_checkout], bez Flux Checkout; decyzja Daniela 10.10.2026).
+   Baza = szablony checkout/form-checkout.php, form-login.php, form-coupon.php, form-billing.php, form-shipping.php, review-order.php, payment.php, payment-method.php, terms.php.
+   Dodatki podnoszące konwersję to osobne moduły: atrybut data-blmd-cro="<nazwa>", klasa blmd-cro-<nazwa>, opis w zrodla/CRO-MODULY.md.
+   WDROŻENIE: reguły dla klas WooCommerce do CSS motywu potomnego (jak woo-baza.css). Nasze klasy: blmd-zm- (baza), blmd-cro- (moduły). */
+
+/* MAKIETA: zloz.py dokleja nagłówek i stopkę powłoki; na tej stronie je ukrywamy.
+   WDROŻENIE: w FSE osobny szablon strony zamówienia (template „Zamówienie”) z minimalnym nagłówkiem i stopką, bez menu. */
 .blmd-page .blmd-topbar,.blmd-page .blmd-head,.blmd-page .blmd-foot{display:none}
 
-/* Uproszczony nagłówek zamówienia */
+/* Minimalny nagłówek zamówienia (template part szablonu „Zamówienie”) */
 .blmd-zm-bar{background:rgba(255,255,255,.92);box-shadow:inset 0 -1px 0 var(--blmd-line)}
-.blmd-zm-bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;min-height:76px;padding-block:10px}
+.blmd-zm-bar-in{display:flex;align-items:center;justify-content:space-between;gap:8px 24px;min-height:72px;padding-block:8px}
 .blmd-zm-logo{display:flex;align-items:center;min-height:44px;flex:none}
 .blmd-zm-logo img{width:118px;height:auto}
-.blmd-zm-steps{display:flex;align-items:center;gap:6px;counter-reset:zm}
-.blmd-zm-steps li{display:flex;align-items:center;gap:6px}
-.blmd-zm-steps li+li::before{content:"";width:28px;height:1.5px;background:var(--blmd-lav-2)}
-.blmd-zm-steps a{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 14px 0 6px;border-radius:999px;font-size:15px;font-weight:600;color:var(--blmd-txt);white-space:nowrap}
-.blmd-zm-steps a::before{counter-increment:zm;content:counter(zm);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blmd-lav);color:var(--blmd-violet-dd);font-size:14px;font-weight:700}
-.blmd-zm-steps a[aria-current]{background:var(--blmd-ink);color:#fff}
-.blmd-zm-steps a[aria-current]::before{background:#fff;color:var(--blmd-ink)}
-.blmd-zm-steps a.is-done{color:var(--blmd-ink)}
-.blmd-zm-steps a.is-done::before{content:"✓";background:var(--blmd-violet);color:#fff}
-html.blmd-js .blmd-zm-steps a.is-locked{pointer-events:none}
-.blmd-zm-safe{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:var(--blmd-ink-2);white-space:nowrap}
-.blmd-zm-safe svg{width:18px;height:18px;color:#1f6b45}
+.blmd-zm-bar-r{display:flex;align-items:center;gap:6px 22px;flex-wrap:wrap;justify-content:flex-end}
+.blmd-zm-safe,.blmd-zm-tel{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:14.5px;font-weight:600;color:var(--blmd-ink-2);white-space:nowrap}
+.blmd-zm-safe svg,.blmd-zm-tel svg{width:18px;height:18px;flex:none}
+.blmd-zm-safe svg{color:#1f6b45}
+.blmd-zm-tel svg{color:var(--blmd-violet-d)}
+.blmd-zm-tel small{font-weight:500;color:var(--blmd-txt)}
 
-/* Układ: kroki po lewej, koszyk po prawej */
+/* Strona */
 .blmd-zm{padding-top:clamp(20px,3vw,40px);padding-bottom:clamp(48px,6vw,80px)}
-.blmd-zm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,420px);gap:clamp(24px,3.5vw,56px);align-items:start;max-width:1160px;margin-inline:auto}
-.blmd-zm-main{display:grid;gap:16px;min-width:0}
-.blmd-zm-step{padding:clamp(20px,3vw,36px);border-radius:var(--blmd-r);background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);scroll-margin-top:16px}
-html.blmd-js .blmd-zm-step:not(.is-active){display:none}
-.blmd-zm-step>header{margin-bottom:22px}
-.blmd-zm-step>header span{display:block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blmd-violet-d);margin-bottom:6px}
-.blmd-zm-step>header h2{font-size:clamp(24px,2.6vw,30px);line-height:1.15;letter-spacing:-.025em;margin:0}
-.blmd-zm-step>header h2:focus{outline:none}
-.blmd-zm-step>header p{margin-top:6px;font-size:16px;color:var(--blmd-txt)}
-.blmd-zm-sub{font-size:19px;margin:26px 0 14px;color:var(--blmd-ink)}
-.blmd-page .woocommerce .blmd-zm-step .form-row .description{font-size:14.5px;line-height:1.45;color:var(--blmd-txt)}
-.blmd-page .woocommerce .blmd-zm-step .woocommerce-input-wrapper{display:block}
-.blmd-page .woocommerce #billing_country_field strong{display:flex;align-items:center;min-height:44px;font-size:17px;color:var(--blmd-ink)}
-[data-zm-notice]:focus{outline:none}
-.blmd-page .woocommerce .woocommerce-form-login-toggle .woocommerce-info{display:block;margin-bottom:22px}
-.blmd-page .woocommerce .woocommerce-form-login-toggle a{font-weight:700;color:var(--blmd-violet-dd);text-decoration:underline;text-underline-offset:3px}
+.blmd-zm-in{max-width:1180px;margin-inline:auto}
+.blmd-zm-h1{font-size:clamp(30px,3.4vw,44px);line-height:1.1;letter-spacing:-.03em;margin-bottom:clamp(16px,2vw,24px)}
+.blmd-zm-h1 small{display:block;margin-top:6px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:16px;font-weight:500;letter-spacing:0;color:var(--blmd-txt)}
+/* Logowanie i kupon (form-login.php, form-coupon.php): zwinięte; bez JS widoczne */
+.blmd-page .woocommerce .woocommerce-form-login-toggle .woocommerce-info,.blmd-page .woocommerce .woocommerce-form-coupon-toggle .woocommerce-info{display:block;margin-bottom:10px}
+.blmd-page .woocommerce .showlogin,.blmd-page .woocommerce .showcoupon{font-weight:700;color:var(--blmd-violet-dd);text-decoration:underline;text-underline-offset:3px}
+html.blmd-js .blmd-page .woocommerce form.login:not(.is-open),html.blmd-js .blmd-page .woocommerce form.checkout_coupon:not(.is-open){display:none}
+.blmd-page .woocommerce form.login,.blmd-page .woocommerce form.checkout_coupon{margin:0 0 16px;padding:20px 20px 4px;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
+.blmd-page .woocommerce form.login>p:first-child{margin-bottom:14px;font-size:15.5px;color:var(--blmd-txt)}
+.blmd-page .woocommerce form.login .lost_password a{display:inline-flex;min-height:44px;align-items:center;color:var(--blmd-violet-d);text-decoration:underline}
+.blmd-page .woocommerce form.checkout_coupon{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:20px}
+.blmd-page .woocommerce form.checkout_coupon .form-row{margin:0;width:auto}
+.blmd-page .woocommerce form.checkout_coupon .form-row-first{flex:1 1 220px}
+.blmd-page .woocommerce form.checkout_coupon .input-text{border-radius:999px;text-transform:uppercase}
+.blmd-page .woocommerce form.checkout_coupon .input-text::placeholder{text-transform:none}
+.blmd-page .woocommerce form.checkout_coupon .button{min-height:54px}
+.blmd-page .woocommerce .blmd-zm-cpnmsg{flex-basis:100%;font-size:15px;font-weight:600;color:#b42318}
+.blmd-page .woocommerce .blmd-zm-cpnmsg:empty{display:none}
+
+/* Układ formularza: dane po lewej, podsumowanie z płatnością po prawej.
+   WDROŻENIE: kolumnę prawą otwiera i zamyka nasz kod na hookach woocommerce_checkout_before_order_review_heading (div.blmd-zm-side) i woocommerce_checkout_after_order_review (zamknięcie, priorytet 99). */
+.blmd-page .woocommerce form.checkout{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,440px);gap:0 clamp(24px,3.5vw,56px);align-items:start}
+.blmd-page .woocommerce form.checkout>*{grid-column:1;min-width:0}
+.blmd-page .woocommerce form.checkout>.blmd-zm-side{grid-column:2;grid-row:1/span 3;display:grid;gap:14px}
+@media (min-width:961px) and (min-height:860px){.blmd-page .woocommerce form.checkout>.blmd-zm-side{position:sticky;top:20px}}
+.blmd-page .woocommerce .woocommerce-NoticeGroup:empty{display:none}
+.blmd-page .woocommerce .woocommerce-NoticeGroup:focus{outline:none}
+/* Kolumna danych: col2-set jako jedna kolumna kart */
+.blmd-page .woocommerce #customer_details{display:grid;gap:16px}
+.blmd-page .woocommerce #customer_details>.col-1,.blmd-page .woocommerce #customer_details>.col-2{padding:clamp(20px,3vw,32px);border-radius:var(--blmd-r);background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
+.blmd-page .woocommerce #customer_details h3{font-size:22px;margin:0 0 18px}
+.blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper{display:flex;flex-wrap:wrap;column-gap:16px}
+.blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper>.form-row{width:100%;margin-right:0}
+.blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper>.form-row-first,.blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper>.form-row-last{width:calc(50% - 8px)}
+.blmd-page .woocommerce .form-row .description{font-size:14.5px;line-height:1.45;color:var(--blmd-txt)}
+.blmd-page .woocommerce .woocommerce-input-wrapper{display:block}
+.blmd-page .woocommerce #billing_country_field .woocommerce-input-wrapper strong{display:block;font-size:17px;color:var(--blmd-ink)}
 /* Faktura i inny adres dostawy: pola pokazują się po zaznaczeniu (bez JS przez :has) */
-.blmd-zm-invoice{display:grid;gap:0;margin-top:4px;padding:16px 16px 0;border-radius:16px;background:var(--blmd-bg)}
-.blmd-page .woocommerce .blmd-zm-step .woocommerce-billing-fields__field-wrapper:has(#billing_faktura:not(:checked)) .blmd-zm-invoice{display:none}
+.blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper:has(#billing_faktura:not(:checked))>.blmd-zm-inv{display:none}
+.blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper>.blmd-zm-inv{padding:0 14px;background:var(--blmd-bg);margin-bottom:0;padding-block:6px 14px}
+.blmd-page .woocommerce #billing_company_field{border-radius:16px 16px 0 0;padding-top:14px}
+.blmd-page .woocommerce #billing_nip_field{border-radius:0 0 16px 16px;margin-bottom:16px}
+.blmd-page .woocommerce #ship-to-different-address{margin:0 0 12px;font-size:17px}
 .blmd-page .woocommerce .woocommerce-shipping-fields:has(#ship-to-different-address-checkbox:not(:checked)) .shipping_address{display:none}
-/* Paczkomat: inny adres dostawy nie ma sensu, ukrywamy (WDROŻENIE: ten sam warunek w CSS motywu; Woo i tak nie wymaga pól shipping_*, gdy checkbox odznaczony) */
-.blmd-page .woocommerce .blmd-zm-step:has(#shipping_method_0_easypack_parcel_machines:checked) .woocommerce-shipping-fields{display:none}
-.blmd-page .woocommerce #ship-to-different-address{margin:22px 0 12px;font-size:17px}
-.blmd-page .woocommerce .shipping_address{padding:16px 16px 0;border-radius:16px;background:var(--blmd-bg);margin-bottom:8px}
-.blmd-page .woocommerce .woocommerce-additional-fields{margin-top:12px}
-/* Paczkomat: przycisk i wybrany punkt (w WP renderuje wtyczka InPost pod metodą dostawy) */
+.blmd-page .woocommerce .shipping_address{padding:16px 16px 0;border-radius:16px;background:var(--blmd-bg);margin-bottom:12px}
+.blmd-page .woocommerce .woocommerce-additional-fields h3{font-size:19px!important;margin:16px 0 12px!important}
+.blmd-page .woocommerce .woocommerce-account-fields{margin-top:6px;padding:14px 16px;border-radius:16px;background:var(--blmd-lav)}
+.blmd-page .woocommerce .woocommerce-account-fields .form-row{margin:0}
+.blmd-page .woocommerce .woocommerce-account-fields .description{display:block;margin:6px 0 0 32px}
+
+/* Prawa kolumna: nagłówek, tabela, dostawa, płatność */
+.blmd-zm-side-card{padding:clamp(20px,2.4vw,28px);border-radius:var(--blmd-r);background:#fff;box-shadow:var(--blmd-shadow),inset 0 0 0 1px var(--blmd-line)}
+.blmd-page .woocommerce #order_review_heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:22px;margin:0 0 10px}
+.blmd-page .woocommerce #order_review_heading a{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:15px;font-weight:600;letter-spacing:0;color:var(--blmd-violet-d);text-decoration:underline;text-underline-offset:3px}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table>*{display:block;box-shadow:none;border-radius:0;background:transparent}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table thead{display:none}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr[hidden],.blmd-zm-item[hidden]{display:none!important}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table th,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td{display:block}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px dashed var(--blmd-lav-2)}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table th,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td{padding:11px 0;border:0;font-size:16px}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tfoot th{font-weight:500;color:var(--blmd-txt)}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td.product-total,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tfoot td{text-align:right}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.cart_item{align-items:flex-start}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.cart_item>td{padding:4px 0 14px}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td.product-total del,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td.product-total ins{display:block;margin:0}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.woocommerce-shipping-totals{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;width:100%;padding:12px 0}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.woocommerce-shipping-totals>*{padding:0;text-align:left}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.order-total{border-bottom:0;border-top:1.5px solid var(--blmd-ink);margin-top:-1px}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.order-total>*{padding-top:14px}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.order-total .amount{font-size:28px}
+.blmd-zm-item{display:grid;grid-template-columns:60px minmax(0,1fr);gap:12px;align-items:start;font-size:15.5px;line-height:1.35;font-weight:600;color:var(--blmd-ink)}
+.blmd-zm-thumb{position:relative;display:block;overflow:hidden;border-radius:12px;background:var(--blmd-photo);aspect-ratio:3/4}
+.blmd-zm-thumb img{width:100%;height:100%;object-fit:cover;object-position:50% 14%}
+.blmd-page .woocommerce .blmd-zm-item .product-quantity{position:absolute;top:4px;right:4px;display:grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--blmd-ink);color:#fff;font-size:12.5px}
+/* Paczkomat: przycisk i wybrany punkt (wtyczka InPost, woocommerce_after_shipping_rate) */
 .blmd-zm-point{flex-basis:100%;display:none;gap:10px;padding:0 0 4px 34px}
 .blmd-page .woocommerce ul.woocommerce-shipping-methods li:has(input:checked) .blmd-zm-point{display:grid}
-.blmd-zm-point-sel{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:#fff;font-size:15.5px;line-height:1.45;color:var(--blmd-ink-2)}
+.blmd-zm-point-sel{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:#fff;font-size:15px;line-height:1.45;color:var(--blmd-ink-2)}
 .blmd-zm-point-sel[hidden]{display:none}
 .blmd-zm-point-sel svg{flex:none;width:20px;height:20px;margin-top:2px;color:#1f6b45}
 .blmd-zm-point-sel strong{display:block;color:var(--blmd-ink)}
-.blmd-zm-point .blmd-btn{justify-self:start;min-height:48px}
+.blmd-zm-point .blmd-btn{justify-self:start;min-height:46px;font-size:15px}
 .blmd-zm-point .checkout-inline-error-message:empty{display:none}
 .blmd-zm-dlg{width:min(520px,calc(100% - 32px));padding:0;border:0;border-radius:24px;box-shadow:0 40px 90px -30px rgba(29,29,27,.6)}
 .blmd-zm-dlg::backdrop{background:rgba(29,29,27,.5)}
 .blmd-zm-dlg-in{display:grid;gap:12px;padding:24px}
 .blmd-zm-dlg-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .blmd-zm-dlg-head h2{font-size:22px;margin:0}
-.blmd-zm-dlg-tag{justify-self:start;display:inline-block;font-size:12.5px;padding:2px 10px;border-radius:999px;background:var(--blmd-lav-3);color:var(--blmd-violet-dd)}
-.blmd-zm-dlg-x{position:relative;width:44px;height:44px;border:0;border-radius:50%;background:var(--blmd-lav);cursor:pointer;flex:none}
-.blmd-zm-dlg-x i{position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;border-radius:2px;background:var(--blmd-ink);transform:rotate(45deg)}
-.blmd-zm-dlg-x i+i{transform:rotate(-45deg)}
+.blmd-zm-dlg-tag{justify-self:start;font-size:12.5px;padding:2px 10px;border-radius:999px;background:var(--blmd-lav-3);color:var(--blmd-violet-dd)}
+.blmd-zm-x{position:relative;width:44px;height:44px;border:0;border-radius:50%;background:var(--blmd-lav);cursor:pointer;flex:none}
+.blmd-zm-x i{position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;border-radius:2px;background:var(--blmd-ink);transform:rotate(45deg)}
+.blmd-zm-x i+i{transform:rotate(-45deg)}
 .blmd-zm-dlg-list{display:grid;gap:8px}
 .blmd-zm-dlg-list button{display:grid;gap:2px;width:100%;min-height:64px;padding:12px 16px;border:0;border-radius:16px;background:var(--blmd-bg);box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2);text-align:left;font:inherit;font-size:15.5px;color:var(--blmd-ink-2);cursor:pointer}
 .blmd-zm-dlg-list button:hover{box-shadow:inset 0 0 0 2px var(--blmd-violet);background:#fff}
 .blmd-zm-dlg-list strong{color:var(--blmd-ink);font-size:16.5px}
-/* Podsumowanie ukończonych kroków (nasz dodatek, odpowiednik podsumowania kroków Flux) */
-.blmd-zm-done{display:grid;gap:0;margin:0 0 20px;padding:4px 16px;border-radius:16px;background:var(--blmd-bg);box-shadow:inset 0 0 0 1px var(--blmd-line)}
-.blmd-zm-done:empty{display:none}
-.blmd-zm-done div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;font-size:15px;line-height:1.4;color:var(--blmd-ink-2)}
-.blmd-zm-done div+div{border-top:1px solid var(--blmd-line)}
-.blmd-zm-done b{display:block;font-size:13px;font-weight:600;color:var(--blmd-mute)}
-.blmd-zm-done button{flex:none;min-height:44px;padding:0 6px;border:0;background:none;font:inherit;font-size:15px;font-weight:600;color:var(--blmd-violet-d);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-/* Nawigacja kroków */
-.blmd-zm-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-top:24px;padding-top:20px;border-top:1px solid var(--blmd-line)}
-.blmd-zm-nav .blmd-btn{min-height:58px;font-size:17px}
-.blmd-zm-back svg{transform:scaleX(-1)}
-html:not(.blmd-js) .blmd-zm-nav{display:none}
 /* Płatność */
+.blmd-page .woocommerce #payment{margin-top:18px}
+.blmd-page .woocommerce #payment h3{font-size:19px;margin:0 0 12px}
 .blmd-page .woocommerce .blmd-zm-payname{display:flex;flex-direction:column;gap:2px}
 .blmd-page .woocommerce .blmd-zm-payname small{font-size:14px;font-weight:500;color:var(--blmd-txt)}
-.blmd-zm-paytags{display:flex;flex-wrap:wrap;gap:4px}
-.blmd-zm-paytags span{display:inline-flex;align-items:center;min-height:26px;padding:0 8px;border-radius:7px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);font-size:12.5px;font-weight:700;color:var(--blmd-ink-2)}
 .blmd-zm-card{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
 .blmd-zm-card label{display:grid;gap:4px;font-size:14px;font-weight:600;color:var(--blmd-ink)}
 .blmd-zm-card label:first-child{grid-column:1/-1}
-.blmd-zm-card input{min-height:50px;padding:0 14px;border-radius:12px;border:1.5px solid var(--blmd-lav-2);font-size:17px;color:var(--blmd-ink);background:#fff}
+.blmd-zm-card input{min-height:50px;padding:0 14px;border-radius:12px;border:1.5px solid var(--blmd-lav-2);font-size:17px;color:var(--blmd-ink);background:#fff;min-width:0}
 .blmd-zm-card-note{grid-column:1/-1;font-size:13.5px;color:var(--blmd-mute)}
 .blmd-page .woocommerce #payment .place-order{margin:0;padding:0}
 .blmd-page .woocommerce #place_order{width:100%;min-height:62px;font-size:18px}
-.blmd-zm-after{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:14.5px;color:var(--blmd-txt);text-align:center}
-.blmd-zm-after svg{flex:none;width:16px;height:16px;color:#1f6b45}
-/* Kolumna z koszykiem (Flux: prawa kolumna; na mobile zwijana na górze) */
-.blmd-zm-side{position:sticky;top:20px;min-width:0}
-.blmd-zm-sum{border-radius:var(--blmd-r);background:#fff;box-shadow:var(--blmd-shadow),inset 0 0 0 1px var(--blmd-line)}
-.blmd-zm-sum>summary{display:none;list-style:none}
-.blmd-zm-sum>summary::-webkit-details-marker{display:none}
-.blmd-zm-sum-in{padding:clamp(20px,2.4vw,28px)}
-.blmd-page .woocommerce #order_review_heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:22px;margin:0 0 14px}
-.blmd-page .woocommerce #order_review_heading a{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:15px;font-weight:600;letter-spacing:0;color:var(--blmd-violet-d);text-decoration:underline;text-underline-offset:3px}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table{box-shadow:none;border-radius:0;background:transparent}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table thead{display:none}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table th,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td{padding:11px 0;border-bottom:1px dashed var(--blmd-lav-2);font-size:16px}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tfoot th{font-weight:500;color:var(--blmd-txt)}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td.product-total,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tfoot td{text-align:right}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tbody td{padding:0 0 16px;vertical-align:top}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td.product-total del,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table td.product-total ins{display:block;margin:0}
-.blmd-zm-item{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:start;font-size:15.5px;line-height:1.35;font-weight:600;color:var(--blmd-ink)}
-.blmd-zm-thumb{position:relative;display:block;overflow:hidden;border-radius:12px;background:var(--blmd-photo);aspect-ratio:3/4}
-.blmd-zm-thumb img{width:100%;height:100%;object-fit:cover;object-position:50% 14%}
-.blmd-page .woocommerce .blmd-zm-item .product-quantity{position:absolute;top:4px;right:4px;display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:999px;background:var(--blmd-ink);color:#fff;font-size:12.5px}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.order-total>*{padding-top:14px;border-bottom:0;border-top:1.5px solid var(--blmd-ink)}
-.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.order-total .amount{font-size:28px}
-.blmd-zm-coupon{margin-top:14px;border-top:1px solid var(--blmd-line)}
-.blmd-zm-coupon>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;font-weight:600;font-size:16px;color:var(--blmd-ink);cursor:pointer}
-.blmd-zm-coupon>summary::-webkit-details-marker{display:none}
-.blmd-zm-coupon[open] .blmd-caret{transform:rotate(180deg)}
-.blmd-zm-coupon .checkout_coupon{display:flex;gap:8px;padding-bottom:6px}
-.blmd-page .woocommerce .blmd-zm-coupon .input-text{flex:1;min-width:0;min-height:50px;border-radius:999px;text-transform:uppercase}
-.blmd-page .woocommerce .blmd-zm-coupon .input-text::placeholder{text-transform:none}
-.blmd-page .woocommerce .blmd-zm-coupon .button{min-height:50px}
-.blmd-zm-coupon-msg{padding-bottom:8px;font-size:15px;font-weight:600;color:#b42318}
-.blmd-zm-coupon-msg:empty{display:none}
-.blmd-zm-free{display:grid;gap:8px;margin-top:12px;padding:14px 16px;border-radius:16px;background:var(--blmd-lav-3);font-size:15px;line-height:1.4;color:var(--blmd-ink-2)}
-.blmd-zm-free strong{color:var(--blmd-ink)}
-.blmd-zm-free span{display:block;height:6px;border-radius:6px;background:rgba(255,255,255,.8)}
-.blmd-zm-free i{display:block;height:100%;width:20%;border-radius:inherit;background:var(--blmd-grad)}
-.blmd-zm-help{display:flex;gap:12px;align-items:center;margin-top:14px;padding:4px 4px 0;font-size:14.5px;line-height:1.45;color:var(--blmd-txt)}
-.blmd-zm-help svg{flex:none;width:20px;height:20px;color:var(--blmd-violet-d)}
-.blmd-zm-help a{font-weight:700;color:var(--blmd-violet-dd);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
-/* Minimalna stopka zamówienia */
+/* Zwijane podsumowanie na mobile (baza; WDROŻENIE: woocommerce_before_checkout_form, priorytet 1, tylko mobile przez CSS) */
+.blmd-zm-mini{display:none}
+/* Minimalna stopka (template part szablonu „Zamówienie”) */
 .blmd-zm-foot{padding:24px 0 32px;box-shadow:inset 0 1px 0 var(--blmd-line);font-size:14.5px;color:var(--blmd-txt)}
 .blmd-zm-foot-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 24px}
 .blmd-zm-foot nav{display:flex;flex-wrap:wrap;gap:0 18px}
 .blmd-zm-foot a{display:inline-flex;align-items:center;min-height:44px;color:var(--blmd-ink-2);text-decoration:underline;text-decoration-color:var(--blmd-lav-2);text-underline-offset:4px}
-.blmd-zm-foot a:hover{text-decoration-color:currentColor}
+
+/* ===== MODUŁY CRO (każdy można wyłączyć; [hidden] ukrywa) ===== */
+[data-blmd-cro][hidden]{display:none!important}
+/* ekspres */
+.blmd-cro-ekspres{display:grid;gap:10px;margin:0 0 18px;padding:18px 20px;border-radius:var(--blmd-r);background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
+.blmd-cro-ekspres h2{font-size:18px;margin:0}
+.blmd-cro-ekspres .izi-widget-placeholder{margin:0}
+.blmd-cro-ekspres .blmd-izi-or{margin:6px 0 0}
+/* dostawa-pasek */
+.blmd-cro-dostawa-pasek{display:grid;gap:8px;padding:14px 16px;border-radius:18px;background:var(--blmd-lav-3);font-size:15px;line-height:1.45;color:var(--blmd-ink-2)}
+.blmd-cro-dostawa-pasek strong{color:var(--blmd-ink)}
+.blmd-cro-dostawa-pasek a{font-weight:600;color:var(--blmd-violet-dd);text-decoration:underline;text-underline-offset:3px}
+.blmd-cro-dostawa-pasek progress{display:block;width:100%;height:6px;border:0;border-radius:6px;overflow:hidden;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.8)}
+.blmd-cro-dostawa-pasek progress::-webkit-progress-bar{background:rgba(255,255,255,.8)}
+.blmd-cro-dostawa-pasek progress::-webkit-progress-value{background:var(--blmd-grad)}
+.blmd-cro-dostawa-pasek progress::-moz-progress-bar{background:var(--blmd-violet)}
+.blmd-cro-dostawa-pasek.is-free{background:#e6f4ec}
+/* kiedy-dotrze, rozmiar-spokoj (wiersze tabeli podsumowania) */
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.blmd-cro-kiedy-dotrze,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.blmd-cro-rozmiar-spokoj{border-bottom:0}
+.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.blmd-cro-kiedy-dotrze td,.blmd-page .woocommerce table.woocommerce-checkout-review-order-table tr.blmd-cro-rozmiar-spokoj td{display:flex;gap:8px;align-items:flex-start;width:100%;padding:0 0 12px;font-size:14.5px;line-height:1.45;text-align:left;color:var(--blmd-ink-2)}
+.blmd-cro-ico{flex:none;width:18px;height:18px;margin-top:1px;color:var(--blmd-violet-d)}
+/* dobierz */
+.blmd-cro-dobierz{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center;margin-top:14px;padding:12px;border-radius:18px;background:var(--blmd-bg);box-shadow:inset 0 0 0 1.5px var(--blmd-lav-2)}
+.blmd-cro-dobierz:has(input:checked){background:var(--blmd-lav);box-shadow:inset 0 0 0 2px var(--blmd-violet)}
+.blmd-cro-dobierz img{width:56px;height:72px;object-fit:cover;object-position:50% 15%;border-radius:10px;background:var(--blmd-photo)}
+.blmd-cro-dobierz-t{font-size:14.5px;line-height:1.4;color:var(--blmd-ink-2)}
+.blmd-cro-dobierz-t strong{display:block;font-size:15px;color:var(--blmd-ink)}
+.blmd-cro-dobierz-t del{color:var(--blmd-mute);margin-right:4px}
+.blmd-cro-dobierz-t b{color:var(--blmd-violet-dd)}
+.blmd-cro-dobierz label{grid-column:1/-1;display:flex;align-items:center;gap:10px;min-height:44px;padding:0 4px;font-weight:600;font-size:15.5px;color:var(--blmd-ink);cursor:pointer}
+.blmd-cro-dobierz input{width:22px;height:22px;margin:0;accent-color:var(--blmd-violet);flex:none}
+/* zaufanie-platnosc */
+.blmd-cro-zaufanie-platnosc{display:grid;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--blmd-line)}
+.blmd-cro-zaufanie-platnosc li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:var(--blmd-ink-2)}
+.blmd-cro-zaufanie-platnosc svg{flex:none;width:18px;height:18px;margin-top:2px;color:var(--blmd-violet-d)}
+.blmd-cro-zaufanie-platnosc a{font-weight:700;color:var(--blmd-violet-dd);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+/* opinia */
+.blmd-cro-opinia{display:grid;gap:10px;padding:20px;border-radius:var(--blmd-r);background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
+.blmd-cro-opinia blockquote{font-size:16px;line-height:1.55;color:var(--blmd-ink-2)}
+.blmd-cro-opinia figcaption{font-size:14px;color:var(--blmd-mute)}
+.blmd-cro-opinia figcaption strong{color:var(--blmd-ink);font-weight:600}
+/* email-najpierw: e-mail jako pierwsze pole (kolejność przez CSS, w WP priorytet pola) */
+.blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper:has(.blmd-cro-email-najpierw:not([hidden])) #billing_email_field{order:-1}
+.blmd-page .woocommerce #billing_email_field:has(.blmd-cro-email-najpierw:not([hidden])) #billing_email-description{display:none}
+.blmd-cro-email-najpierw{display:block;font-size:14.5px;line-height:1.45;color:var(--blmd-txt)}
+/* mobilny-pasek */
+.blmd-cro-mobilny-pasek{display:none}
+
+/* MAKIETA: panel przełączania modułów (nie do wdrożenia) */
+.blmd-crodemo{display:none}
+html.blmd-js .blmd-crodemo{display:block;position:fixed;top:84px;right:12px;z-index:90;max-width:min(320px,calc(100% - 24px));font-size:14px}
+.blmd-crodemo>summary{list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:#1d1d1b;color:#fff;font-weight:600;cursor:pointer;box-shadow:0 12px 30px -12px rgba(0,0,0,.5);float:right}
+.blmd-crodemo>summary::-webkit-details-marker{display:none}
+.blmd-crodemo-in{clear:both;margin-top:8px;padding:14px;border-radius:18px;background:#fff;box-shadow:0 30px 60px -20px rgba(0,0,0,.45),inset 0 0 0 1px var(--blmd-line);max-height:calc(100vh - 90px);overflow:auto}
+.blmd-crodemo-in p{font-size:12.5px;color:var(--blmd-mute);margin-bottom:8px}
+.blmd-crodemo label{display:flex;align-items:center;gap:8px;min-height:36px;color:var(--blmd-ink);cursor:pointer}
+.blmd-crodemo input{width:18px;height:18px;margin:0;accent-color:var(--blmd-violet)}
+.blmd-crodemo-btns{display:flex;gap:6px;margin-top:8px}
+.blmd-crodemo-btns button{flex:1;min-height:38px;border:0;border-radius:999px;background:var(--blmd-lav);font:inherit;font-size:13px;font-weight:600;color:var(--blmd-violet-dd);cursor:pointer}
 
 @media (max-width:960px){
- .blmd-zm-grid{grid-template-columns:1fr}
- .blmd-zm-side{position:static;order:-1}
- .blmd-zm-sum>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;padding:8px 20px;cursor:pointer;font-weight:600;font-size:16px;color:var(--blmd-violet-dd)}
- .blmd-zm-sum>summary span{display:inline-flex;align-items:center;gap:8px}
- .blmd-zm-sum>summary strong{font-size:19px;color:var(--blmd-ink)}
- .blmd-zm-sum[open]>summary .blmd-caret{transform:rotate(180deg)}
- .blmd-zm-sum[open]>summary{box-shadow:inset 0 -1px 0 var(--blmd-line)}
- .blmd-zm-sum{box-shadow:inset 0 0 0 1px var(--blmd-line)}
+ .blmd-page .woocommerce form.checkout{grid-template-columns:1fr}
+ .blmd-page .woocommerce form.checkout>.blmd-zm-side{grid-column:1;grid-row:auto}
+ /* Na mobile produkty są w zwijanym podsumowaniu u góry, więc w tabeli zostają kwoty, dostawa i płatność */
+ .blmd-page .woocommerce table.woocommerce-checkout-review-order-table tbody{display:none}
+ .blmd-page .woocommerce #order_review_heading{font-size:20px}
+ .blmd-zm-mini{display:block;margin:0 0 16px;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
+ .blmd-zm-mini>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:58px;padding:6px 18px;font-weight:600;font-size:16px;color:var(--blmd-violet-dd);cursor:pointer}
+ .blmd-zm-mini>summary::-webkit-details-marker{display:none}
+ .blmd-zm-mini>summary span{display:inline-flex;align-items:center;gap:8px}
+ .blmd-zm-mini>summary strong{font-size:19px;color:var(--blmd-ink)}
+ .blmd-zm-mini[open]>summary .blmd-caret{transform:rotate(180deg)}
+ .blmd-zm-mini-in{display:grid;gap:12px;padding:4px 18px 16px;border-top:1px solid var(--blmd-line);padding-top:14px}
+ .blmd-zm-mini-row{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:var(--blmd-ink-2)}
+ .blmd-zm-mini-row b{color:var(--blmd-ink);white-space:nowrap}
+ .blmd-cro-mobilny-pasek{position:fixed;left:0;right:0;bottom:0;z-index:57;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);box-shadow:0 -18px 40px -24px rgba(58,59,110,.5),inset 0 1px 0 var(--blmd-line);transition:transform .3s var(--blmd-ease)}
+ .blmd-cro-mobilny-pasek.is-hidden{transform:translateY(110%)}
+ .blmd-cro-mobilny-pasek span{font-size:13.5px;line-height:1.3;color:var(--blmd-txt)}
+ .blmd-cro-mobilny-pasek strong{display:block;font-size:20px;color:var(--blmd-ink)}
+ .blmd-cro-mobilny-pasek .blmd-btn{flex:none}
 }
-@media (max-width:760px){
- .blmd-zm-bar-in{flex-wrap:wrap;min-height:0;padding-block:8px 10px}
+@media (max-width:960px){html.blmd-js .blmd-crodemo{top:auto;bottom:86px}.blmd-crodemo-in{position:absolute;right:0;bottom:calc(100% + 8px);width:min(300px,calc(100vw - 24px))}}
+@media (max-width:620px){
+ .blmd-zm-bar-in{min-height:64px}
  .blmd-zm-logo img{width:96px}
- .blmd-zm-bar-in>nav{order:3;flex-basis:100%}
- .blmd-zm-steps{justify-content:space-between;gap:2px}
- .blmd-zm-steps li{gap:2px;flex:1}
- .blmd-zm-steps li+li::before{width:auto;flex:1;min-width:6px}
- .blmd-zm-steps a{gap:6px;padding:0 10px 0 5px;font-size:14px}
- .blmd-zm-steps a::before{width:26px;height:26px;font-size:13px}
- .blmd-zm-safe{font-size:13.5px}
- .blmd-zm-step{padding:20px 16px;border-radius:22px}
- .blmd-zm-nav{flex-direction:column-reverse;align-items:stretch}
- .blmd-zm-nav .blmd-btn{width:100%;justify-content:space-between}
- .blmd-zm-nav .blmd-link{justify-content:center}
+ .blmd-zm-safe span{display:none}
+ .blmd-zm-tel small{display:none}
+ .blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper>.form-row-first,.blmd-page .woocommerce .woocommerce-billing-fields__field-wrapper>.form-row-last{width:100%}
+ .blmd-page .woocommerce #customer_details>.col-1,.blmd-page .woocommerce #customer_details>.col-2{padding:20px 16px;border-radius:22px}
+ .blmd-zm-side-card{padding:20px 16px;border-radius:22px}
  .blmd-zm-point{padding-left:0}
 }
 </style>
@@ -733,111 +792,215 @@ html:not(.blmd-js) .blmd-zm-nav{display:none}
 <!-- SHELL:END naglowek -->
 
 <main id="blmd-main" tabindex="-1">
-<!-- Uproszczony nagłówek zamówienia: logo, kroki, „Bezpieczne zakupy”. Bez menu i wyszukiwarki, żeby nic nie odciągało od zamówienia.
-     WDROŻENIE: Flux Checkout ma własny nagłówek z logo i krokami (ustawienia Flux: logo, kolory, tłumaczenia etykiet kroków). -->
+<!-- Minimalny nagłówek zamówienia: logo, „Bezpieczne zakupy”, telefon. Bez menu i wyszukiwarki, żeby nic nie odciągało od zamówienia.
+     WDROŻENIE: template part „Nagłówek zamówienia” w osobnym szablonie FSE strony /zamowienie/. -->
 <div class="blmd-zm-bar"><div class="blmd-wrap blmd-zm-bar-in">
  <a class="blmd-zm-logo" href="index.html" data-href="https://blancomed.com/" aria-label="Blanco Med, strona główna"><img src="img/logo-blancomed-trim.png" width="640" height="245" alt="Blanco Med"></a>
- <nav aria-label="Etapy zamówienia"><ol class="blmd-zm-steps" data-zm-steps>
-  <li><a href="#zm-dane" data-zm-go="0" aria-current="step">Dane</a></li>
-  <li><a href="#zm-adres" data-zm-go="1">Adres</a></li>
-  <li><a href="#zm-platnosc" data-zm-go="2">Płatność</a></li>
- </ol></nav>
- <p class="blmd-zm-safe"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Bezpieczne zakupy</p>
+ <div class="blmd-zm-bar-r">
+  <p class="blmd-zm-safe"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span>Bezpieczne zakupy</span></p>
+  <a class="blmd-zm-tel" href="tel:+48665502476"><svg aria-hidden="true"><use href="#blmd-i-phone"/></svg>665 502 476 <small>pn. do pt. 9:00 do 15:00</small></a>
+ </div>
 </div></div>
 
-<section class="wp-section alignfull blmd-zm" aria-labelledby="blmd-zm-h1"><div class="wp-content-wrap blmd-wrap">
- <h1 class="blmd-sr" id="blmd-zm-h1">Zamówienie</h1>
+<!-- MAKIETA: panel do porównania czystej bazy z wersją z modułami CRO. NIE do wdrożenia. Stan także z adresu: ?cro=0 (bez modułów) albo ?cro=ekspres,opinia. Bez JS panel jest ukryty, a wszystkie moduły widoczne. -->
+<details class="blmd-crodemo" data-crodemo>
+ <summary>Moduły CRO <span data-crodemo-n></span></summary>
+ <div class="blmd-crodemo-in">
+  <p>Podgląd makiety: włącz lub wyłącz moduły.</p>
+  <div data-crodemo-list></div>
+  <div class="blmd-crodemo-btns"><button type="button" data-crodemo-all="1">Wszystkie</button><button type="button" data-crodemo-all="0">Wszystkie wyłączone</button></div>
+ </div>
+</details>
+
+<section class="wp-section alignfull blmd-zm" aria-labelledby="blmd-zm-h1"><div class="wp-content-wrap blmd-wrap"><div class="blmd-zm-in">
+ <!-- H1: tytuł strony w szablonie FSE. -->
+ <h1 class="blmd-zm-h1" id="blmd-zm-h1">Zamówienie<small>Zamówisz bez zakładania konta.</small></h1>
+
+ <!-- Od tego miejsca: HTML shortcode [woocommerce_checkout]. -->
  <div class="woocommerce">
-  <!-- form.checkout.woocommerce-checkout z checkout/form-checkout.php. W makiecie: wysłanie prowadzi do ZAMOWIENIE-PRZYJETE.html. Bez JS wszystkie trzy kroki są widoczne jeden pod drugim. -->
+  <div class="woocommerce-notices-wrapper"></div>
+
+  <!-- Baza (WDROŻENIE: woocommerce_before_checkout_form, priorytet 1; widoczne tylko na mobile przez CSS): zwijane podsumowanie z kwotą na górze. -->
+  <details class="blmd-zm-mini" data-zm-mini>
+   <summary><span><span data-zm-minilbl>Pokaż podsumowanie</span><svg class="blmd-caret" aria-hidden="true"><use href="#blmd-i-caret"/></svg></span><strong data-zm-total-text>117,00 zł</strong></summary>
+   <div class="blmd-zm-mini-in">
+    <div class="blmd-zm-item"><span class="blmd-zm-thumb"><img src="img/2024-07-spodnie-medyczne-damskie-comfy-proline-lila.webp" width="1200" height="1804" alt=""></span><span>Spodnie medyczne damskie Comfy PROline liliowy VIOLET MIST<dl class="variation"><dt>Rozmiar:</dt><dd><p>XS</p></dd></dl></span></div>
+    <div class="blmd-zm-item" data-zm-bumpmini hidden><span class="blmd-zm-thumb"><img src="img/2024-09-bluza-medyczna-damska-smart-prolina-lila.webp" width="1200" height="1804" alt="" loading="lazy"></span><span>Bluza medyczna damska Smart PROline liliowy VIOLET MIST<dl class="variation"><dt>Rozmiar:</dt><dd><p>XS</p></dd></dl></span></div>
+    <div class="blmd-zm-mini-row"><span>Kwota</span><b data-zm-sub-text>99,00 zł</b></div>
+    <div class="blmd-zm-mini-row"><span>Dostawa</span><b data-zm-ship-text>18,00 zł</b></div>
+    <div class="blmd-zm-mini-row"><span>Łącznie</span><b data-zm-total-text>117,00 zł</b></div>
+    <a class="blmd-link" href="KOSZYK.html" data-href="https://blancomed.com/koszyk/">Edytuj koszyk</a>
+   </div>
+  </details>
+
+  <!-- MODUŁ CRO: ekspres. CEL: kto ma aplikację InPost, płaci bez wpisywania danych i adresu.
+       WDROŻENIE: woocommerce_before_checkout_form, priorytet 5; przycisk renderuje wtyczka InPost Pay (inpost-izi-button), tu podgląd.
+       DO-POTWIERDZENIA: czy InPost Pay ma miejsce osadzenia na stronie zamówienia; czy PayU daje przyciski Apple Pay / Google Pay w trybie ekspres (wtedy dodać tu, dziś są tylko na liście płatności niżej). -->
+  <div class="blmd-cro-ekspres" data-blmd-cro="ekspres">
+   <h2>Szybka płatność</h2>
+   <div class="izi-widget-placeholder izi-widget-checkout">
+    <div class="blmd-izi blmd-izi--sub">
+     <span class="blmd-izi-btn"><span class="blmd-izi-tag">Paczkomat taniej</span>Kup z <b><i aria-hidden="true"></i>InPost</b></span>
+     <span class="blmd-izi-note">Dane i paczkomat podasz w aplikacji InPost.</span>
+    </div>
+   </div>
+   <p class="blmd-izi-or">albo wypełnij dane poniżej</p>
+  </div>
+
+  <!-- checkout/form-login.php: przypomnienie o logowaniu (ustawienie Woo: „Pozwól klientom zalogować się na stronie zamówienia”). Formularz zwinięty; bez JS widoczny. -->
+  <div class="woocommerce-form-login-toggle">
+   <div class="woocommerce-info">Masz już konto? <a href="#" class="showlogin" role="button" aria-expanded="false" aria-controls="blmd-zm-login">Zaloguj się</a>, a dane uzupełnią się same.</div>
+  </div>
+  <form class="woocommerce-form woocommerce-form-login login" method="get" action="ZAMOWIENIE.html" id="blmd-zm-login">
+   <p>Kupowałaś lub kupowałeś już u nas? Zaloguj się. Jeśli jesteś tu pierwszy raz, przejdź do danych niżej.</p>
+   <p class="form-row form-row-first"><label for="username">E-mail lub nazwa użytkownika&nbsp;<span class="required" aria-hidden="true">*</span></label><input type="text" class="input-text" name="username" id="username" autocomplete="username"></p>
+   <p class="form-row form-row-last"><label for="password">Hasło&nbsp;<span class="required" aria-hidden="true">*</span></label><input class="input-text woocommerce-Input" type="password" name="password" id="password" autocomplete="current-password"></p>
+   <p class="form-row"><label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme"><input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever"> <span>Zapamiętaj mnie</span></label>
+    <button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="Zaloguj">Zaloguj się</button></p>
+   <p class="lost_password"><a href="https://blancomed.com/moje-konto/lost-password/">Nie pamiętasz hasła?</a></p>
+  </form>
+
+  <!-- checkout/form-coupon.php: kupon w osobnym formularzu nad zamówieniem. Zwinięty (Woo ukrywa go stylem inline; u nas klasa is-open), bez JS widoczny. -->
+  <div class="woocommerce-form-coupon-toggle">
+   <div class="woocommerce-info">Masz kod rabatowy? <a href="#" role="button" aria-label="Wpisz kod rabatowy" aria-controls="woocommerce-checkout-form-coupon" aria-expanded="false" class="showcoupon">Wpisz go tutaj</a></div>
+  </div>
+  <form class="checkout_coupon woocommerce-form-coupon" method="get" action="ZAMOWIENIE.html" id="woocommerce-checkout-form-coupon">
+   <p class="form-row form-row-first"><label for="coupon_code" class="screen-reader-text">Kod rabatowy:</label><input type="text" name="coupon_code" class="input-text" placeholder="Kod rabatowy" id="coupon_code" value="" autocomplete="off" spellcheck="false"></p>
+   <p class="form-row form-row-last"><button type="submit" class="button" name="apply_coupon" value="Zastosuj kod">Zastosuj kod</button></p>
+   <p class="blmd-zm-cpnmsg" role="alert" data-zm-cpnmsg></p>
+  </form>
+
   <form name="checkout" method="get" class="checkout woocommerce-checkout" action="ZAMOWIENIE-PRZYJETE.html" enctype="multipart/form-data" aria-label="Zamówienie" data-zm-form>
-   <div class="blmd-zm-grid">
-    <div class="blmd-zm-main">
-     <!-- Błędy walidacji (WooCommerce: div.woocommerce-NoticeGroup-checkout > ul.woocommerce-error). Komunikaty pól przez filtr woocommerce_checkout_required_field_notice. -->
-     <div class="woocommerce-NoticeGroup woocommerce-NoticeGroup-checkout" data-zm-notice tabindex="-1"></div>
+   <!-- Błędy (WooCommerce wstawia tu div.woocommerce-NoticeGroup-checkout > ul.woocommerce-error). Komunikaty pól: filtr woocommerce_checkout_required_field_notice. -->
+   <div class="woocommerce-NoticeGroup woocommerce-NoticeGroup-checkout" data-zm-notice tabindex="-1"></div>
 
-     <!-- KROK 1: Dane -->
-     <section class="blmd-zm-step is-active" id="zm-dane" data-zm-step aria-labelledby="zm-dane-h">
-      <header><span>Krok 1 z 3</span><h2 id="zm-dane-h" tabindex="-1">Twoje dane</h2><p>Zamówisz bez zakładania konta.</p></header>
-      <!-- Logowanie dla stałych klientów: checkout/form-login.php (div.woocommerce-form-login-toggle). -->
-      <div class="woocommerce-form-login-toggle"><div class="woocommerce-info">Masz już konto? <a href="https://blancomed.com/moje-konto/" class="showlogin">Zaloguj się</a>, a dane uzupełnią się same.</div></div>
-      <div class="woocommerce-billing-fields">
-       <div class="woocommerce-billing-fields__field-wrapper">
-        <p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="1"><label for="billing_email">Adres e-mail&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="email" class="input-text" name="billing_email" id="billing_email" placeholder="np. anna@example.com" value="" autocomplete="email" inputmode="email" spellcheck="false" required aria-required="true" aria-describedby="billing_email-description"></span><span class="description" id="billing_email-description">Wyślemy tu potwierdzenie zamówienia.</span></p>
-        <p class="form-row form-row-first validate-required" id="billing_first_name_field" data-priority="10"><label for="billing_first_name">Imię&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_first_name" id="billing_first_name" placeholder="np. Anna" value="" autocomplete="given-name" required aria-required="true"></span></p>
-        <p class="form-row form-row-last validate-required" id="billing_last_name_field" data-priority="20"><label for="billing_last_name">Nazwisko&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_last_name" id="billing_last_name" placeholder="np. Kowalska" value="" autocomplete="family-name" required aria-required="true"></span></p>
-        <!-- Flux pokazuje przy telefonie wybór kierunkowego kraju; dla Polski +48. -->
-        <p class="form-row form-row-wide validate-required validate-phone" id="billing_phone_field" data-priority="100"><label for="billing_phone">Telefon&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="tel" class="input-text" name="billing_phone" id="billing_phone" placeholder="np. 600 100 200" value="" autocomplete="tel" inputmode="tel" required aria-required="true" aria-describedby="billing_phone-description"></span><span class="description" id="billing_phone-description">Przyda się InPost do powiadomień o paczce.</span></p>
-        <!-- „Chcę fakturę”: pole dodatkowe (dziś na żywym sklepie). DO-POTWIERDZENIA: id pól z wtyczki (przyjęto billing_faktura, billing_nip; billing_company to pole WooCommerce). -->
-        <p class="form-row form-row-wide" id="billing_faktura_field"><label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox"><input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" name="billing_faktura" id="billing_faktura" value="1"> <span>Chcę fakturę na firmę lub placówkę</span></label></p>
-        <div class="blmd-zm-invoice">
-         <p class="form-row form-row-wide" id="billing_company_field" data-priority="30" data-zm-req="invoice"><label for="billing_company">Nazwa firmy lub placówki&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_company" id="billing_company" placeholder="np. Szpital Miejski w Przykładowie" value="" autocomplete="organization"></span></p>
-         <p class="form-row form-row-wide" id="billing_nip_field" data-zm-req="invoice"><label for="billing_nip">NIP&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_nip" id="billing_nip" placeholder="10 cyfr, np. 1234567890" value="" inputmode="numeric" autocomplete="off" aria-describedby="billing_nip-description"></span><span class="description" id="billing_nip-description">Fakturę wystawimy z adresem z następnego kroku.</span></p>
-        </div>
-       </div>
-      </div>
-      <div class="blmd-zm-nav">
-       <a class="blmd-link blmd-zm-back" href="KOSZYK.html" data-href="https://blancomed.com/koszyk/"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg>Wróć do koszyka</a>
-       <button class="blmd-btn blmd-btn--violet" type="button" data-zm-next>Dalej: adres i dostawa <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></button>
-      </div>
-     </section>
-
-     <!-- KROK 2: Adres i dostawa -->
-     <section class="blmd-zm-step" id="zm-adres" data-zm-step aria-labelledby="zm-adres-h">
-      <header><span>Krok 2 z 3</span><h2 id="zm-adres-h" tabindex="-1">Adres i dostawa</h2></header>
-      <div class="blmd-zm-done" data-zm-done="1"></div>
+   <div class="col2-set" id="customer_details">
+    <div class="col-1">
+     <!-- checkout/form-billing.php. Pola i kolejność: filtr woocommerce_checkout_fields w motywie potomnym (polskie etykiety, placeholdery, autocomplete, inputmode;
+          telefon wymagany; pola faktury billing_faktura i billing_nip dodane naszym kodem; billing_company przeniesione do faktury). -->
+     <div class="woocommerce-billing-fields">
+      <h3>Dane do zamówienia</h3>
       <div class="woocommerce-billing-fields__field-wrapper">
-       <!-- Sprzedaż tylko do Polski: WooCommerce pokazuje kraj jako tekst z ukrytym polem. -->
+       <p class="form-row form-row-first validate-required" id="billing_first_name_field" data-priority="10"><label for="billing_first_name">Imię&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_first_name" id="billing_first_name" placeholder="np. Anna" value="" autocomplete="given-name" required aria-required="true"></span></p>
+       <p class="form-row form-row-last validate-required" id="billing_last_name_field" data-priority="20"><label for="billing_last_name">Nazwisko&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_last_name" id="billing_last_name" placeholder="np. Kowalska" value="" autocomplete="family-name" required aria-required="true"></span></p>
        <p class="form-row form-row-wide address-field update_totals_on_change" id="billing_country_field" data-priority="40"><label for="billing_country">Kraj</label><span class="woocommerce-input-wrapper"><strong>Polska</strong><input type="hidden" name="billing_country" id="billing_country" value="PL" autocomplete="country" class="country_to_state" readonly></span></p>
        <p class="form-row form-row-wide address-field validate-required" id="billing_address_1_field" data-priority="50"><label for="billing_address_1">Ulica i numer domu&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_address_1" id="billing_address_1" placeholder="np. ul. Lipowa 12" value="" autocomplete="address-line1" required aria-required="true"></span></p>
        <p class="form-row form-row-wide address-field" id="billing_address_2_field" data-priority="60"><label for="billing_address_2">Numer mieszkania lub lokalu&nbsp;<span class="optional">(opcjonalnie)</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_address_2" id="billing_address_2" placeholder="np. 4" value="" autocomplete="address-line2"></span></p>
        <p class="form-row form-row-first address-field validate-required validate-postcode" id="billing_postcode_field" data-priority="65"><label for="billing_postcode">Kod pocztowy&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_postcode" id="billing_postcode" placeholder="00-000" value="" autocomplete="postal-code" inputmode="numeric" maxlength="6" required aria-required="true"></span></p>
        <p class="form-row form-row-last address-field validate-required" id="billing_city_field" data-priority="70"><label for="billing_city">Miejscowość&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_city" id="billing_city" placeholder="np. Łódź" value="" autocomplete="address-level2" required aria-required="true"></span></p>
+       <p class="form-row form-row-wide validate-required validate-phone" id="billing_phone_field" data-priority="100"><label for="billing_phone">Telefon&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="tel" class="input-text" name="billing_phone" id="billing_phone" placeholder="np. 600 100 200" value="" autocomplete="tel" inputmode="tel" required aria-required="true" aria-describedby="billing_phone-description"></span><span class="description" id="billing_phone-description">Przyda się InPost do powiadomień o paczce.</span></p>
+       <p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="110"><label for="billing_email">Adres e-mail&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="email" class="input-text" name="billing_email" id="billing_email" placeholder="np. anna@example.com" value="" autocomplete="email" inputmode="email" spellcheck="false" required aria-required="true" aria-describedby="billing_email-description"></span><span class="description" id="billing_email-description">Wyślemy tu potwierdzenie zamówienia.</span>
+        <!-- MODUŁ CRO: email-najpierw. CEL: zebrać adres na początku, żeby móc przypomnieć o niedokończonym zamówieniu; e-mail na górze to też najkrótsza droga dla stałych klientów.
+             WDROŻENIE: filtr woocommerce_checkout_fields, priority pola billing_email = 1 (tu kolejność przez CSS order). Przypomnienia o porzuconym koszyku wymagają narzędzia (np. wtyczki do porzuconych koszyków lub automatyzacji e-mail).
+             DO-POTWIERDZENIA: narzędzie i podstawa prawna wysyłki przypomnień (zgoda albo uzasadniony interes, zapis w polityce prywatności). Do tego czasu tekst dopisku bez obietnicy przypomnień. -->
+        <span class="blmd-cro-email-najpierw" data-blmd-cro="email-najpierw">Zaczynamy od e-maila: tu przyjdzie potwierdzenie i informacje o wysyłce.</span>
+       </p>
+       <!-- Faktura: pola dodane naszym kodem (filtr woocommerce_checkout_fields). DO-POTWIERDZENIA: czy zachować dzisiejsze id z wtyczki (billing_faktura, billing_nip) dla zgodności z księgowością. -->
+       <p class="form-row form-row-wide" id="billing_faktura_field" data-priority="120"><label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox"><input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" name="billing_faktura" id="billing_faktura" value="1"> <span>Chcę fakturę na firmę lub placówkę</span></label></p>
+       <p class="form-row form-row-wide blmd-zm-inv" id="billing_company_field" data-priority="121" data-zm-req="1"><label for="billing_company">Nazwa firmy lub placówki&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_company" id="billing_company" placeholder="np. Szpital Miejski w Przykładowie" value="" autocomplete="organization"></span></p>
+       <p class="form-row form-row-wide blmd-zm-inv" id="billing_nip_field" data-priority="122" data-zm-req="1"><label for="billing_nip">NIP&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="billing_nip" id="billing_nip" placeholder="10 cyfr, np. 1234567890" value="" inputmode="numeric" autocomplete="off"></span></p>
       </div>
+     </div>
+     <!-- MODUŁ CRO: konto-po. CEL: konto jako wybór, nie warunek; kto chce śledzić zamówienia, zaznacza jedno pole.
+          WDROŻENIE: ustawienia WooCommerce (konta: „Pozwól tworzyć konto przy zamówieniu”, „Generuj hasło i wyślij e-mailem”); tekst przez filtr gettext. Rdzeń: div.woocommerce-account-fields z form-billing.php. -->
+     <div class="woocommerce-account-fields blmd-cro-konto-po" data-blmd-cro="konto-po">
+      <p class="form-row form-row-wide create-account">
+       <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox"><input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" type="checkbox" name="createaccount" value="1"> <span>Załóż konto, żeby sprawdzać status zamówienia</span></label>
+       <span class="description">Hasło ustawisz z linku, który wyślemy e-mailem. Nic więcej nie musisz wypełniać.</span>
+      </p>
+     </div>
+    </div>
 
-      <h3 class="blmd-zm-sub" id="zm-dostawa-h">Jak dostarczyć paczkę?</h3>
-      <!-- Metody dostawy (cart/cart-shipping.php, Flux przenosi je do kroku Adres). Id metod jak we wtyczce InPost (easypack_*), DO-POTWIERDZENIA.
-           Pod Paczkomatami wtyczka InPost dodaje przycisk wyboru punktu i mapę (Geowidget) przez woocommerce_after_shipping_rate; w makiecie okno z przykładowymi punktami. -->
-      <ul id="shipping_method" class="woocommerce-shipping-methods" aria-labelledby="zm-dostawa-h">
-       <li><input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_easypack_shipping_courier" value="easypack_shipping_courier" class="shipping_method" checked data-cost="18" data-label="Kurier InPost"><label for="shipping_method_0_easypack_shipping_courier">Kurier InPost: <span class="woocommerce-Price-amount amount"><bdi>18,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></label></li>
-       <li><input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_easypack_parcel_machines" value="easypack_parcel_machines" class="shipping_method" data-cost="15" data-label="Paczkomaty InPost"><label for="shipping_method_0_easypack_parcel_machines">Paczkomaty InPost: <span class="woocommerce-Price-amount amount"><bdi>15,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></label>
-        <div class="blmd-zm-point" id="parcel_machine_field">
-         <input type="hidden" name="parcel_machine_id" id="parcel_machine_id" value="">
-         <p class="blmd-zm-point-sel" data-zm-point-sel hidden><svg aria-hidden="true"><use href="#blmd-i-check"/></svg><span><strong data-zm-point-name></strong><span data-zm-point-addr></span></span></p>
-         <button class="blmd-btn blmd-btn--dark blmd-btn--plain" type="button" data-zm-point-open aria-haspopup="dialog">Wybierz paczkomat</button>
-         <p class="checkout-inline-error-message" id="parcel_machine_id-error" data-zm-point-err></p>
-        </div>
-       </li>
-      </ul>
-
-      <div class="woocommerce-shipping-fields">
-       <h3 id="ship-to-different-address"><label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox"><input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" type="checkbox" name="ship_to_different_address" value="1"> <span>Wyślij na inny adres</span></label></h3>
-       <div class="shipping_address">
-        <div class="woocommerce-shipping-fields__field-wrapper">
-         <p class="form-row form-row-first" id="shipping_first_name_field" data-zm-req="ship"><label for="shipping_first_name">Imię odbiorcy&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_first_name" id="shipping_first_name" placeholder="np. Jan" value="" autocomplete="shipping given-name"></span></p>
-         <p class="form-row form-row-last" id="shipping_last_name_field" data-zm-req="ship"><label for="shipping_last_name">Nazwisko odbiorcy&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_last_name" id="shipping_last_name" placeholder="np. Nowak" value="" autocomplete="shipping family-name"></span></p>
-         <p class="form-row form-row-wide address-field" id="shipping_address_1_field" data-zm-req="ship"><label for="shipping_address_1">Ulica i numer domu&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_address_1" id="shipping_address_1" placeholder="np. ul. Szpitalna 3" value="" autocomplete="shipping address-line1"></span></p>
-         <p class="form-row form-row-wide address-field" id="shipping_address_2_field"><label for="shipping_address_2">Numer mieszkania lub lokalu&nbsp;<span class="optional">(opcjonalnie)</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_address_2" id="shipping_address_2" placeholder="np. oddział, pokój 12" value="" autocomplete="shipping address-line2"></span></p>
-         <p class="form-row form-row-first address-field validate-postcode" id="shipping_postcode_field" data-zm-req="ship"><label for="shipping_postcode">Kod pocztowy&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_postcode" id="shipping_postcode" placeholder="00-000" value="" autocomplete="shipping postal-code" inputmode="numeric" maxlength="6"></span></p>
-         <p class="form-row form-row-last address-field" id="shipping_city_field" data-zm-req="ship"><label for="shipping_city">Miejscowość&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_city" id="shipping_city" placeholder="np. Łódź" value="" autocomplete="shipping address-level2"></span></p>
-        </div>
+    <div class="col-2">
+     <!-- checkout/form-shipping.php -->
+     <div class="woocommerce-shipping-fields">
+      <h3 id="ship-to-different-address"><label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox"><input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" type="checkbox" name="ship_to_different_address" value="1"> <span>Wyślij na inny adres</span></label></h3>
+      <div class="shipping_address">
+       <div class="woocommerce-shipping-fields__field-wrapper">
+        <p class="form-row form-row-first" id="shipping_first_name_field" data-zm-req="1"><label for="shipping_first_name">Imię odbiorcy&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_first_name" id="shipping_first_name" placeholder="np. Jan" value="" autocomplete="shipping given-name"></span></p>
+        <p class="form-row form-row-last" id="shipping_last_name_field" data-zm-req="1"><label for="shipping_last_name">Nazwisko odbiorcy&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_last_name" id="shipping_last_name" placeholder="np. Nowak" value="" autocomplete="shipping family-name"></span></p>
+        <p class="form-row form-row-wide address-field" id="shipping_address_1_field" data-zm-req="1"><label for="shipping_address_1">Ulica i numer domu&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_address_1" id="shipping_address_1" placeholder="np. ul. Szpitalna 3" value="" autocomplete="shipping address-line1"></span></p>
+        <p class="form-row form-row-wide address-field" id="shipping_address_2_field"><label for="shipping_address_2">Numer mieszkania lub lokalu&nbsp;<span class="optional">(opcjonalnie)</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_address_2" id="shipping_address_2" placeholder="np. oddział, pokój 12" value="" autocomplete="shipping address-line2"></span></p>
+        <p class="form-row form-row-first address-field validate-postcode" id="shipping_postcode_field" data-zm-req="1"><label for="shipping_postcode">Kod pocztowy&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_postcode" id="shipping_postcode" placeholder="00-000" value="" autocomplete="shipping postal-code" inputmode="numeric" maxlength="6"></span></p>
+        <p class="form-row form-row-last address-field" id="shipping_city_field" data-zm-req="1"><label for="shipping_city">Miejscowość&nbsp;<span class="required" aria-hidden="true">*</span></label><span class="woocommerce-input-wrapper"><input type="text" class="input-text" name="shipping_city" id="shipping_city" placeholder="np. Łódź" value="" autocomplete="shipping address-level2"></span></p>
        </div>
       </div>
-      <div class="woocommerce-additional-fields">
-       <div class="woocommerce-additional-fields__field-wrapper">
-        <p class="form-row notes" id="order_comments_field" data-priority=""><label for="order_comments">Uwagi do zamówienia&nbsp;<span class="optional">(opcjonalnie)</span></label><span class="woocommerce-input-wrapper"><textarea name="order_comments" class="input-text" id="order_comments" placeholder="np. wskazówki dla kuriera albo dzwonek nie działa" rows="2" cols="5"></textarea></span></p>
-       </div>
+     </div>
+     <div class="woocommerce-additional-fields">
+      <h3>Dodatkowe informacje</h3>
+      <div class="woocommerce-additional-fields__field-wrapper">
+       <p class="form-row notes" id="order_comments_field"><label for="order_comments">Uwagi do zamówienia&nbsp;<span class="optional">(opcjonalnie)</span></label><span class="woocommerce-input-wrapper"><textarea name="order_comments" class="input-text" id="order_comments" placeholder="np. wskazówki dla kuriera" rows="2" cols="5"></textarea></span></p>
       </div>
-      <div class="blmd-zm-nav">
-       <button class="blmd-link blmd-zm-back blmd-linkbtn" type="button" data-zm-prev><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg>Wróć do danych</button>
-       <button class="blmd-btn blmd-btn--violet" type="button" data-zm-next>Dalej: płatność <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></button>
-      </div>
-     </section>
+     </div>
+    </div>
+   </div>
 
-     <!-- KROK 3: Płatność (checkout/payment.php + payment-method.php). Bramki PayU jak na żywym sklepie; id bramek według wtyczki PayU, DO-POTWIERDZENIA. -->
-     <section class="blmd-zm-step" id="zm-platnosc" data-zm-step aria-labelledby="zm-platnosc-h">
-      <header><span>Krok 3 z 3</span><h2 id="zm-platnosc-h" tabindex="-1">Płatność</h2><p>Płatności obsługuje PayU.</p></header>
-      <div class="blmd-zm-done" data-zm-done="2"></div>
+   <!-- Prawa kolumna. WDROŻENIE: div.blmd-zm-side otwierany na woocommerce_checkout_before_order_review_heading, zamykany na woocommerce_checkout_after_order_review (priorytet 99). -->
+   <div class="blmd-zm-side">
+    <!-- MODUŁ CRO: dostawa-pasek. CEL: jasno pokazuje próg darmowej dostawy (500 zł, fakt ze strony głównej), zanim klient zapłaci za wysyłkę.
+         WDROŻENIE: woocommerce_checkout_before_order_review_heading, priorytet 20; kwota z WC()->cart->get_displayed_subtotal(); odświeżanie przez fragment woocommerce_update_order_review_fragments. -->
+    <div class="blmd-cro-dostawa-pasek" data-blmd-cro="dostawa-pasek" data-zm-free>
+     <p aria-live="polite" data-zm-freemsg>Do darmowej dostawy od 500 zł brakuje Ci <strong>401,00&nbsp;zł</strong>. <a href="KOSZYK.html" data-href="https://blancomed.com/koszyk/">Dobierz coś do kompletu</a></p>
+     <progress max="500" value="99" aria-label="Postęp do darmowej dostawy od 500 zł" data-zm-freebar>99 z 500 zł</progress>
+    </div>
+
+    <div class="blmd-zm-side-card">
+     <h3 id="order_review_heading">Twoje zamówienie <a href="KOSZYK.html" data-href="https://blancomed.com/koszyk/">Edytuj koszyk</a></h3>
+     <div id="order_review" class="woocommerce-checkout-review-order">
+      <!-- checkout/review-order.php. Miniatura produktu: filtr woocommerce_cart_item_name (tylko na stronie zamówienia). Cena przekreślona: filtr woocommerce_cart_item_subtotal. -->
+      <table class="shop_table woocommerce-checkout-review-order-table">
+       <thead><tr><th class="product-name">Produkt</th><th class="product-total">Kwota</th></tr></thead>
+       <tbody data-zm-items>
+        <tr class="cart_item">
+         <td class="product-name"><div class="blmd-zm-item"><span class="blmd-zm-thumb"><img src="img/2024-07-spodnie-medyczne-damskie-comfy-proline-lila.webp" width="1200" height="1804" alt=""><strong class="product-quantity" aria-label="Ilość: 1">1</strong></span><span>Spodnie medyczne damskie Comfy PROline liliowy VIOLET MIST<dl class="variation"><dt class="variation-Rozmiar">Rozmiar:</dt><dd class="variation-Rozmiar"><p>XS</p></dd></dl></span></div></td>
+         <td class="product-total"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>170,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></del><span class="screen-reader-text">Cena regularna 170,00 zł, teraz:</span> <ins><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></ins></td>
+        </tr>
+        <tr class="cart_item" data-zm-bumprow hidden>
+         <td class="product-name"><div class="blmd-zm-item"><span class="blmd-zm-thumb"><img src="img/2024-09-bluza-medyczna-damska-smart-prolina-lila.webp" width="1200" height="1804" alt="" loading="lazy"><strong class="product-quantity" aria-label="Ilość: 1">1</strong></span><span>Bluza medyczna damska Smart PROline liliowy VIOLET MIST<dl class="variation"><dt class="variation-Rozmiar">Rozmiar:</dt><dd class="variation-Rozmiar"><p>XS</p></dd></dl></span></div></td>
+         <td class="product-total"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>160,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></ins></td>
+        </tr>
+        <!-- MODUŁ CRO: rozmiar-spokoj. CEL: usuwa obawę „a jak rozmiar nie będzie pasował” (14 dni na zwrot lub wymianę, fakt z FAQ).
+             WDROŻENIE: woocommerce_review_order_after_cart_contents, priorytet 10 (wiersz tabeli). -->
+        <tr class="blmd-cro-rozmiar-spokoj" data-blmd-cro="rozmiar-spokoj"><td colspan="2"><svg class="blmd-cro-ico" aria-hidden="true"><use href="#blmd-i-return"/></svg><span>Rozmiar nie pasuje? Wymienisz go w ciągu 14 dni od otrzymania paczki.</span></td></tr>
+       </tbody>
+       <tfoot>
+        <tr class="cart-subtotal"><th>Kwota</th><td data-zm-sub><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td></tr>
+        <!-- cart/cart-shipping.php. Id metod jak we wtyczce InPost (easypack_*), DO-POTWIERDZENIA. Pod Paczkomatami wtyczka InPost dodaje wybór punktu (woocommerce_after_shipping_rate); w makiecie okno z przykładowymi punktami. -->
+        <tr class="woocommerce-shipping-totals shipping">
+         <th id="blmd-zm-ship-h">Dostawa</th>
+         <td data-title="Dostawa">
+          <ul id="shipping_method" class="woocommerce-shipping-methods" aria-labelledby="blmd-zm-ship-h">
+           <li><input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_easypack_shipping_courier" value="easypack_shipping_courier" class="shipping_method" checked data-cost="18" data-label="Kurier InPost"><label for="shipping_method_0_easypack_shipping_courier">Kurier InPost: <span class="woocommerce-Price-amount amount"><bdi>18,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></label></li>
+           <li><input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_easypack_parcel_machines" value="easypack_parcel_machines" class="shipping_method" data-cost="15" data-label="Paczkomaty InPost"><label for="shipping_method_0_easypack_parcel_machines">Paczkomaty InPost: <span class="woocommerce-Price-amount amount"><bdi>15,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></label>
+            <div class="blmd-zm-point" id="parcel_machine_field">
+             <input type="hidden" name="parcel_machine_id" id="parcel_machine_id" value="">
+             <p class="blmd-zm-point-sel" data-zm-point-sel hidden><svg aria-hidden="true"><use href="#blmd-i-check"/></svg><span><strong data-zm-point-name></strong><span data-zm-point-addr></span></span></p>
+             <button class="blmd-btn blmd-btn--dark blmd-btn--plain" type="button" data-zm-point-open aria-haspopup="dialog">Wybierz paczkomat</button>
+             <p class="checkout-inline-error-message" id="parcel_machine_id-error" data-zm-point-err></p>
+            </div>
+           </li>
+          </ul>
+         </td>
+        </tr>
+        <!-- MODUŁ CRO: kiedy-dotrze. CEL: odpowiada na „kiedy to dostanę” bez obiecywania dat (fakt z FAQ: 3 do 5 dni roboczych od zaksięgowania płatności).
+             WDROŻENIE: woocommerce_review_order_after_shipping, priorytet 10 (wiersz tabeli). -->
+        <tr class="blmd-cro-kiedy-dotrze" data-blmd-cro="kiedy-dotrze"><td colspan="2"><svg class="blmd-cro-ico" aria-hidden="true"><use href="#blmd-i-truck"/></svg><span>Wysyłamy w 3 do 5 dni roboczych od zaksięgowania płatności.</span></td></tr>
+        <tr class="order-total"><th>Łącznie</th><td><strong data-zm-total><span class="woocommerce-Price-amount amount"><bdi>117,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></strong></td></tr>
+       </tfoot>
+      </table>
+
+      <!-- MODUŁ CRO: dobierz (order bump). CEL: komplet w tym samym kolorze i rozmiarze jednym kliknięciem, bez wracania do sklepu. Cena z crawl/produkty.json (160,00 zł, promocja 99,00 zł).
+           WDROŻENIE: woocommerce_review_order_before_payment, priorytet 5; zaznaczenie = AJAX add-to-cart wariantu (ten sam rozmiar co w koszyku) + $(document.body).trigger('update_checkout'). Pokazywać tylko, gdy produktu nie ma w koszyku i wariant jest na stanie.
+           DO-POTWIERDZENIA: stan bluzy Smart PROline liliowej w rozmiarze XS. -->
+      <div class="blmd-cro-dobierz" data-blmd-cro="dobierz">
+       <img src="img/2024-09-bluza-medyczna-damska-smart-prolina-lila.webp" width="1200" height="1804" alt="" loading="lazy">
+       <p class="blmd-cro-dobierz-t"><strong>Bluza Smart PROline w tym samym kolorze</strong>Rozmiar XS, <del>160,00 zł</del><b>99,00 zł</b></p>
+       <label><input type="checkbox" name="blmd_dobierz" value="1" data-zm-bump> Dodaj do zamówienia</label>
+      </div>
+
+      <!-- checkout/payment.php + payment-method.php. Bramki PayU jak na żywym sklepie; id bramek według wtyczki PayU, DO-POTWIERDZENIA. -->
       <div id="payment" class="woocommerce-checkout-payment">
+       <h3>Płatność</h3>
        <ul class="wc_payment_methods payment_methods methods" aria-label="Metody płatności">
         <li class="wc_payment_method payment_method_payublik">
          <input id="payment_method_payublik" type="radio" class="input-radio" name="payment_method" value="payublik" checked data-order_button_text="" data-title="BLIK">
@@ -853,7 +1016,7 @@ html:not(.blmd-js) .blmd-zm-nav{display:none}
          <input id="payment_method_payucreditcard" type="radio" class="input-radio" name="payment_method" value="payucreditcard" data-order_button_text="" data-title="Karta płatnicza">
          <label for="payment_method_payucreditcard"><span class="blmd-zm-payname">Karta płatnicza<small>Visa, Mastercard</small></span></label>
          <div class="payment_box payment_method_payucreditcard">
-          <!-- WDROŻENIE: pola karty renderuje bezpieczny formularz PayU (iframe). W makiecie podgląd: pola nie mają atrybutu name, więc nic nie jest wysyłane. -->
+          <!-- WDROŻENIE: pola karty renderuje bezpieczny formularz PayU (iframe). Makieta: pola bez atrybutu name, nic nie jest wysyłane. -->
           <p>Dane karty wpisujesz w bezpiecznym formularzu PayU. Nie zapisujemy ich w sklepie.</p>
           <div class="blmd-zm-card">
            <label>Numer karty<input type="text" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000"></label>
@@ -871,15 +1034,15 @@ html:not(.blmd-js) .blmd-zm-nav{display:none}
         <li class="wc_payment_method payment_method_payupaypo">
          <input id="payment_method_payupaypo" type="radio" class="input-radio" name="payment_method" value="payupaypo" data-order_button_text="" data-title="PayPo">
          <label for="payment_method_payupaypo"><span class="blmd-zm-payname">PayPo<small>Kupujesz teraz, płacisz za 30 dni</small></span></label>
-         <div class="payment_box payment_method_payupaypo"><p>Odbierasz paczkę, przymierzasz i płacisz później. Szczegóły i warunki podaje PayPo w następnym kroku.</p></div>
+         <div class="payment_box payment_method_payupaypo"><p>Odbierasz paczkę, przymierzasz i płacisz później. Warunki podaje PayPo w następnym kroku.</p></div>
         </li>
         <li class="wc_payment_method payment_method_payutwisto">
          <input id="payment_method_payutwisto" type="radio" class="input-radio" name="payment_method" value="payutwisto" data-order_button_text="" data-title="Twisto">
          <label for="payment_method_payutwisto"><span class="blmd-zm-payname">Twisto<small>Kupujesz teraz, płacisz za 30 dni</small></span></label>
-         <div class="payment_box payment_method_payutwisto"><p>Płatność odroczona obsługiwana przez Twisto. Szczegóły i warunki zobaczysz w następnym kroku.</p></div>
+         <div class="payment_box payment_method_payutwisto"><p>Płatność odroczona obsługiwana przez Twisto. Warunki zobaczysz w następnym kroku.</p></div>
         </li>
        </ul>
-       <!-- DO-POTWIERDZENIA: czy BLIK jest wpisywany na stronie sklepu (BLIK level 0), czy w oknie PayU; od tego zależy opis BLIK. -->
+       <!-- DO-POTWIERDZENIA: czy BLIK wpisuje się na stronie sklepu (BLIK level 0), czy w oknie PayU. -->
        <div class="form-row place-order">
         <div class="woocommerce-terms-and-conditions-wrapper">
          <div class="woocommerce-privacy-policy-text"><p>Twoje dane wykorzystamy do realizacji zamówienia i obsługi Twojej wizyty w sklepie. Więcej w <a href="https://blancomed.com/polityka-prywatnosci/" class="woocommerce-privacy-policy-link" target="_blank" rel="noopener">polityce prywatności</a>.</p></div>
@@ -890,78 +1053,48 @@ html:not(.blmd-js) .blmd-zm-nav{display:none}
           </label>
           <input type="hidden" name="terms-field" value="1">
          </p>
-         <!-- Zgoda marketingowa: osobny, NIEobowiązkowy checkbox. DO-POTWIERDZENIA: wtyczka newslettera i jej pole na zamówieniu. -->
+         <!-- Zgoda marketingowa: osobna, nieobowiązkowa. DO-POTWIERDZENIA: wtyczka newslettera i jej pole na zamówieniu. -->
          <p class="form-row" id="blmd_newsletter_field"><label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox"><input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" name="blmd_newsletter" id="blmd_newsletter" value="1"> <span>Chcę dostawać e-mailem informacje o nowościach i promocjach. Mogę zrezygnować w każdej chwili.</span></label></p>
         </div>
-        <!-- Tekst przycisku: filtr woocommerce_order_button_text / tłumaczenie Flux (dziś „Pay 117.00zł”). Kwota aktualizuje się po zmianie dostawy. -->
+        <!-- Tekst przycisku: filtr woocommerce_order_button_text + kwota przez fragment update_order_review. -->
         <button type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order" value="Kupuję i płacę" data-value="Kupuję i płacę">Kupuję i płacę <span data-zm-total-btn>117,00&nbsp;zł</span></button>
         <input type="hidden" id="woocommerce-process-checkout-nonce" name="woocommerce-process-checkout-nonce" value="makieta">
-        <p class="blmd-zm-after"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Wysyłamy w 3 do 5 dni roboczych od zaksięgowania płatności.</p>
+        <!-- MODUŁ CRO: zaufanie-platnosc. CEL: w chwili płacenia przypomina, że płatność jest bezpieczna, zwrot możliwy, a pomoc na telefon (fakty z BRIEF).
+             WDROŻENIE: woocommerce_review_order_after_submit, priorytet 10. -->
+        <ul class="blmd-cro-zaufanie-platnosc" data-blmd-cro="zaufanie-platnosc">
+         <li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Płatność obsługuje PayU, dane karty nie trafiają do sklepu.</li>
+         <li><svg aria-hidden="true"><use href="#blmd-i-return"/></svg>14 dni na zwrot lub wymianę.</li>
+         <li><svg aria-hidden="true"><use href="#blmd-i-flag"/></svg>Szyjemy w Polsce z tkanin z certyfikatem Oeko-Tex.</li>
+         <li><svg aria-hidden="true"><use href="#blmd-i-phone"/></svg><span>Pytanie? <a href="tel:+48665502476">665 502 476</a>, pn. do pt. 9:00 do 15:00.</span></li>
+        </ul>
        </div>
       </div>
-      <div class="blmd-zm-nav">
-       <button class="blmd-link blmd-zm-back blmd-linkbtn" type="button" data-zm-prev><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg>Wróć do adresu</button>
-      </div>
-     </section>
+     </div>
     </div>
 
-    <!-- Prawa kolumna Flux z koszykiem: #order_review_heading + #order_review (checkout/review-order.php). Na mobile zwinięta na górze.
-         Bez JS: rozwinięta (atrybut open). Miniatury produktów pokazuje Flux. -->
-    <aside class="blmd-zm-side" aria-label="Podsumowanie zamówienia">
-     <details class="blmd-zm-sum" open data-zm-sum>
-      <summary><span><span data-zm-sumlbl>Pokaż podsumowanie</span><svg class="blmd-caret" aria-hidden="true"><use href="#blmd-i-caret"/></svg></span><strong data-zm-total>117,00 zł</strong></summary>
-      <div class="blmd-zm-sum-in">
-       <h3 id="order_review_heading">Twoje zamówienie <a href="KOSZYK.html" data-href="https://blancomed.com/koszyk/">Edytuj koszyk</a></h3>
-       <div id="order_review" class="woocommerce-checkout-review-order">
-        <table class="shop_table woocommerce-checkout-review-order-table">
-         <thead><tr><th class="product-name">Produkt</th><th class="product-total">Kwota</th></tr></thead>
-         <tbody>
-          <tr class="cart_item">
-           <td class="product-name">
-            <div class="blmd-zm-item">
-             <span class="blmd-zm-thumb"><img src="img/2024-07-spodnie-medyczne-damskie-comfy-proline-lila.webp" width="1200" height="1804" alt=""><strong class="product-quantity" aria-label="Ilość: 1">1</strong></span>
-             <span>Spodnie medyczne damskie Comfy PROline liliowy VIOLET MIST
-              <dl class="variation"><dt class="variation-Rozmiar">Rozmiar:</dt><dd class="variation-Rozmiar"><p>XS</p></dd></dl></span>
-            </div>
-           </td>
-           <td class="product-total"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>170,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></del><span class="screen-reader-text">Cena regularna 170,00 zł, teraz:</span> <ins><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></ins></td>
-          </tr>
-         </tbody>
-         <tfoot>
-          <tr class="cart-subtotal"><th>Kwota</th><td><span class="woocommerce-Price-amount amount"><bdi>99,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td></tr>
-          <tr class="woocommerce-shipping-totals shipping"><th>Dostawa</th><td data-zm-ship>Kurier InPost: <span class="woocommerce-Price-amount amount"><bdi>18,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></td></tr>
-          <tr class="order-total"><th>Łącznie</th><td><strong data-zm-total-tbl><span class="woocommerce-Price-amount amount"><bdi>117,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></strong></td></tr>
-         </tfoot>
-        </table>
-       </div>
-       <!-- Kupon: Flux pokazuje pole kuponu w kolumnie koszyka (WooCommerce: checkout_coupon). Tu div zamiast formularza, bo jest w środku form.checkout. -->
-       <details class="blmd-zm-coupon">
-        <summary>Masz kod rabatowy? <svg class="blmd-caret" aria-hidden="true"><use href="#blmd-i-caret"/></svg></summary>
-        <div class="checkout_coupon woocommerce-form-coupon">
-         <label for="coupon_code" class="screen-reader-text">Kod rabatowy</label>
-         <input type="text" name="coupon_code" class="input-text" placeholder="Wpisz kod" id="coupon_code" value="" autocomplete="off" spellcheck="false">
-         <button type="button" class="button" name="apply_coupon" value="Zastosuj" data-zm-coupon>Zastosuj</button>
-        </div>
-        <p class="blmd-zm-coupon-msg" role="alert" data-zm-coupon-msg></p>
-       </details>
-       <!-- Nasz dodatek (pasek do darmowej dostawy). WDROŻENIE: hook woocommerce_review_order_after_order_total albo blok w kolumnie Flux; kwota z WC()->cart. -->
-       <div class="blmd-zm-free">
-        <p>Do darmowej dostawy od 500 zł brakuje Ci <strong>401,00 zł</strong>.</p>
-        <span aria-hidden="true"><i></i></span>
-       </div>
-       <p class="blmd-zm-help"><svg aria-hidden="true"><use href="#blmd-i-phone"/></svg><span>Coś nie działa? Zadzwoń: <a href="tel:+48665502476">665 502 476</a>, pn. do pt. 9:00 do 15:00.</span></p>
-      </div>
-     </details>
-    </aside>
+    <!-- MODUŁ CRO: opinia. CEL: głos innego klienta o rozmiarówce i jakości w chwili decyzji. Cytat dosłowny z crawl/opinie.json.
+         WDROŻENIE: woocommerce_checkout_after_order_review, priorytet 20 (w kolumnie prawej, przed jej zamknięciem). -->
+    <figure class="blmd-cro-opinia" data-blmd-cro="opinia">
+     <span class="blmd-stars" role="img" aria-label="5 na 5 gwiazdek"><svg><use href="#blmd-i-star"/></svg><svg><use href="#blmd-i-star"/></svg><svg><use href="#blmd-i-star"/></svg><svg><use href="#blmd-i-star"/></svg><svg><use href="#blmd-i-star"/></svg></span>
+     <blockquote>Świetny sklep z odzieżą medyczną! Duży wybór modeli i kolorów, rozmiarówka zgodna z opisem, a materiały naprawdę dobrej jakości.</blockquote>
+     <figcaption><strong>Natalia Królik</strong>, Google</figcaption>
+    </figure>
    </div>
   </form>
  </div>
-</div></section>
+</div></div></section>
 
-<!-- Okno wyboru paczkomatu (makieta). WDROŻENIE: w WP mapę InPost Geowidget otwiera wtyczka InPost. Punkty niżej są zmyślone. -->
+<!-- MODUŁ CRO: mobilny-pasek. CEL: na telefonie suma i przycisk płatności są zawsze pod kciukiem.
+     WDROŻENIE: woocommerce_after_checkout_form, priorytet 10; kwota przez fragment update_order_review; przycisk wysyła form.checkout (jak #place_order). Ukrywa się, gdy #place_order jest na ekranie. -->
+<div class="blmd-cro-mobilny-pasek" data-blmd-cro="mobilny-pasek" data-zm-bar>
+ <span>Łącznie z dostawą<strong data-zm-total-text>117,00 zł</strong></span>
+ <button class="blmd-btn blmd-btn--violet blmd-btn--sm blmd-btn--plain" type="button" data-zm-barbtn>Kupuję i płacę</button>
+</div>
+
+<!-- Okno wyboru paczkomatu (makieta). WDROŻENIE: mapę InPost Geowidget otwiera wtyczka InPost. Punkty są zmyślone. -->
 <dialog class="blmd-zm-dlg" id="blmd-zm-dlg" aria-labelledby="blmd-zm-dlg-h">
  <div class="blmd-zm-dlg-in">
-  <div class="blmd-zm-dlg-head"><h2 id="blmd-zm-dlg-h">Wybierz paczkomat</h2><button class="blmd-zm-dlg-x" type="button" aria-label="Zamknij" data-zm-dlg-close><i></i><i></i></button></div>
+  <div class="blmd-zm-dlg-head"><h2 id="blmd-zm-dlg-h">Wybierz paczkomat</h2><button class="blmd-zm-x" type="button" aria-label="Zamknij" data-zm-dlg-close><i></i><i></i></button></div>
   <span class="blmd-zm-dlg-tag">Podgląd (makieta): w sklepie mapa InPost</span>
   <div class="blmd-zm-dlg-list">
    <button type="button" data-point="Paczkomat ABC01M" data-addr="ul. Przykładowa 1, 00-001 Przykładowo"><strong>Paczkomat ABC01M</strong><span>ul. Przykładowa 1, 00-001 Przykładowo</span></button>
@@ -971,7 +1104,7 @@ html:not(.blmd-js) .blmd-zm-nav{display:none}
  </div>
 </dialog>
 
-<!-- Minimalna stopka zamówienia (WDROŻENIE: stopka Flux; linki w ustawieniach Flux albo w szablonie). -->
+<!-- Minimalna stopka (template part szablonu „Zamówienie”). -->
 <footer class="blmd-zm-foot"><div class="blmd-wrap blmd-zm-foot-in">
  <span>© 2026 Blanco Med · Pomoc: <a href="tel:+48665502476">665 502 476</a></span>
  <nav aria-label="Dokumenty sklepu">
@@ -1103,121 +1236,108 @@ if(cookie){
 </script>
 <!-- SHELL:END js -->
 <script data-wp-block-html="js">
-/* Zamówienie (makieta Flux): kroki z walidacją, wybór dostawy i paczkomatu, sumy, kupon, zwijane podsumowanie na mobile.
-   W WP kroki i walidację obsługuje Flux + WooCommerce (checkout.js); tu pokazujemy zachowanie i komunikaty. */
+/* Zamówienie klasyczne (makieta): logowanie i kupon zwijane, sumy i dostawa, paczkomat, order bump, walidacja inline, pasek mobilny.
+   W WP robi to WooCommerce (checkout.js, update_order_review) i nasze moduły; tu pokazujemy zachowanie. */
 (()=>{'use strict';
 const form=document.querySelector('[data-zm-form]');if(!form)return;
 form.noValidate=true;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const steps=[...form.querySelectorAll('[data-zm-step]')],nav=[...document.querySelectorAll('[data-zm-go]')],notice=form.querySelector('[data-zm-notice]');
-const PRICE=99,FREE=500;
+const $=id=>document.getElementById(id),Q=s=>document.querySelector(s),QA=s=>[...document.querySelectorAll(s)];
+const PRICE=99,BUMP=99,FREE=500;
 const num=n=>n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/\s/g,' ');
 const money=n=>'<span class="woocommerce-Price-amount amount"><bdi>'+num(n)+'&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span>';
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const $=id=>document.getElementById(id);
-let cur=0,maxReached=0;
+const notice=form.querySelector('[data-zm-notice]');
 
-/* Sumy i dostawa */
-const methods=[...form.querySelectorAll('input.shipping_method')];
-function totals(){const m=methods.find(x=>x.checked)||methods[0];const sc=PRICE>=FREE?0:+m.dataset.cost,t=PRICE+sc;
- form.querySelector('[data-zm-ship]').innerHTML=esc(m.dataset.label)+': '+money(sc);
- form.querySelector('[data-zm-total-tbl]').innerHTML=money(t);
- form.querySelector('[data-zm-total]').textContent=num(t)+' zł';
- form.querySelector('[data-zm-total-btn]').innerHTML=num(t)+'&nbsp;zł';}
-methods.forEach(m=>m.addEventListener('change',()=>{totals();clearErr(form.querySelector('#parcel_machine_field'));}));
+/* Logowanie i kupon: zwinięte (Woo: .showlogin / .showcoupon) */
+[['.showlogin','#blmd-zm-login'],['.showcoupon','#woocommerce-checkout-form-coupon']].forEach(([a,f])=>{const t=Q(a),el=Q(f);
+ t.addEventListener('click',e=>{e.preventDefault();const o=!el.classList.contains('is-open');el.classList.toggle('is-open',o);t.setAttribute('aria-expanded',o);if(o){const i=el.querySelector('input:not([type=hidden])');if(i)i.focus();}});});
+const cpn=$('woocommerce-checkout-form-coupon'),cMsg=Q('[data-zm-cpnmsg]');
+cpn.addEventListener('submit',e=>{e.preventDefault();const v=$('coupon_code').value.trim();cMsg.textContent=v?'Kod „'+v.toUpperCase()+'” nie istnieje. Sprawdź pisownię.':'Wpisz kod rabatowy.';});
+$('blmd-zm-login').addEventListener('submit',e=>e.preventDefault());
+
+/* Sumy: produkty + order bump + dostawa (0 zł od 500 zł) */
+const methods=QA('input.shipping_method'),bump=Q('[data-zm-bump]');
+const bumpOn=()=>bump&&bump.checked&&!bump.closest('[data-blmd-cro]').hidden;
+function totals(){
+ const sub=PRICE+(bumpOn()?BUMP:0),free=sub>=FREE;
+ methods.forEach(m=>{const a=m.nextElementSibling.querySelector('.amount');if(a)a.outerHTML=money(free?0:+m.dataset.cost);});
+ const m=methods.find(x=>x.checked)||methods[0],sc=free?0:+m.dataset.cost,t=sub+sc;
+ Q('[data-zm-sub]').innerHTML=money(sub);Q('[data-zm-total]').innerHTML=money(t);Q('[data-zm-total-btn]').innerHTML=num(t)+'&nbsp;zł';
+ QA('[data-zm-total-text]').forEach(el=>el.textContent=num(t)+' zł');
+ QA('[data-zm-sub-text]').forEach(el=>el.textContent=num(sub)+' zł');QA('[data-zm-ship-text]').forEach(el=>el.textContent=num(sc)+' zł');
+ Q('[data-zm-bumprow]').hidden=!bumpOn();Q('[data-zm-bumpmini]').hidden=!bumpOn();
+ const fb=Q('[data-zm-free]');fb.classList.toggle('is-free',free);Q('[data-zm-freebar]').value=Math.min(sub,FREE);
+ Q('[data-zm-freemsg]').innerHTML=free?'<strong>Masz darmową dostawę.</strong>':'Do darmowej dostawy od 500 zł brakuje Ci <strong>'+num(FREE-sub)+'&nbsp;zł</strong>. <a href="KOSZYK.html" data-href="https://blancomed.com/koszyk/">Dobierz coś do kompletu</a>';
+}
+methods.forEach(m=>m.addEventListener('change',()=>{totals();pErr.textContent='';}));
+if(bump)bump.addEventListener('change',totals);
 
 /* Paczkomat */
-const dlg=$('blmd-zm-dlg'),pOpen=form.querySelector('[data-zm-point-open]'),pId=$('parcel_machine_id'),pSel=form.querySelector('[data-zm-point-sel]'),pErr=form.querySelector('[data-zm-point-err]');
+const dlg=$('blmd-zm-dlg'),pOpen=Q('[data-zm-point-open]'),pId=$('parcel_machine_id'),pSel=Q('[data-zm-point-sel]'),pErr=Q('[data-zm-point-err]');
 pOpen.addEventListener('click',()=>{if(dlg.showModal)dlg.showModal();});
 dlg.querySelector('[data-zm-dlg-close]').addEventListener('click',()=>dlg.close());
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
 dlg.addEventListener('close',()=>pOpen.focus());
-dlg.querySelectorAll('[data-point]').forEach(b=>b.addEventListener('click',()=>{
- pId.value=b.dataset.point;form.querySelector('[data-zm-point-name]').textContent=b.dataset.point;form.querySelector('[data-zm-point-addr]').textContent=b.dataset.addr;
- pSel.hidden=false;pOpen.textContent='Zmień paczkomat';pErr.textContent='';dlg.close();}));
-const parcel=()=>methods.find(m=>m.checked).value==='easypack_parcel_machines';
+dlg.querySelectorAll('[data-point]').forEach(b=>b.addEventListener('click',()=>{pId.value=b.dataset.point;Q('[data-zm-point-name]').textContent=b.dataset.point;Q('[data-zm-point-addr]').textContent=b.dataset.addr;pSel.hidden=false;pOpen.textContent='Zmień paczkomat';pErr.textContent='';dlg.close();}));
+const parcel=()=>(methods.find(m=>m.checked)||{}).value==='easypack_parcel_machines';
 
-/* Walidacja */
+/* Walidacja inline: woocommerce-invalid / woocommerce-validated + p.checkout-inline-error-message */
 const shown=el=>!!(el.offsetParent||el.getClientRects().length);
 const digits=v=>v.replace(/\D/g,'');
-const rules={
- billing_email:v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)?'':'Wpisz adres e-mail w formacie nazwa@domena.pl.',
- billing_phone:v=>{const d=digits(v).replace(/^48(?=\d{9}$)/,'');return d.length===9?'':'Wpisz numer telefonu: 9 cyfr, np. 600 100 200.';},
- billing_postcode:v=>/^\d{2}-?\d{3}$/.test(v)?'':'Wpisz kod pocztowy w formacie 00-000.',
- shipping_postcode:v=>/^\d{2}-?\d{3}$/.test(v)?'':'Wpisz kod pocztowy w formacie 00-000.',
- billing_nip:v=>digits(v).length===10?'':'NIP ma 10 cyfr.'
-};
-const label=inp=>{const l=form.querySelector('label[for="'+inp.id+'"]');return l?l.childNodes[0].textContent.replace(/ /g,' ').trim():inp.name;};
+const pc=v=>/^\d{2}-?\d{3}$/.test(v)?'':'Wpisz kod pocztowy w formacie 00-000.';
+const rules={billing_email:v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)?'':'Wpisz adres e-mail w formacie nazwa@domena.pl.',
+ billing_phone:v=>digits(v).replace(/^48(?=\d{9}$)/,'').length===9?'':'Wpisz numer telefonu: 9 cyfr, np. 600 100 200.',
+ billing_postcode:pc,shipping_postcode:pc,billing_nip:v=>digits(v).length===10?'':'NIP ma 10 cyfr.'};
+const label=inp=>{const l=form.querySelector('label[for="'+inp.id+'"]');const t=l?l.childNodes[0].textContent.replace(/ /g,' ').trim():inp.name;return /^[A-ZĄĆĘŁŃÓŚŹŻ]{2}/.test(t)?t:t.charAt(0).toLowerCase()+t.slice(1);};
 function setErr(row,inp,msg){row.classList.add('woocommerce-invalid','woocommerce-invalid-required-field');row.classList.remove('woocommerce-validated');
  let p=row.querySelector('.checkout-inline-error-message');if(!p){p=document.createElement('p');p.className='checkout-inline-error-message';p.id=inp.id+'-error';row.appendChild(p);}
  p.textContent=msg;inp.setAttribute('aria-invalid','true');const d=(inp.getAttribute('aria-describedby')||'').split(' ').filter(x=>x&&x!==p.id);d.push(p.id);inp.setAttribute('aria-describedby',d.join(' '));}
-function clearErr(row){if(!row)return;row.classList.remove('woocommerce-invalid','woocommerce-invalid-required-field');const p=row.querySelector('.checkout-inline-error-message:not([data-zm-point-err])');if(p)p.remove();const i=row.querySelector('input,textarea');if(i)i.removeAttribute('aria-invalid');}
+function clearErr(row,inp){row.classList.remove('woocommerce-invalid','woocommerce-invalid-required-field');const p=row.querySelector('.checkout-inline-error-message');if(p)p.remove();inp.removeAttribute('aria-invalid');}
 function check(inp){const row=inp.closest('.form-row');if(!row||!shown(inp))return '';
- const need=inp.required||row.dataset.zmReq;const v=inp.type==='checkbox'?inp.checked:inp.value.trim();
- let msg='';
+ const need=inp.required||row.dataset.zmReq;const v=inp.type==='checkbox'?inp.checked:inp.value.trim();let msg='';
  if(inp.type==='checkbox'){if(inp.required&&!v)msg='Zaakceptuj regulamin, żeby złożyć zamówienie.';}
- else if(need&&!v){const l=label(inp);msg='Uzupełnij pole: '+(/^[A-ZĄĆĘŁŃÓŚŹŻ]{2}/.test(l)?l:l.charAt(0).toLowerCase()+l.slice(1))+'.';}
+ else if(need&&!v)msg='Uzupełnij pole: '+label(inp)+'.';
  else if(v&&rules[inp.id])msg=rules[inp.id](v);
- if(msg)setErr(row,inp,msg);else{clearErr(row);if(v&&need)row.classList.add('woocommerce-validated');}
+ if(msg)setErr(row,inp,msg);else{clearErr(row,inp);row.classList.toggle('woocommerce-validated',!!(v&&need));}
  return msg;}
-function validate(i){const errs=[];
- steps[i].querySelectorAll('.form-row input:not([type=hidden]),.form-row textarea').forEach(inp=>{const m=check(inp);if(m)errs.push([inp,m]);});
- if(i===1&&parcel()&&!pId.value){pErr.textContent='Wybierz paczkomat, do którego mamy wysłać paczkę.';errs.push([pOpen,'Wybierz paczkomat.']);}
- if(errs.length){
-  notice.innerHTML='<ul class="woocommerce-error" role="alert">'+errs.map(([inp,m])=>'<li><a href="#'+inp.id+'" data-f="'+inp.id+'">'+esc(m)+'</a></li>').join('')+'</ul>';
-  notice.querySelectorAll('[data-f]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const f=$(a.dataset.f);f.focus();f.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});}));
-  notice.focus({preventScroll:true});notice.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'});return false;}
- notice.innerHTML='';return true;}
-form.addEventListener('focusout',e=>{const t=e.target;if(t.matches('.form-row input,.form-row textarea')&&t.closest('.form-row').classList.contains('woocommerce-invalid'))check(t);});
-form.addEventListener('input',e=>{const t=e.target;if(t.closest&&t.closest('.form-row.woocommerce-invalid')&&!check(t)&&notice.innerHTML){/* zostaw listę do następnej próby */}});
-/* Kod pocztowy: dopisz kreskę (00000 -> 00-000) */
+const fields=()=>[...form.querySelectorAll('#customer_details .form-row input:not([type=hidden]),#customer_details .form-row textarea')].sort((a,b)=>a.getBoundingClientRect().top-b.getBoundingClientRect().top);
+form.addEventListener('focusout',e=>{const t=e.target;if(t.matches('#customer_details .form-row input,#customer_details .form-row textarea')&&(t.value.trim()||t.closest('.woocommerce-invalid')))check(t);});
+form.addEventListener('change',e=>{if(e.target.id==='terms')check(e.target);});
 ['billing_postcode','shipping_postcode'].forEach(id=>$(id).addEventListener('blur',e=>{const d=digits(e.target.value);if(d.length===5)e.target.value=d.slice(0,2)+'-'+d.slice(2);}));
-
-/* Podsumowanie ukończonych kroków */
-function done(){const v=id=>esc($(id).value.trim());
- const contact='<div><span><b>Kontakt</b>'+v('billing_first_name')+' '+v('billing_last_name')+', '+v('billing_email')+', '+v('billing_phone')+($('billing_faktura').checked?'<br>Faktura: '+v('billing_company')+', NIP '+v('billing_nip'):'')+'</span><button type="button" data-zm-edit="0">Zmień</button></div>';
- const m=methods.find(x=>x.checked);
- const where=parcel()?esc(pId.value)+', '+esc(form.querySelector('[data-zm-point-addr]').textContent):(($('ship-to-different-address-checkbox').checked?v('shipping_first_name')+' '+v('shipping_last_name')+', '+v('shipping_address_1')+' '+v('shipping_address_2')+', '+v('shipping_postcode')+' '+v('shipping_city'):v('billing_address_1')+' '+v('billing_address_2')+', '+v('billing_postcode')+' '+v('billing_city')));
- const addr='<div><span><b>Dostawa</b>'+esc(m.dataset.label)+': '+where+'</span><button type="button" data-zm-edit="1">Zmień</button></div>';
- form.querySelector('[data-zm-done="1"]').innerHTML=contact;form.querySelector('[data-zm-done="2"]').innerHTML=contact+addr;}
-form.addEventListener('click',e=>{const b=e.target.closest('[data-zm-edit]');if(b)go(+b.dataset.zmEdit);});
-
-/* Kroki */
-function go(i,focus=true){
- if(i>cur){for(let k=cur;k<i;k++){if(!validate(k)){show(k,false);return;}}}
- show(i,focus);}
-function show(i,focus){cur=i;maxReached=Math.max(maxReached,i);
- steps.forEach((s,k)=>s.classList.toggle('is-active',k===i));
- nav.forEach((a,k)=>{if(k===i)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');a.classList.toggle('is-done',k<i);a.classList.toggle('is-locked',k>maxReached);});
- if(i>0)done();
- if(focus){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});const h=steps[i].querySelector('h2');if(h)h.focus({preventScroll:true});}}
-nav.forEach((a,k)=>a.addEventListener('click',e=>{e.preventDefault();if(k<=maxReached||k===cur+1)go(k);}));
-form.querySelectorAll('[data-zm-next]').forEach(b=>b.addEventListener('click',()=>go(cur+1)));
-form.querySelectorAll('[data-zm-prev]').forEach(b=>b.addEventListener('click',()=>{notice.innerHTML='';show(cur-1,true);}));
-/* Enter w polu kroku 1 i 2 przechodzi dalej zamiast wysyłać zamówienie */
-form.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('input:not([type=checkbox]):not([type=radio])')&&cur<2){e.preventDefault();go(cur+1);}});
-/* Złożenie zamówienia: makieta przechodzi na stronę „Zamówienie przyjęte” bez danych osobowych w adresie */
-form.addEventListener('submit',e=>{e.preventDefault();
- for(let k=0;k<3;k++){if(!validate(k)){show(k,true);validate(k);return;}}
+function validateAll(){const errs=[];
+ fields().forEach(inp=>{const m=check(inp);if(m)errs.push([inp.id,m]);});
+ if(parcel()&&!pId.value){pErr.textContent='Wybierz paczkomat, do którego mamy wysłać paczkę.';errs.push(['parcel_machine_field','Wybierz paczkomat.']);}
+ {const t=$('terms'),m=check(t);if(m)errs.push(['terms',m]);}
+ if(!errs.length){notice.innerHTML='';return true;}
+ notice.innerHTML='<ul class="woocommerce-error" role="alert">'+errs.map(([id,m])=>'<li><a href="#'+id+'" data-f="'+id+'">'+esc(m)+'</a></li>').join('')+'</ul>';
+ notice.querySelectorAll('[data-f]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const f=$(a.dataset.f);const t=f.matches('input,textarea')?f:f.querySelector('button');t.focus({preventScroll:true});f.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});}));
+ notice.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'});notice.focus({preventScroll:true});return false;}
+form.addEventListener('submit',e=>{e.preventDefault();if(!validateAll())return;
  const pm=form.querySelector('input[name=payment_method]:checked'),m=methods.find(x=>x.checked);
  const btn=$('place_order');btn.disabled=true;btn.textContent='Przekazujemy płatność do PayU…';
- location.href='ZAMOWIENIE-PRZYJETE.html?platnosc='+encodeURIComponent(pm.dataset.title)+'&dostawa='+encodeURIComponent(m.value);});
+ location.href='ZAMOWIENIE-PRZYJETE.html?platnosc='+encodeURIComponent(pm.dataset.title)+'&dostawa='+encodeURIComponent(m.value)+(bumpOn()?'&dobierz=1':'');});
 
-/* Kupon (makieta nie sprawdza kodów) */
-const cBtn=form.querySelector('[data-zm-coupon]'),cIn=$('coupon_code'),cMsg=form.querySelector('[data-zm-coupon-msg]');
-cBtn.addEventListener('click',()=>{const v=cIn.value.trim();cMsg.textContent=v?'Kod „'+v.toUpperCase()+'” nie istnieje. Sprawdź pisownię.':'Wpisz kod rabatowy.';});
-cIn.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();cBtn.click();}});
+/* Zwijane podsumowanie (mobile) */
+const mini=Q('[data-zm-mini]'),miniLbl=Q('[data-zm-minilbl]');
+mini.addEventListener('toggle',()=>{miniLbl.textContent=mini.open?'Ukryj podsumowanie':'Pokaż podsumowanie';});
 
-/* Podsumowanie: zwinięte na mobile, zawsze otwarte na desktopie */
-const sum=form.querySelector('[data-zm-sum]'),sumLbl=form.querySelector('[data-zm-sumlbl]'),mq=matchMedia('(max-width:960px)');
-const syncSum=()=>{sum.open=!mq.matches;};
-sum.addEventListener('toggle',()=>{sumLbl.textContent=sum.open?'Ukryj podsumowanie':'Pokaż podsumowanie';});
-sum.querySelector('summary').addEventListener('click',e=>{if(!mq.matches)e.preventDefault();});
-mq.addEventListener('change',syncSum);syncSum();
+/* Moduł mobilny-pasek: przycisk wysyła formularz, pasek chowa się przy #place_order */
+const bar=Q('[data-zm-bar]');
+Q('[data-zm-barbtn]').addEventListener('click',()=>{form.requestSubmit?form.requestSubmit():form.dispatchEvent(new Event('submit',{cancelable:true}));});
+if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(en=>bar.classList.toggle('is-hidden',en.isIntersecting)),{threshold:.1}).observe($('place_order'));
 
-/* Pasek darmowej dostawy w kolumnie */
-const fi=form.querySelector('.blmd-zm-free i');if(fi)fi.style.width=Math.min(100,PRICE/FREE*100)+'%';
-totals();show(0,false);
+/* MAKIETA: panel modułów CRO (nie do wdrożenia). ?cro=0 albo ?cro=ekspres,opinia */
+const names=[...new Set(QA('[data-blmd-cro]').map(el=>el.dataset.blmdCro))];
+const list=Q('[data-crodemo-list]'),cnt=Q('[data-crodemo-n]');
+const q=new URLSearchParams(location.search).get('cro');
+let on=new Set(q===null?names:q==='0'?[]:q.split(',').filter(n=>names.includes(n)));
+function apply(save){QA('[data-blmd-cro]').forEach(el=>el.hidden=!on.has(el.dataset.blmdCro));
+ list.querySelectorAll('input').forEach(i=>i.checked=on.has(i.value));cnt.textContent='('+on.size+'/'+names.length+')';totals();
+ if(save){const u=new URL(location.href);u.searchParams.set('cro',on.size===names.length?names.join(','):on.size?[...on].join(','):'0');try{history.replaceState(null,'',u);}catch(e){}}}
+names.forEach(n=>{const l=document.createElement('label');l.innerHTML='<input type="checkbox" value="'+n+'"> '+n;l.querySelector('input').addEventListener('change',e=>{e.target.checked?on.add(n):on.delete(n);apply(true);});list.appendChild(l);});
+QA('[data-crodemo-all]').forEach(b=>b.addEventListener('click',()=>{on=new Set(b.dataset.crodemoAll==='1'?names:[]);apply(true);}));
+apply(false);
 })();
 </script>
 </body>

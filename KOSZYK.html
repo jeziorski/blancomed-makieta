@@ -734,8 +734,8 @@ html.blmd-js .blmd-ko-add{display:grid}
  <!-- WDROŻENIE: kroki i nagłówek to blok GLAI na stronie /koszyk/ nad shortcode [woocommerce_cart]. Tytuł strony Kadence wyłączyć (H1 jest tutaj). -->
  <ol class="blmd-ko-steps" aria-label="Etapy zamówienia">
   <li aria-current="step">Koszyk</li>
-  <li>Dane i adres</li>
-  <li>Płatność</li>
+  <li>Dane i płatność</li>
+  <li>Potwierdzenie</li>
  </ol>
  <div class="blmd-ko-head">
   <h1 id="blmd-ko-h1">Twój koszyk <small data-ko-count>1 produkt</small></h1>
@@ -744,7 +744,7 @@ html.blmd-js .blmd-ko-add{display:grid}
 
  <!-- Od tego miejsca: HTML szablonów WooCommerce (shortcode [woocommerce_cart]) w opakowaniu Kadence. Makieta: ?pusty=1 w adresie pokazuje pusty koszyk. -->
  <div class="woocommerce">
-  <!-- Komunikaty WooCommerce (Kadence pokazuje je jako kwsb-snackbar-notice). W makiecie: usunięcie z „Cofnij?”, kupon, dodanie z „Uzupełnij komplet”. -->
+  <!-- Komunikaty WooCommerce (dziś jako kwsb-snackbar-notice z Kadence Shop Kit; po rezygnacji z Shop Kit klasyczne woocommerce-message / woocommerce-error, stylowane w woo-baza.css). W makiecie: usunięcie z „Cofnij?”, kupon, dodanie z „Uzupełnij komplet”. -->
   <div class="woocommerce-notices-wrapper" data-ko-notices></div>
 
   <div class="kadence-woo-cart-form-wrap" data-ko-full>
@@ -823,7 +823,7 @@ html.blmd-js .blmd-ko-add{display:grid}
          <li><input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_easypack_parcel_machines" value="easypack_parcel_machines" class="shipping_method" data-cost="15"><label for="shipping_method_0_easypack_parcel_machines">Paczkomaty InPost: <span class="woocommerce-Price-amount amount"><bdi>15,00&nbsp;<span class="woocommerce-Price-currencySymbol">zł</span></bdi></span></label></li>
         </ul>
         <!-- Tekst przez filtr woocommerce_shipping_estimate_html. -->
-        <p class="woocommerce-shipping-destination">Paczkomat albo adres dla kuriera podasz w następnym kroku.</p>
+        <p class="woocommerce-shipping-destination">Paczkomat albo adres dla kuriera podasz przy zamówieniu.</p>
        </td>
       </tr>
       <tr class="order-total">
@@ -834,7 +834,7 @@ html.blmd-js .blmd-ko-add{display:grid}
      <!-- DO-POTWIERDZENIA: dopisek WooCommerce o VAT przy kwocie łącznej (zależy od ustawień podatków). -->
 
      <div class="wc-proceed-to-checkout">
-      <!-- Dziś „Przejdź do płatności”. Zmieniamy na „Przejdź do zamówienia”, bo następny krok to dane i adres, nie płatność. WDROŻENIE: tłumaczenie (Loco Translate) lub filtr gettext. -->
+      <!-- Dziś „Przejdź do płatności”. Zmieniamy na „Przejdź do zamówienia”, bo na następnej stronie najpierw podajesz dane i adres, a dopiero potem płacisz. WDROŻENIE: tłumaczenie (Loco Translate) lub filtr gettext. -->
       <a href="ZAMOWIENIE.html" data-href="https://blancomed.com/zamowienie/" class="checkout-button button alt wc-forward" data-ko-cta>Przejdź do zamówienia</a>
      </div>
      <p class="blmd-ko-note"><svg aria-hidden="true"><use href="#blmd-i-user"/></svg>Zamówisz bez zakładania konta</p>
