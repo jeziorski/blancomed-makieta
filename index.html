@@ -9,11 +9,11 @@
 <link rel="icon" href="img/ikona-blancomed.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap">
 <style>/* Powłoka makiety (NIE wdrażać, w GLAI odpowiada za to motyw) */ body{margin:0;background:#f8f8fb}</style>
 <!-- SHELL:START css -->
 <style data-wp-block-html="css">
-.blmd-page{--blmd-violet:#6667ab;--blmd-violet-d:#4f5092;--blmd-violet-dd:#3a3b6e;--blmd-violet-l:#8a8aff;--blmd-lav:#efeff5;--blmd-lav-2:#deddeb;--blmd-lav-3:#e7e6f6;--blmd-bg:#f8f8fb;--blmd-photo:#ebe9ee;--blmd-ink:#1d1d1b;--blmd-ink-2:#34343f;--blmd-txt:#5a5a6a;--blmd-mute:#68687a;--blmd-line:#e4e3ee;--blmd-white:#fff;--blmd-grad:linear-gradient(120deg,#6667ab 0%,#8a8aff 100%);--blmd-night:linear-gradient(160deg,#1d1d1b 0%,#26263a 55%,#34345a 100%);--blmd-side:max(clamp(16px,4vw,64px),calc((100% - 1312px)/2));--blmd-r:28px;--blmd-r-s:18px;--blmd-ease:cubic-bezier(.4,0,.2,1);--blmd-shadow:0 30px 60px -34px rgba(58,59,110,.45);font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:18px;line-height:1.6;color:var(--blmd-ink-2);background:radial-gradient(60% 560px at 92% 0%,rgba(138,138,255,.24),transparent 70%),radial-gradient(40% 420px at 0% 220px,rgba(102,103,171,.14),transparent 70%),var(--blmd-bg);background-repeat:no-repeat;overflow-x:clip;-webkit-font-smoothing:antialiased}
+.blmd-page{--blmd-violet:#6667ab;--blmd-violet-d:#4f5092;--blmd-violet-dd:#3a3b6e;--blmd-violet-l:#8a8aff;--blmd-lav:#efeff5;--blmd-lav-2:#deddeb;--blmd-lav-3:#e7e6f6;--blmd-bg:#f8f8fb;--blmd-photo:#ebe9ee;--blmd-ink:#1d1d1b;--blmd-ink-2:#34343f;--blmd-txt:#5a5a6a;--blmd-mute:#68687a;--blmd-line:#e4e3ee;--blmd-white:#fff;--blmd-grad:linear-gradient(120deg,#6667ab 0%,#8a8aff 100%);--blmd-night:linear-gradient(160deg,#1d1d1b 0%,#26263a 55%,#34345a 100%);--blmd-side:max(clamp(16px,4vw,64px),calc((100% - 1312px)/2));--blmd-r:28px;--blmd-r-s:18px;--blmd-ease:cubic-bezier(.4,0,.2,1);--blmd-shadow:0 30px 60px -34px rgba(58,59,110,.45);font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:18px;line-height:1.6;color:var(--blmd-ink-2);background:radial-gradient(60% 560px at 92% 0%,rgba(138,138,255,.24),transparent 70%),radial-gradient(40% 420px at 0% 220px,rgba(102,103,171,.14),transparent 70%),var(--blmd-bg);background-repeat:no-repeat;overflow-x:clip;-webkit-font-smoothing:antialiased}
 .blmd-page *,.blmd-page *::before,.blmd-page *::after{box-sizing:border-box}
 .blmd-page :where(a){color:inherit;text-decoration:none}
 .blmd-page :where(img){max-width:100%;height:auto;display:block}
@@ -78,7 +78,7 @@
 .blmd-nav{pointer-events:auto;position:relative;isolation:isolate;display:flex;align-items:center;gap:4px;min-height:68px;padding:8px 8px 8px 22px;border-radius:999px;background:rgba(255,255,255,.88);box-shadow:0 14px 40px -24px rgba(58,59,110,.5),inset 0 0 0 1px rgba(58,59,110,.07)}
 .blmd-nav::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px)}
 .blmd-logo{display:flex;align-items:center;min-height:44px;flex:none;margin-right:10px}
-.blmd-logo img{width:118px;height:auto}
+.blmd-logo img{width:auto;height:30px}
 .blmd-shell{display:flex;align-items:center}
 .blmd-check{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
 .blmd-burger,.blmd-backdrop,.blmd-drawer-head,.blmd-drawer-foot{display:none}
@@ -137,7 +137,7 @@
  .blmd-menu{position:fixed;top:0;right:0;bottom:0;z-index:2;width:min(440px,100%);flex-direction:column;align-items:stretch;gap:0;padding:0 20px 28px;background:#fff;overflow-y:auto;overscroll-behavior:contain;transform:translateX(100%);visibility:hidden;transition:transform .34s var(--blmd-ease),visibility 0s .34s;box-shadow:-30px 0 60px -30px rgba(29,29,27,.4)}
  .blmd-check:checked~.blmd-menu{transform:none;visibility:visible;transition:transform .34s var(--blmd-ease)}
  .blmd-drawer-head{display:flex;align-items:center;justify-content:space-between;min-height:76px;position:sticky;top:0;background:#fff;z-index:1;border-bottom:1px solid var(--blmd-line);margin-bottom:6px}
- .blmd-drawer-head img{width:110px}
+ .blmd-drawer-head img{width:auto;height:26px}
  .blmd-drawer-close{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--blmd-lav);cursor:pointer;position:relative}
  .blmd-drawer-close i{position:absolute;width:18px;height:2px;background:var(--blmd-ink);border-radius:2px;transform:rotate(45deg)}
  .blmd-drawer-close i+i{transform:rotate(-45deg)}
@@ -157,7 +157,7 @@
 @media (max-width:760px){
  .blmd-head{padding-top:10px}
  .blmd-nav{min-height:60px;padding:6px 6px 6px 16px}
- .blmd-logo img{width:96px}
+ .blmd-logo img{height:24px}
  .blmd-burger-txt{display:none}
  .blmd-burger{width:46px;padding:0;justify-content:center}
  .blmd-ico-btn{width:44px;height:44px}
@@ -259,7 +259,7 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 .blmd-foot a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .blmd-foot-grid{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr)) minmax(0,1.25fr);gap:40px 32px}
 .blmd-foot-logo{display:inline-flex;min-height:44px;align-items:center;margin-bottom:18px}
-.blmd-foot-logo img{width:140px}
+.blmd-foot-logo img{width:auto;height:30px}
 .blmd-foot-promise{color:#ececf6;font-size:17px;max-width:340px;margin-bottom:20px}
 .blmd-foot h2{color:#fff;font-size:16px;font-weight:600;letter-spacing:0;margin-bottom:12px}
 .blmd-foot ul{display:grid;gap:0}
@@ -292,6 +292,9 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 .blmd-cookie-btns button{min-height:48px;padding:0 10px;border-radius:999px;border:1.5px solid var(--blmd-ink);background:#fff;color:var(--blmd-ink);font-weight:600;font-size:15px;cursor:pointer}
 .blmd-cookie-btns button:hover{background:var(--blmd-lav)}
 @media (max-width:420px){.blmd-cookie{left:16px;bottom:16px}.blmd-cookie-btns{grid-template-columns:1fr}}
+/* Promocje: czerwien wyprzedazy (kontrast 6,5:1 na bialym) */
+.blmd-page{--blmd-sale:#b3261e}
+.blmd-menu .blmd-toplink--promo{color:var(--blmd-sale);font-weight:700}
 </style>
 <!-- SHELL:END css -->
 <style data-wp-block-html="css">
@@ -321,6 +324,26 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 @keyframes blmd-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @media (max-width:960px){.blmd-hero-grid{grid-template-columns:1fr}.blmd-hero-art{max-width:560px;margin-inline:auto;width:100%}.blmd-float--a{left:-4px}.blmd-float--b{right:-4px}}
 @media (max-width:520px){.blmd-float{font-size:13px;padding:10px 12px 10px 10px}.blmd-float-ico{width:36px;height:36px}.blmd-float--b{top:-10px}.blmd-arch--b{margin-top:48px}}
+.blmd-hero-grid>*{min-width:0}
+.blmd-hero-art--one{display:block}
+.blmd-heroimg{margin:0;aspect-ratio:3/2;border-radius:28px;overflow:hidden;background:var(--blmd-photo);box-shadow:var(--blmd-shadow)}
+.blmd-heroimg img{width:100%;height:100%;object-fit:cover}
+.blmd-hero-art--one .blmd-float--a{bottom:-18px}
+.blmd-hero-art--one .blmd-float--b{top:-22px}
+/* Dwie drogi w hero: dla siebie / dla zespołu */
+.blmd-doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;margin-top:28px;max-width:600px}
+.blmd-door{display:flex;align-items:center;gap:14px;min-height:76px;padding:14px 16px;border-radius:22px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line),0 18px 34px -24px rgba(58,59,110,.45);color:var(--blmd-ink);transition:transform .2s,box-shadow .2s}
+.blmd-door:hover{transform:translateY(-2px)}
+.blmd-door:focus-visible{outline:3px solid var(--blmd-violet-d);outline-offset:3px}
+.blmd-door-ico{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--blmd-lav);color:var(--blmd-violet-d)}
+.blmd-door-ico svg,.blmd-door-go svg{width:20px;height:20px}
+.blmd-door-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.blmd-door-txt strong{font-size:17px;font-weight:700}
+.blmd-door-txt small{font-size:14px;color:var(--blmd-txt);line-height:1.35}
+.blmd-door-go{margin-left:auto;flex:none;color:var(--blmd-violet-d)}
+.blmd-door--team{background:var(--blmd-violet-d);box-shadow:0 18px 34px -24px rgba(58,59,110,.6);color:#fff}
+.blmd-door--team .blmd-door-ico{background:rgba(255,255,255,.18);color:#fff}
+.blmd-door--team .blmd-door-txt small,.blmd-door--team .blmd-door-go{color:#fff}
 /* Pasek USP */
 .blmd-usp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .blmd-usp li{display:flex;gap:14px;align-items:center;padding:18px 20px;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);font-size:15.5px;line-height:1.4;color:var(--blmd-txt)}
@@ -365,25 +388,34 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 .blmd-pal-txt ul{display:grid;gap:12px;margin-top:24px}
 .blmd-pal-txt li{display:flex;gap:12px;align-items:flex-start;font-size:16.5px;color:var(--blmd-ink-2)}
 .blmd-pal-txt li svg{flex:none;width:22px;height:22px;margin-top:2px;color:var(--blmd-violet)}
-.blmd-pal-txt>p{color:var(--blmd-txt);margin-top:16px;max-width:520px}
 .blmd-pal-txt .blmd-btn{margin-top:30px}
 @media (max-width:960px){.blmd-palette{grid-template-columns:1fr}.blmd-pal-stage{max-width:520px;width:100%;margin-inline:auto}}
-/* Kolekcje */
-.blmd-colls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
-.blmd-coll{position:relative;display:flex;flex-direction:column;overflow:hidden;border-radius:26px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);transition:transform .35s var(--blmd-ease),box-shadow .35s}
-.blmd-coll:hover{transform:translateY(-4px);box-shadow:0 30px 50px -30px rgba(58,59,110,.5),inset 0 0 0 1px var(--blmd-lav-2)}
-.blmd-coll-img{aspect-ratio:4/4.4;overflow:hidden;background:var(--blmd-photo)}
-.blmd-coll-img img{width:100%;height:100%;object-fit:cover;object-position:50% 14%;transition:transform .7s var(--blmd-ease)}
-.blmd-coll:hover .blmd-coll-img img{transform:scale(1.05)}
-.blmd-coll-body{display:flex;flex-direction:column;gap:8px;padding:20px 22px 22px;flex:1}
-.blmd-coll-tag{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blmd-violet-d)}
-.blmd-coll h3{font-size:20px;line-height:1.25}
-.blmd-coll h3 a::after{content:"";position:absolute;inset:0}
-.blmd-coll p{font-size:15.5px;line-height:1.55;color:var(--blmd-txt)}
-.blmd-coll-for{margin-top:auto;padding-top:10px;font-size:14px;color:var(--blmd-ink-2)}
-.blmd-coll-for b{font-weight:600}
-@media (max-width:1080px){.blmd-colls{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.blmd-colls{grid-template-columns:1fr}}
+/* Nowości: pranie 60°C */
+.blmd-new-sub{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:16px;font-weight:600;color:var(--blmd-violet-d)}
+.blmd-wash-ico{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--blmd-lav);color:var(--blmd-violet-d)}
+.blmd-wash-ico svg{width:20px;height:20px}
+.blmd-wash{position:absolute;bottom:12px;right:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 10px;border-radius:999px;background:var(--blmd-violet-d);color:#fff;font-size:13px;font-weight:700}
+.blmd-wash svg{width:16px;height:16px}
+/* Promocje */
+.blmd-eyebrow--sale,.blmd-acc--sale,.blmd-sale{color:var(--blmd-sale)}
+.blmd-eyebrow--sale::before{background:var(--blmd-sale)}
+.blmd-badge--sale{background:var(--blmd-sale);color:#fff}
+.blmd-pcard-price s{font-weight:500;color:var(--blmd-mute);font-size:14px}
+.blmd-omni{margin-top:2px;font-size:13px;color:var(--blmd-mute)}
+.blmd-outlet{display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:24px;border-radius:24px;background:var(--blmd-violet-dd);color:#e7e6f6}
+.blmd-outlet .blmd-eyebrow{color:#fff}
+.blmd-outlet strong{font-size:22px;line-height:1.15;color:#fff}
+.blmd-outlet>span{font-size:15px;line-height:1.45}
+.blmd-outlet-links{display:flex;flex-direction:column;margin-top:6px}
+.blmd-outlet-links a{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;color:#fff}
+.blmd-outlet-links svg{width:18px;height:18px}
+.blmd-outlet-links a:focus-visible{outline:3px solid var(--blmd-violet-l);outline-offset:2px}
+/* Galeria „Dla niej i dla niego” */
+.blmd-gal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(10px,1.6vw,18px)}
+.blmd-gal figure{margin:0;display:flex;flex-direction:column;gap:8px}
+.blmd-gal img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 20%;border-radius:20px;background:var(--blmd-photo)}
+.blmd-gal figcaption{font-size:15px;font-weight:600;color:var(--blmd-ink)}
+@media (max-width:900px){.blmd-gal{grid-template-columns:repeat(5,minmax(160px,1fr));overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}.blmd-gal figure{scroll-snap-align:start}}
 /* Nowości: przewijany rząd na mobile */
 .blmd-row-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 32px;margin-bottom:clamp(28px,4vw,44px)}
 @media (max-width:760px){.blmd-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--blmd-side);gap:12px;margin-inline:calc(var(--blmd-side)*-1);padding-inline:var(--blmd-side);padding-bottom:8px;scrollbar-width:none}.blmd-scroll::-webkit-scrollbar{display:none}.blmd-scroll>*{flex:0 0 64%;scroll-snap-align:start}}
@@ -422,6 +454,8 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 .blmd-case b{display:block;font-size:40px;line-height:1;letter-spacing:-.03em;color:var(--blmd-violet-d);font-weight:700}
 .blmd-case p{font-size:15px;line-height:1.45;margin-top:8px}
 .blmd-case a{display:inline-flex;align-items:center;min-height:44px;font-size:14.5px;font-weight:600;color:var(--blmd-violet-d);text-decoration:underline;text-underline-offset:3px}
+.blmd-case--txt b{font-size:24px;line-height:1.15;letter-spacing:-.02em}
+.blmd-team-art .blmd-arch--rect{aspect-ratio:2/3}
 @media (max-width:960px){.blmd-team{grid-template-columns:1fr}.blmd-case{left:12px;right:12px;max-width:none;bottom:12px}}
 /* Studenci */
 .blmd-stud{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);overflow:hidden;border-radius:var(--blmd-r);background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line)}
@@ -472,6 +506,7 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 
 <!-- SHELL:START ikony (sprite SVG, w WP w template part nagłówka) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+ <symbol id="blmd-i-wash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M4 7.5h16"/><circle cx="12" cy="14" r="4"/></symbol>
  <symbol id="blmd-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
  <symbol id="blmd-i-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
  <symbol id="blmd-i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
@@ -500,19 +535,19 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 
 <!-- SHELL:START naglowek (wspólny dla wszystkich podstron; pasek korzyści + pigułka z mega menu) -->
 <div class="blmd-topbar"><div class="blmd-wrap blmd-topbar-in">
- <span><svg aria-hidden="true"><use href="#blmd-i-truck"/></svg>Darmowa dostawa od 500 zł</span>
+ <span><svg aria-hidden="true"><use href="#blmd-i-truck"/></svg>Wysyłka w 24 h, darmowa od 300 zł</span>
  <span><svg aria-hidden="true"><use href="#blmd-i-flag"/></svg>Szyjemy w Polsce z tkanin Oeko-Tex</span>
  <span><svg aria-hidden="true"><use href="#blmd-i-return"/></svg>Zwrot lub wymiana do 14 dni</span>
 </div></div>
 <header class="blmd-head">
  <nav class="blmd-nav" aria-label="Nawigacja główna">
-  <a class="blmd-logo" href="index.html" data-href="https://blancomed.com/" aria-label="Blanco Med, strona główna"><img src="img/logo-blancomed-trim.png" width="640" height="245" alt="Blanco Med"></a>
+  <a class="blmd-logo" href="index.html" data-href="https://blancomed.com/" aria-label="Blanco Med, strona główna"><img src="img/logo-blancomed-2026.png" width="1088" height="212" alt="Blanco Med"></a>
   <div class="blmd-shell">
    <input class="blmd-check" type="checkbox" id="blmd-menu-check" aria-label="Otwórz menu" aria-controls="blmd-menu">
    <label class="blmd-burger" for="blmd-menu-check"><i aria-hidden="true"></i><span class="blmd-burger-txt">Menu</span></label>
    <label class="blmd-backdrop" for="blmd-menu-check" aria-hidden="true"></label>
    <div class="blmd-menu" id="blmd-menu">
-    <div class="blmd-drawer-head"><img src="img/logo-blancomed-trim.png" width="640" height="245" alt="Blanco Med"><label class="blmd-drawer-close" for="blmd-menu-check" role="button" tabindex="0" aria-label="Zamknij menu"><i></i><i></i></label></div>
+    <div class="blmd-drawer-head"><img src="img/logo-blancomed-2026.png" width="1088" height="212" alt="Blanco Med"><label class="blmd-drawer-close" for="blmd-menu-check" role="button" tabindex="0" aria-label="Zamknij menu"><i></i><i></i></label></div>
 
     <details class="blmd-item">
      <summary class="blmd-toplink">Dla niej <svg class="blmd-caret" aria-hidden="true"><use href="#blmd-i-caret"/></svg></summary>
@@ -529,7 +564,7 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
       </div>
       <div class="blmd-mega-col"><span class="blmd-mega-lbl">Pomoc w wyborze</span>
        <a href="PRODUKT.html#rozmiary" data-href="https://blancomed.com/sklep/"><strong>Jak dobrać rozmiar</strong><span>Mierzymy każdy model na płasko</span></a>
-       <a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/"><strong>Porównaj kolekcje</strong><span>FlexCare, PROline, Comfort, Cotton PRO</span></a>
+       <a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/"><strong>Porównaj kolekcje</strong><span>FlexCare i PROline</span></a>
        <a href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/bony-upominkowe/"><strong>Bony upominkowe</strong><span>Prezent dla kogoś z oddziału</span></a>
       </div>
       <a class="blmd-mega-tile" href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/">
@@ -558,7 +593,7 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
        <a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-meskie/"><strong>Kolekcje męskie</strong><span>Wybierz tkaninę pod swój dyżur</span></a>
       </div>
       <a class="blmd-mega-tile" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/">
-       <img src="img/2024-10-bluzy-medyczne-meskie-1-scaled.webp" width="1200" height="1804" alt="" loading="lazy">
+       <img src="img/2026-10-mega-dla-niego.webp" width="720" height="720" alt="" loading="lazy">
        <span class="blmd-mega-lbl">Dla niego</span>
        <h3>Normalny męski krój, wreszcie</h3>
        <span class="blmd-btn blmd-btn--light blmd-btn--sm">Zobacz <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></span>
@@ -572,20 +607,19 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
       <div class="blmd-mega-col"><span class="blmd-mega-lbl">Wybierz tkaninę pod swoją pracę</span>
        <div class="blmd-mega-coll">
         <a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/"><img src="img/2026-01-bt1a9893.webp" width="1200" height="1823" alt="" loading="lazy"><span><strong>FlexCare</strong><span>Maksymalna elastyczność</span></span></a>
-        <a href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/spodnie-medyczne-damskie/spodnie-proline/"><img src="img/2024-07-komplet-medyczny-ciemny-zielony-scrubs-banco-med.webp" width="1200" height="1805" alt="" loading="lazy"><span><strong>PROline</strong><span>Linia premium, 12 kolorów</span></span></a>
-        <a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/"><img src="img/2023-08-komplet-medyczny-damski-clever-comfort-niebieski.webp" width="1200" height="1805" alt="" loading="lazy"><span><strong>Comfort</strong><span>Miękkość na co dzień</span></span></a>
-        <a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/"><img src="img/2025-12-komplet-medyczny-damski-classic-professional-fuksja.webp" width="1200" height="1804" alt="" loading="lazy"><span><strong>Cotton PRO</strong><span>Dużo bawełny, wrażliwa skóra</span></span></a>
+        <a href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/spodnie-medyczne-damskie/spodnie-proline/"><img src="img/2024-07-komplet-medyczny-ciemny-zielony-scrubs-banco-med.webp" width="1200" height="1805" alt="" loading="lazy"><span><strong>PROline</strong><span>Linia premium, 10 kolorów</span></span></a>
        </div>
       </div>
       <a class="blmd-mega-tile" href="KATEGORIA.html" data-href="https://blancomed.com/promocje/">
        <img src="img/2024-09-blancomed_06092024-56.webp" width="1200" height="1805" alt="" loading="lazy">
        <span class="blmd-mega-lbl">Promocje</span>
-       <h3>Wybrane modele nawet o 40% taniej</h3>
+       <h3>Wybrane modele nawet o 42% taniej</h3>
        <span class="blmd-btn blmd-btn--light blmd-btn--sm">Sprawdź <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></span>
       </a>
      </div>
     </details>
 
+    <a class="blmd-toplink blmd-toplink--promo" href="index.html#promocje" data-href="https://blancomed.com/promocje/">Promocje</a>
     <a class="blmd-toplink" href="DLA-ZESPOLOW.html" data-href="https://blancomed.com/dla-zespolow/">Dla zespołów</a>
     <a class="blmd-toplink" href="STUDENCI.html" data-href="https://blancomed.com/studenci/">Studenci</a>
     <a class="blmd-toplink" href="BLOG.html" data-href="https://blancomed.com/blog/">Blog</a>
@@ -621,11 +655,11 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
  <div class="blmd-hero-grid">
   <div>
    <a class="blmd-hero-pill" href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/"><b>Nowość</b>Kolekcja FlexCare już w sklepie</a>
-   <h1 id="blmd-h1">Odzież medyczna, w której <span class="blmd-acc">dobrze</span> przetrwasz cały dyżur</h1>
-   <p class="blmd-hero-lead"><strong>Bluzy, spodnie i tuniki szyte w Polsce z tkanin Oeko-Tex.</strong> Nie krępują ruchów przy pacjencie, mają kieszenie tam, gdzie ich szukasz, a kolor zostaje po wielu praniach.</p>
-   <div class="blmd-hero-btns">
-    <a class="blmd-btn blmd-btn--violet" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/">Dla niej <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
-    <a class="blmd-btn blmd-btn--light" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/">Dla niego <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
+   <h1 id="blmd-h1">Odzież medyczna: jeden <span class="blmd-acc">standard</span> dla Ciebie i całego zespołu</h1>
+   <p class="blmd-hero-lead">Jedna jakość, wiele możliwości. Niezależnie od tego, czy wybierasz komplet dla siebie, czy odzież dla całego zespołu.</p>
+   <div class="blmd-doors">
+    <a class="blmd-door" href="KATEGORIA.html" data-href="https://blancomed.com/sklep/"><span class="blmd-door-ico"><svg aria-hidden="true"><use href="#blmd-i-bag"/></svg></span><span class="blmd-door-txt"><strong>Kup dla siebie</strong><small>Bluzy, spodnie, tuniki. Wysyłka w 24 h</small></span><span class="blmd-door-go"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
+    <a class="blmd-door blmd-door--team" href="DLA-ZESPOLOW.html" data-href="https://blancomed.com/dla-zespolow/"><span class="blmd-door-ico"><svg aria-hidden="true"><use href="#blmd-i-users"/></svg></span><span class="blmd-door-txt"><strong>Ubierz zespół</strong><small>Od 3-osobowego gabinetu po szpital</small></span><span class="blmd-door-go"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
    </div>
    <div class="blmd-hero-trust">
     <a class="blmd-chip" href="OPINIE.html" data-href="https://blancomed.com/opinie/"><span class="blmd-stars" aria-hidden="true"><svg><use href="#blmd-i-star"/></svg><svg><use href="#blmd-i-star"/></svg><svg><use href="#blmd-i-star"/></svg><svg><use href="#blmd-i-star"/></svg><svg><use href="#blmd-i-star"/></svg></span>5,0 w opiniach Google</a>
@@ -633,19 +667,19 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
     <span class="blmd-chip"><svg aria-hidden="true"><use href="#blmd-i-users"/></svg>Ubieramy całe zespoły</span>
    </div>
   </div>
-  <div class="blmd-hero-art">
-   <figure class="blmd-arch"><img src="img/2024-09-blancomed_06092024-124.webp" width="1200" height="1805" alt="Kobieta w magentowej bluzie medycznej PROline trzyma różową bluzę na wieszaku" fetchpriority="high"></figure>
-   <figure class="blmd-arch blmd-arch--b"><img src="img/2024-09-blancomed_06092024-43.webp" width="1200" height="1804" alt="Kobieta w liliowym komplecie medycznym z laptopem i telefonem" fetchpriority="high"></figure>
+  <div class="blmd-hero-art blmd-hero-art--one">
+   <!-- Zdjęcie tymczasowe: klient podmieni po sesji zdjęciowej (koniec października 2026). -->
+   <figure class="blmd-heroimg"><img src="img/2026-10-komplety-bez-zielen-wieszak.webp" width="1600" height="1064" alt="Komplety medyczne Blanco Med w kolorach beżowym i zielonym na wieszaku" fetchpriority="high"></figure>
    <div class="blmd-float blmd-float--a" aria-hidden="true"><span class="blmd-float-ico"><svg><use href="#blmd-i-drop"/></svg></span><span><strong>Kolor zostaje</strong>także po wielu praniach</span></div>
-   <div class="blmd-float blmd-float--b" aria-hidden="true"><span><strong>12 kolorów PROline</strong><span class="blmd-sw"><i style="--c:#b8a9d9"></i><i style="--c:#a3195b"></i><i style="--c:#1f3a6e"></i><i style="--c:#1f4d3a"></i><i style="--c:#d8c3a5"></i></span></span></div>
+   <div class="blmd-float blmd-float--b" aria-hidden="true"><span><strong>10 kolorów PROline</strong><span class="blmd-sw"><i style="--c:#5b2e52"></i><i style="--c:#a3195b"></i><i style="--c:#1f3a6e"></i><i style="--c:#1f4d3a"></i><i style="--c:#d8c3a5"></i></span></span></div>
   </div>
  </div>
 </div></section>
 
 <section class="wp-section alignfull" aria-label="Zakupy bez ryzyka"><div class="wp-content-wrap blmd-wrap">
  <ul class="blmd-usp">
-  <li class="blmd-rv"><span class="blmd-usp-ico"><svg aria-hidden="true"><use href="#blmd-i-flag"/></svg></span><span><strong>Szyte w Polsce</strong>Wysyłamy ze Świerzyn pod Zapolicami</span></li>
-  <li class="blmd-rv"><span class="blmd-usp-ico"><svg aria-hidden="true"><use href="#blmd-i-truck"/></svg></span><span><strong>Darmowa dostawa od 500 zł</strong>Wysyłka w 3 do 5 dni roboczych</span></li>
+  <li class="blmd-rv"><span class="blmd-usp-ico"><svg aria-hidden="true"><use href="#blmd-i-flag"/></svg></span><span><strong>Szyte w Polsce</strong>Wspierasz rodzimy biznes</span></li>
+  <li class="blmd-rv"><span class="blmd-usp-ico"><svg aria-hidden="true"><use href="#blmd-i-truck"/></svg></span><span><strong>Darmowa dostawa od 300 zł</strong>Wysyłka w 24 h w dni robocze</span></li>
   <li class="blmd-rv"><span class="blmd-usp-ico"><svg aria-hidden="true"><use href="#blmd-i-return"/></svg></span><span><strong>14 dni na zwrot lub wymianę</strong>Rozmiar nie pasuje? Wymienimy</span></li>
   <li class="blmd-rv"><span class="blmd-usp-ico"><svg aria-hidden="true"><use href="#blmd-i-check"/></svg></span><span><strong>Płacisz, jak wolisz</strong>BLIK, karta, przelew, płatność odroczona</span></li>
  </ul>
@@ -660,48 +694,48 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
  <input class="blmd-tabs-in" type="radio" name="blmd-tab" id="blmd-tab-on">
  <div class="blmd-tabs-bar"><label for="blmd-tab-ona"><span>Dla niej</span></label><label for="blmd-tab-on"><span>Dla niego</span></label></div>
  <div class="blmd-cats blmd-cats--ona">
-  <a class="blmd-cat blmd-rv" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/bluzy-medyczne-damskie/"><img src="img/2024-07-bluza-medyczna-damska-smart-proline-roz.webp" width="1200" height="1804" alt="Różowa damska bluza medyczna Smart PROline" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Bluzy medyczne</strong><small>Serek, stójka, zatrzaski</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
-  <a class="blmd-cat blmd-rv" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/spodnie-medyczne-damskie/"><img src="img/2024-09-blancomed_06092024-117.webp" width="1200" height="1805" alt="Kobieta w magentowych spodniach medycznych Comfy PROline" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Spodnie medyczne</strong><small>Proste, zwężane, joggery</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
-  <a class="blmd-cat blmd-rv" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/tuniki-medyczne/"><img src="img/2026-01-bt1a0183.webp" width="1200" height="1801" alt="Magentowa tunika medyczna FlexCare z paskiem" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Tuniki medyczne</strong><small>Kobiecy krój z talią</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
+  <a class="blmd-cat blmd-rv" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/bluzy-medyczne-damskie/"><img src="img/2026-10-bluza-proline-magenta.webp" width="665" height="1000" alt="Kobieta w magentowej bluzie medycznej PROline" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Bluzy medyczne</strong><small>Serek, stójka, zatrzaski</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
+  <a class="blmd-cat blmd-rv" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/spodnie-medyczne-damskie/"><img src="img/2026-10-spodnie-proline-sliwkowe.webp" width="665" height="1000" alt="Śliwkowe spodnie medyczne damskie PROline" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Spodnie medyczne</strong><small>Proste, zwężane, joggery</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
+  <a class="blmd-cat blmd-rv" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/tuniki-medyczne/"><img src="img/2026-10-tunika-bezowa-pasek.webp" width="733" height="1100" alt="Kobieta w beżowej tunice medycznej z paskiem" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Tuniki medyczne</strong><small>Kobiecy krój z talią</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
   <a class="blmd-cat blmd-rv" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/"><img src="img/2023-06-fartuch-damski-classic-professional-bialy.webp" width="1200" height="1804" alt="Biały damski fartuch medyczny Classic Professional" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Fartuchy</strong><small>Klasyczna biel</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
  </div>
  <div class="blmd-cats blmd-cats--on">
-  <a class="blmd-cat" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/bluzy-medyczne-meskie/"><img src="img/2024-10-bluzy-medyczne-meskie-1-scaled.webp" width="1200" height="1804" alt="Mężczyzna w beżowej bluzie medycznej ze stetoskopem" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Bluzy medyczne</strong><small>Męski krój i proporcje</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
-  <a class="blmd-cat" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/spodnie-medyczne-meskie/"><img src="img/2024-10-spodnie-medyczne-meskie-1-scaled.webp" width="1200" height="1804" alt="Mężczyzna w beżowym komplecie medycznym" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Spodnie medyczne</strong><small>Proste i joggery</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
-  <a class="blmd-cat" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/"><img src="img/2023-03-komplet-medyczny-meski-clever-professional-granat.webp" width="1200" height="1804" alt="Granatowy męski komplet medyczny" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Komplety</strong><small>Bluza i spodnie w parze</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
+  <a class="blmd-cat" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/bluzy-medyczne-meskie/"><img src="img/2026-10-meska-bluza-bezowa.webp" width="720" height="720" alt="Mężczyzna w beżowej bluzie medycznej ze stetoskopem" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Bluzy medyczne</strong><small>Męski krój i proporcje</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
+  <a class="blmd-cat" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/spodnie-medyczne-meskie/"><img src="img/2026-10-meskie-spodnie-zielone.webp" width="720" height="720" alt="Mężczyzna w zielonych spodniach medycznych" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Spodnie medyczne</strong><small>Proste i joggery</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
+  <a class="blmd-cat" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/"><img src="img/2026-10-meski-komplet-zielony.webp" width="720" height="720" alt="Zielony męski komplet medyczny" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Komplety</strong><small>Bluza i spodnie w parze</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
   <a class="blmd-cat" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-mezczyzn/"><img src="img/2023-06-blancomed_web_255.webp" width="1200" height="1804" alt="Mężczyzna w białym fartuchu lekarskim" loading="lazy"><span class="blmd-cat-lbl"><span><strong>Fartuchy</strong><small>Na obchód i konsultacje</small></span><i><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></i></span></a>
  </div>
 </div></section>
 
 <section class="wp-section alignfull blmd-sec blmd-sec--white" id="nowosci" aria-labelledby="blmd-new-h"><div class="wp-content-wrap blmd-wrap">
  <div class="blmd-row-head">
-  <div><span class="blmd-eyebrow">Nowa kolekcja FlexCare</span><h2 class="blmd-h2" id="blmd-new-h">Elastyczna jak Twój <span class="blmd-acc">grafik</span></h2></div>
+  <div><span class="blmd-eyebrow">Nowa kolekcja FlexCare</span><h2 class="blmd-h2" id="blmd-new-h">Elastyczna jak Twój <span class="blmd-acc">grafik</span>. Wytrzymała jak Twój dyżur.</h2><p class="blmd-new-sub"><span class="blmd-wash-ico" aria-hidden="true"><svg><use href="#blmd-i-wash"/></svg></span>Można ją prać w 60°C bez utraty kształtu i koloru.</p></div>
   <a class="blmd-link" href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/">Zobacz całą kolekcję <svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></a>
  </div>
  <div class="blmd-pgrid blmd-scroll">
   <article class="blmd-pcard blmd-rv">
-   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-focus-flexcare-magenta-dark-hibiscus/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><img src="img/2026-01-bt1a0117.webp" width="1200" height="1824" alt="" loading="lazy"></a>
+   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-focus-flexcare-magenta-dark-hibiscus/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><span class="blmd-wash"><svg aria-hidden="true"><use href="#blmd-i-wash"/></svg>60°C</span><img src="img/2026-01-bt1a0117.webp" width="1200" height="1824" alt="" loading="lazy"></a>
    <span class="blmd-pcard-coll">FlexCare</span>
    <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-focus-flexcare-magenta-dark-hibiscus/">Bluza medyczna damska Focus ze stójką</a></h3>
    <div class="blmd-sw"><i style="--c:#8e1f55" title="Dark Hibiscus"></i><i style="--c:#4a2e25" title="Dark Chocolate"></i><i style="--c:#e3b7bd" title="Powder Rose"></i><small>3 kolory</small></div>
    <p class="blmd-pcard-price">169,00 zł</p>
   </article>
   <article class="blmd-pcard blmd-rv">
-   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-snaps-flexcare-brazowa-dark-chocolate/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><img src="img/2026-01-bt1a9925.webp" width="1200" height="1824" alt="" loading="lazy"></a>
+   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-snaps-flexcare-brazowa-dark-chocolate/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><span class="blmd-wash"><svg aria-hidden="true"><use href="#blmd-i-wash"/></svg>60°C</span><img src="img/2026-01-bt1a9925.webp" width="1200" height="1824" alt="" loading="lazy"></a>
    <span class="blmd-pcard-coll">FlexCare</span>
    <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-snaps-flexcare-brazowa-dark-chocolate/">Bluza medyczna damska Snaps na zatrzaski</a></h3>
    <div class="blmd-sw"><i style="--c:#4a2e25" title="Dark Chocolate"></i><i style="--c:#8e1f55" title="Dark Hibiscus"></i><i style="--c:#e3b7bd" title="Powder Rose"></i><small>3 kolory</small></div>
    <p class="blmd-pcard-price">159,00 zł</p>
   </article>
   <article class="blmd-pcard blmd-rv">
-   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-pure-flexcare-magenta-dark-hibiscus/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><img src="img/2026-01-bt1a0103.webp" width="1200" height="1824" alt="" loading="lazy"></a>
+   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-pure-flexcare-magenta-dark-hibiscus/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><span class="blmd-wash"><svg aria-hidden="true"><use href="#blmd-i-wash"/></svg>60°C</span><img src="img/2026-01-bt1a0103.webp" width="1200" height="1824" alt="" loading="lazy"></a>
    <span class="blmd-pcard-coll">FlexCare</span>
    <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-pure-flexcare-magenta-dark-hibiscus/">Spodnie medyczne damskie Pure</a></h3>
    <div class="blmd-sw"><i style="--c:#8e1f55" title="Dark Hibiscus"></i><i style="--c:#4a2e25" title="Dark Chocolate"></i><i style="--c:#e3b7bd" title="Powder Rose"></i><small>3 kolory</small></div>
    <p class="blmd-pcard-price">179,00 zł</p>
   </article>
   <article class="blmd-pcard blmd-rv">
-   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-elegance-flexcare-brazowe-dark-chocolate/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><img src="img/2026-01-bt1a9955.webp" width="1200" height="1824" alt="" loading="lazy"></a>
+   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-elegance-flexcare-brazowe-dark-chocolate/" tabindex="-1" aria-hidden="true"><span class="blmd-badge">Nowość</span><span class="blmd-wash"><svg aria-hidden="true"><use href="#blmd-i-wash"/></svg>60°C</span><img src="img/2026-01-bt1a9955.webp" width="1200" height="1824" alt="" loading="lazy"></a>
    <span class="blmd-pcard-coll">FlexCare</span>
    <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-elegance-flexcare-brazowe-dark-chocolate/">Spodnie medyczne damskie Elegance</a></h3>
    <div class="blmd-sw"><i style="--c:#4a2e25" title="Dark Chocolate"></i><i style="--c:#8e1f55" title="Dark Hibiscus"></i><i style="--c:#e3b7bd" title="Powder Rose"></i><small>3 kolory</small></div>
@@ -711,66 +745,134 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 </div></section>
 
 <section class="wp-section alignfull blmd-sec" id="kolory" aria-labelledby="blmd-pal-h"><div class="wp-content-wrap blmd-wrap">
+ <!-- Przełącznik kolekcji i kolorów: radio + :has() (bez JS). Bez :has() widać pierwszy kolor wybranej kolekcji. Zdjęcia tymczasowe do sesji. -->
  <div class="blmd-palette">
+  <input class="blmd-pc-in" type="radio" name="blmd-pal-coll" id="blmd-pc-pro" checked>
+  <input class="blmd-pc-in" type="radio" name="blmd-pal-coll" id="blmd-pc-flex">
   <div class="blmd-pal-box">
-   <!-- Przełącznik kolorów: radio + :has() (bez JS). W przeglądarce bez :has() widać pierwszy kolor. -->
-   <div class="blmd-pal-stage">
-    <img src="img/2024-07-komplet-medyczny-damski-clever-proline-lila.webp" width="1200" height="1805" alt="Komplet medyczny PROline w kolorze liliowym Violet Mist" loading="lazy" data-c="lila">
-    <img src="img/2024-07-komplet-medyczny-damski-clever-proline-magenta.webp" width="1200" height="1804" alt="Komplet medyczny PROline w kolorze Deep Magenta" loading="lazy" data-c="magenta">
-    <img src="img/2024-07-komplet-medyczny-damski-clever-proline-granat.webp" width="1200" height="1805" alt="Komplet medyczny PROline w kolorze granatowym Royal Blue" loading="lazy" data-c="granat">
-    <img src="img/2024-07-komplet-medyczny-clever-proline-ciemna-zielen.webp" width="1200" height="1805" alt="Komplet medyczny PROline w kolorze zielonym Forest Green" loading="lazy" data-c="zielen">
-    <img src="img/2024-07-komolet-medyczny-damski-clever-proline-bordowy.webp" width="1200" height="1804" alt="Komplet medyczny PROline w kolorze bordowym Ruby Red" loading="lazy" data-c="bordo">
-    <img src="img/2024-07-komplet-medyczny-damski-clever-proline-bez.webp" width="1200" height="1804" alt="Komplet medyczny PROline w kolorze beżowym Cafe Cream" loading="lazy" data-c="bez">
-    <img src="img/2024-09-komplet-medyczny-damski-clever-proline-niebieski.webp" width="1200" height="1804" alt="Komplet medyczny PROline w kolorze popielatego błękitu Ash Blue" loading="lazy" data-c="ash">
-    <img src="img/2024-07-komplet-medyczny-dasmki-clever-proline-roz.webp" width="1200" height="1805" alt="Komplet medyczny PROline w kolorze różowym Pink Bubblegum" loading="lazy" data-c="roz">
-    <span class="blmd-pal-name" aria-live="polite"><i style="--c:#b8a9d9" data-n="lila"></i><span data-n="lila">Violet Mist</span><span data-n="magenta">Deep Magenta</span><span data-n="granat">Royal Blue</span><span data-n="zielen">Forest Green</span><span data-n="bordo">Ruby Red</span><span data-n="bez">Cafe Cream</span><span data-n="ash">Ash Blue</span><span data-n="roz">Pink Bubblegum</span></span>
+   <div class="blmd-pal-stage blmd-pal-stage--pro">
+    <img src="img/2024-07-komplet-medyczny-damski-clever-proline-magenta.webp" width="1200" height="1804" alt="Komplet PROline w kolorze Deep Magenta (magenta)" loading="lazy" data-c="magenta">
+    <img src="img/2024-07-komplet-medyczny-damski-clever-proline-granat.webp" width="1200" height="1805" alt="Komplet PROline w kolorze Royal Blue (granatowy)" loading="lazy" data-c="granat">
+    <img src="img/2024-07-komplet-medyczny-clever-proline-ciemna-zielen.webp" width="1200" height="1805" alt="Komplet PROline w kolorze Forest Green (zielony)" loading="lazy" data-c="zielen">
+    <img src="img/2024-07-komolet-medyczny-damski-clever-proline-bordowy.webp" width="1200" height="1804" alt="Komplet PROline w kolorze Ruby Red (bordowy)" loading="lazy" data-c="bordo">
+    <img src="img/2026-10-proline-plum-perfect.webp" width="665" height="1000" alt="Komplet PROline w kolorze Plum Perfect (fioletowy)" loading="lazy" data-c="plum">
+    <img src="img/2024-07-komplet-medyczny-dasmki-clever-proline-roz.webp" width="1200" height="1805" alt="Komplet PROline w kolorze Pink Bubblegum (różowy)" loading="lazy" data-c="roz">
+    <img src="img/2024-09-komplet-medyczny-damski-clever-proline-niebieski.webp" width="1200" height="1804" alt="Komplet PROline w kolorze Ash Blue (popielaty błękit)" loading="lazy" data-c="ash">
+    <img src="img/2024-07-komplet-medyczny-damski-clever-proline-bez.webp" width="1200" height="1804" alt="Komplet PROline w kolorze Cafe Cream (beżowy)" loading="lazy" data-c="bez">
+    <img src="img/2026-10-proline-crystal-white.webp" width="667" height="1000" alt="Komplet PROline w kolorze Crystal White (biały)" loading="lazy" data-c="white">
+    <img src="img/2026-10-proline-phantom-black.webp" width="667" height="1000" alt="Komplet PROline w kolorze Phantom Black (czarny)" loading="lazy" data-c="black">
+    <span class="blmd-pal-name" aria-live="polite"><i></i><span data-n="magenta">Deep Magenta</span><span data-n="granat">Royal Blue</span><span data-n="zielen">Forest Green</span><span data-n="bordo">Ruby Red</span><span data-n="plum">Plum Perfect</span><span data-n="roz">Pink Bubblegum</span><span data-n="ash">Ash Blue</span><span data-n="bez">Cafe Cream</span><span data-n="white">Crystal White</span><span data-n="black">Phantom Black</span></span>
+   </div>
+   <div class="blmd-pal-stage blmd-pal-stage--flex">
+    <img src="img/2026-01-bt1a9893.webp" width="1200" height="1823" alt="Komplet FlexCare w kolorze Dark Chocolate (brązowy)" loading="lazy" data-c="choco">
+    <img src="img/2026-01-bt1a0183.webp" width="1200" height="1801" alt="Komplet FlexCare w kolorze Dark Hibiscus (magenta)" loading="lazy" data-c="hibiscus">
+    <img src="img/2026-10-flexcare-powder-rose.webp" width="708" height="1000" alt="Komplet FlexCare w kolorze Powder Rose (różowy pudrowy)" loading="lazy" data-c="powder">
+    <span class="blmd-pal-name" aria-live="polite"><i></i><span data-n="choco">Dark Chocolate</span><span data-n="hibiscus">Dark Hibiscus</span><span data-n="powder">Powder Rose</span></span>
    </div>
   </div>
   <div class="blmd-pal-txt">
-   <span class="blmd-eyebrow">Kolekcja PROline</span>
+   <div class="blmd-pc-bar"><label for="blmd-pc-pro"><span>PROline</span></label><label for="blmd-pc-flex"><span>FlexCare</span></label></div>
    <h2 class="blmd-h2" id="blmd-pal-h">Kolor, który pasuje do <span class="blmd-acc">Ciebie</span> i do placówki</h2>
-   <p>Kliknij kolor i zobacz komplet. Klasyczny granat i zieleń na blok, róż i liliowy do gabinetu, beż do kliniki estetycznej. Bluzę i spodnie z tej samej linii łączysz w komplet w jednym odcieniu.</p>
-   <fieldset class="blmd-pal-sw">
-    <legend class="blmd-sr">Wybierz kolor kompletu</legend>
-    <label><input class="blmd-pal-in" type="radio" name="blmd-pal" value="lila" checked><i style="--c:#b8a9d9"></i><span class="blmd-sr">Violet Mist, liliowy</span></label>
-    <label><input class="blmd-pal-in" type="radio" name="blmd-pal" value="magenta"><i style="--c:#a3195b"></i><span class="blmd-sr">Deep Magenta</span></label>
-    <label><input class="blmd-pal-in" type="radio" name="blmd-pal" value="granat"><i style="--c:#1f3a6e"></i><span class="blmd-sr">Royal Blue, granatowy</span></label>
-    <label><input class="blmd-pal-in" type="radio" name="blmd-pal" value="zielen"><i style="--c:#1f4d3a"></i><span class="blmd-sr">Forest Green, zielony</span></label>
-    <label><input class="blmd-pal-in" type="radio" name="blmd-pal" value="bordo"><i style="--c:#6e1a2a"></i><span class="blmd-sr">Ruby Red, bordowy</span></label>
-    <label><input class="blmd-pal-in" type="radio" name="blmd-pal" value="bez"><i style="--c:#d8c3a5"></i><span class="blmd-sr">Cafe Cream, beżowy</span></label>
-    <label><input class="blmd-pal-in" type="radio" name="blmd-pal" value="ash"><i style="--c:#9fb6c9"></i><span class="blmd-sr">Ash Blue, popielaty błękit</span></label>
-    <label><input class="blmd-pal-in" type="radio" name="blmd-pal" value="roz"><i style="--c:#ef9fc0"></i><span class="blmd-sr">Pink Bubblegum, różowy</span></label>
-   </fieldset>
-   <ul>
-    <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Tkanina z certyfikatem Oeko-Tex, bezpieczna dla skóry</li>
-    <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Spodnie z 5 kieszeniami, w tym cargo na telefon</li>
-    <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Zawieszka na identyfikator w pasie</li>
-   </ul>
-   <a class="blmd-btn blmd-btn--violet" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/spodnie-medyczne-damskie/spodnie-proline/">Zobacz kolekcję PROline <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
+   <div class="blmd-pal-copy blmd-pal-copy--pro">
+    <p>Kliknij kolor i zobacz komplet. Klasyczny granat i zieleń na blok, róż i magenta do gabinetu, beż do kliniki estetycznej. Bluzę i spodnie z tej samej linii łączysz w komplet w jednym odcieniu.</p>
+    <fieldset class="blmd-pal-sw">
+     <legend class="blmd-sr">Kolory PROline</legend>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="magenta" checked><i style="--c:#a3195b"></i><span class="blmd-sr">Deep Magenta, magenta</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="granat"><i style="--c:#1f3a6e"></i><span class="blmd-sr">Royal Blue, granatowy</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="zielen"><i style="--c:#1f4d3a"></i><span class="blmd-sr">Forest Green, zielony</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="bordo"><i style="--c:#6e1a2a"></i><span class="blmd-sr">Ruby Red, bordowy</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="plum"><i style="--c:#5b2e52"></i><span class="blmd-sr">Plum Perfect, fioletowy</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="roz"><i style="--c:#ef9fc0"></i><span class="blmd-sr">Pink Bubblegum, różowy</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="ash"><i style="--c:#9fb6c9"></i><span class="blmd-sr">Ash Blue, popielaty błękit</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="bez"><i style="--c:#d8c3a5"></i><span class="blmd-sr">Cafe Cream, beżowy</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="white"><i style="--c:#f5f4f0"></i><span class="blmd-sr">Crystal White, biały</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-pro" value="black"><i style="--c:#1c1c1f"></i><span class="blmd-sr">Phantom Black, czarny</span></label>
+    </fieldset>
+    <ul>
+     <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Tkanina z certyfikatem Oeko-Tex, bezpieczna dla skóry</li>
+     <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Spodnie z 5 kieszeniami, w tym cargo na telefon</li>
+     <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Zawieszka na identyfikator w pasie</li>
+    </ul>
+    <a class="blmd-btn blmd-btn--violet" href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/spodnie-medyczne-damskie/spodnie-proline/">Zobacz kolekcję PROline <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
+   </div>
+   <div class="blmd-pal-copy blmd-pal-copy--flex">
+    <p>Wybierz swój odcień i stwórz komplet, który sprawdzi się nawet podczas najbardziej intensywnego dnia. FlexCare łączy wyjątkową elastyczność z trwałością koloru i kształtu, również po praniu w 60°C.</p>
+    <fieldset class="blmd-pal-sw">
+     <legend class="blmd-sr">Kolory FlexCare</legend>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-flex" value="choco" checked><i style="--c:#4a2e25"></i><span class="blmd-sr">Dark Chocolate, brązowy</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-flex" value="hibiscus"><i style="--c:#8e1f55"></i><span class="blmd-sr">Dark Hibiscus, magenta</span></label>
+     <label><input class="blmd-pal-in" type="radio" name="blmd-pal-flex" value="powder"><i style="--c:#e3b7bd"></i><span class="blmd-sr">Powder Rose, różowy pudrowy</span></label>
+    </fieldset>
+    <ul>
+     <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Elastyczna w czterech kierunkach (4-way stretch)</li>
+     <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Kolor zostaje także po wielu praniach</li>
+     <li><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Pranie w 60°C bez utraty kształtu</li>
+    </ul>
+    <a class="blmd-btn blmd-btn--violet" href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/">Zobacz kolekcję FlexCare <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
+   </div>
   </div>
  </div>
 </div></section>
 <style data-wp-block-html="css">
-/* Przełącznik kolorów PROline (radio + :has, bez JS) */
+/* Przełącznik kolekcji PROline / FlexCare i kolorów (radio + :has, bez JS) */
+.blmd-pc-in{position:absolute;opacity:0;pointer-events:none}
+.blmd-pc-bar{display:inline-flex;gap:4px;padding:5px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--blmd-line);margin-bottom:18px;max-width:100%}
+.blmd-pc-bar label{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:999px;font-weight:600;font-size:16px;cursor:pointer;color:var(--blmd-ink-2);transition:background-color .25s,color .25s}
+#blmd-pc-pro:checked~.blmd-pal-txt label[for=blmd-pc-pro],#blmd-pc-flex:checked~.blmd-pal-txt label[for=blmd-pc-flex]{background:var(--blmd-violet-d);color:#fff}
+#blmd-pc-pro:focus-visible~.blmd-pal-txt label[for=blmd-pc-pro],#blmd-pc-flex:focus-visible~.blmd-pal-txt label[for=blmd-pc-flex]{outline:3px solid var(--blmd-violet-d);outline-offset:2px}
+#blmd-pc-pro:checked~.blmd-pal-box .blmd-pal-stage--flex,#blmd-pc-flex:checked~.blmd-pal-box .blmd-pal-stage--pro,#blmd-pc-pro:checked~.blmd-pal-txt .blmd-pal-copy--flex,#blmd-pc-flex:checked~.blmd-pal-txt .blmd-pal-copy--pro{display:none}
+.blmd-pal-stage--pro .blmd-pal-name i{--c:#a3195b}
+.blmd-pal-stage--flex .blmd-pal-name i{--c:#4a2e25}
+.blmd-pal-copy>p{color:var(--blmd-txt);margin-top:16px;max-width:520px}
 .blmd-pal-sw label:has(:checked)::after{box-shadow:inset 0 0 0 2px var(--blmd-ink)}
 .blmd-pal-sw label:has(:focus-visible)::after{box-shadow:inset 0 0 0 3px var(--blmd-violet-d)}
-.blmd-palette:has(.blmd-pal-in:not([value=lila]):checked) .blmd-pal-stage img[data-c=lila]{opacity:0;transform:scale(1.03)}
-.blmd-palette:has([value=magenta]:checked) img[data-c=magenta],.blmd-palette:has([value=granat]:checked) img[data-c=granat],.blmd-palette:has([value=zielen]:checked) img[data-c=zielen],.blmd-palette:has([value=bordo]:checked) img[data-c=bordo],.blmd-palette:has([value=bez]:checked) img[data-c=bez],.blmd-palette:has([value=ash]:checked) img[data-c=ash],.blmd-palette:has([value=roz]:checked) img[data-c=roz]{opacity:1;transform:none}
-.blmd-palette:has([value=lila]:checked) .blmd-pal-name span[data-n=lila],.blmd-palette:has([value=magenta]:checked) .blmd-pal-name span[data-n=magenta],.blmd-palette:has([value=granat]:checked) .blmd-pal-name span[data-n=granat],.blmd-palette:has([value=zielen]:checked) .blmd-pal-name span[data-n=zielen],.blmd-palette:has([value=bordo]:checked) .blmd-pal-name span[data-n=bordo],.blmd-palette:has([value=bez]:checked) .blmd-pal-name span[data-n=bez],.blmd-palette:has([value=ash]:checked) .blmd-pal-name span[data-n=ash],.blmd-palette:has([value=roz]:checked) .blmd-pal-name span[data-n=roz]{display:inline}
-.blmd-palette:has([value=magenta]:checked) .blmd-pal-name i{--c:#a3195b}.blmd-palette:has([value=granat]:checked) .blmd-pal-name i{--c:#1f3a6e}.blmd-palette:has([value=zielen]:checked) .blmd-pal-name i{--c:#1f4d3a}.blmd-palette:has([value=bordo]:checked) .blmd-pal-name i{--c:#6e1a2a}.blmd-palette:has([value=bez]:checked) .blmd-pal-name i{--c:#d8c3a5}.blmd-palette:has([value=ash]:checked) .blmd-pal-name i{--c:#9fb6c9}.blmd-palette:has([value=roz]:checked) .blmd-pal-name i{--c:#ef9fc0}
-@supports not selector(:has(*)){.blmd-pal-name span[data-n=lila]{display:inline}}
+.blmd-palette:has([name=blmd-pal-pro]:not([value=magenta]):checked) .blmd-pal-stage--pro img[data-c=magenta]{opacity:0;transform:scale(1.03)}
+.blmd-palette:has([name=blmd-pal-pro][value=granat]:checked) .blmd-pal-stage--pro img[data-c=granat],.blmd-palette:has([name=blmd-pal-pro][value=zielen]:checked) .blmd-pal-stage--pro img[data-c=zielen],.blmd-palette:has([name=blmd-pal-pro][value=bordo]:checked) .blmd-pal-stage--pro img[data-c=bordo],.blmd-palette:has([name=blmd-pal-pro][value=plum]:checked) .blmd-pal-stage--pro img[data-c=plum],.blmd-palette:has([name=blmd-pal-pro][value=roz]:checked) .blmd-pal-stage--pro img[data-c=roz],.blmd-palette:has([name=blmd-pal-pro][value=ash]:checked) .blmd-pal-stage--pro img[data-c=ash],.blmd-palette:has([name=blmd-pal-pro][value=bez]:checked) .blmd-pal-stage--pro img[data-c=bez],.blmd-palette:has([name=blmd-pal-pro][value=white]:checked) .blmd-pal-stage--pro img[data-c=white],.blmd-palette:has([name=blmd-pal-pro][value=black]:checked) .blmd-pal-stage--pro img[data-c=black]{opacity:1;transform:none}
+.blmd-palette:has([name=blmd-pal-pro][value=magenta]:checked) .blmd-pal-stage--pro span[data-n=magenta],.blmd-palette:has([name=blmd-pal-pro][value=granat]:checked) .blmd-pal-stage--pro span[data-n=granat],.blmd-palette:has([name=blmd-pal-pro][value=zielen]:checked) .blmd-pal-stage--pro span[data-n=zielen],.blmd-palette:has([name=blmd-pal-pro][value=bordo]:checked) .blmd-pal-stage--pro span[data-n=bordo],.blmd-palette:has([name=blmd-pal-pro][value=plum]:checked) .blmd-pal-stage--pro span[data-n=plum],.blmd-palette:has([name=blmd-pal-pro][value=roz]:checked) .blmd-pal-stage--pro span[data-n=roz],.blmd-palette:has([name=blmd-pal-pro][value=ash]:checked) .blmd-pal-stage--pro span[data-n=ash],.blmd-palette:has([name=blmd-pal-pro][value=bez]:checked) .blmd-pal-stage--pro span[data-n=bez],.blmd-palette:has([name=blmd-pal-pro][value=white]:checked) .blmd-pal-stage--pro span[data-n=white],.blmd-palette:has([name=blmd-pal-pro][value=black]:checked) .blmd-pal-stage--pro span[data-n=black]{display:inline}
+.blmd-palette:has([name=blmd-pal-pro][value=granat]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#1f3a6e}.blmd-palette:has([name=blmd-pal-pro][value=zielen]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#1f4d3a}.blmd-palette:has([name=blmd-pal-pro][value=bordo]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#6e1a2a}.blmd-palette:has([name=blmd-pal-pro][value=plum]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#5b2e52}.blmd-palette:has([name=blmd-pal-pro][value=roz]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#ef9fc0}.blmd-palette:has([name=blmd-pal-pro][value=ash]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#9fb6c9}.blmd-palette:has([name=blmd-pal-pro][value=bez]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#d8c3a5}.blmd-palette:has([name=blmd-pal-pro][value=white]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#f5f4f0}.blmd-palette:has([name=blmd-pal-pro][value=black]:checked) .blmd-pal-stage--pro .blmd-pal-name i{--c:#1c1c1f}
+@supports not selector(:has(*)){.blmd-pal-stage--pro .blmd-pal-name span[data-n=magenta]{display:inline}}
+.blmd-palette:has([name=blmd-pal-flex]:not([value=choco]):checked) .blmd-pal-stage--flex img[data-c=choco]{opacity:0;transform:scale(1.03)}
+.blmd-palette:has([name=blmd-pal-flex][value=hibiscus]:checked) .blmd-pal-stage--flex img[data-c=hibiscus],.blmd-palette:has([name=blmd-pal-flex][value=powder]:checked) .blmd-pal-stage--flex img[data-c=powder]{opacity:1;transform:none}
+.blmd-palette:has([name=blmd-pal-flex][value=choco]:checked) .blmd-pal-stage--flex span[data-n=choco],.blmd-palette:has([name=blmd-pal-flex][value=hibiscus]:checked) .blmd-pal-stage--flex span[data-n=hibiscus],.blmd-palette:has([name=blmd-pal-flex][value=powder]:checked) .blmd-pal-stage--flex span[data-n=powder]{display:inline}
+.blmd-palette:has([name=blmd-pal-flex][value=hibiscus]:checked) .blmd-pal-stage--flex .blmd-pal-name i{--c:#8e1f55}.blmd-palette:has([name=blmd-pal-flex][value=powder]:checked) .blmd-pal-stage--flex .blmd-pal-name i{--c:#e3b7bd}
+@supports not selector(:has(*)){.blmd-pal-stage--flex .blmd-pal-name span[data-n=choco]{display:inline}}
+@media (max-width:420px){.blmd-pc-bar label{padding:0 16px}}
 </style>
 
-<section class="wp-section alignfull blmd-sec blmd-sec--lav" id="kolekcje" aria-labelledby="blmd-coll-h"><div class="wp-content-wrap blmd-wrap">
- <div class="blmd-sec-head">
-  <div><span class="blmd-eyebrow">Kolekcje</span><h2 class="blmd-h2" id="blmd-coll-h">Cztery tkaniny, <span class="blmd-acc">jedna</span> jest dla Ciebie</h2></div>
-  <p>Każda kolekcja ma inną tkaninę i swoją paletę kolorów. Wybierz tę, która pasuje do tempa Twojej pracy.</p>
+<section class="wp-section alignfull blmd-sec blmd-sec--lav" id="promocje" aria-labelledby="blmd-promo-h"><div class="wp-content-wrap blmd-wrap">
+ <!-- W WP: blok kolekcji produktów z filtrem „w promocji”. Ceny i rabat z danych sklepu (crawl 10.10.2026), najniższa cena z 30 dni z wtyczki iworks Omnibus. -->
+ <div class="blmd-row-head">
+  <div><span class="blmd-eyebrow blmd-eyebrow--sale">Promocje i outlet</span><h2 class="blmd-h2" id="blmd-promo-h">Do <span class="blmd-acc blmd-acc--sale">−42%</span> na wybrane modele</h2></div>
+  <a class="blmd-link" href="KATEGORIA.html" data-href="https://blancomed.com/promocje/">Wszystkie promocje <svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></a>
  </div>
- <div class="blmd-colls">
-  <article class="blmd-coll blmd-rv"><div class="blmd-coll-img"><img src="img/2026-01-bt1a9893.webp" width="1200" height="1823" alt="Brązowy komplet FlexCare Dark Chocolate" loading="lazy"></div><div class="blmd-coll-body"><span class="blmd-coll-tag">FlexCare</span><h3><a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/">Swoboda przy każdym skłonie</a></h3><p>Najbardziej elastyczna tkanina w ofercie i sportowy sznyt. Nic nie ciągnie, gdy kucasz przy łóżku.</p><p class="blmd-coll-for"><b>Dla:</b> pielęgniarek, fizjoterapeutów, ratowników</p></div></article>
-  <article class="blmd-coll blmd-rv"><div class="blmd-coll-img"><img src="img/2024-07-komplet-medyczny-ciemny-zielony-scrubs-banco-med.webp" width="1200" height="1805" alt="Zielony komplet PROline Forest Green" loading="lazy"></div><div class="blmd-coll-body"><span class="blmd-coll-tag">PROline</span><h3><a href="KATEGORIA.html" data-href="https://blancomed.com/kategoria-produktu/odziez-medyczna-dla-kobiet/spodnie-medyczne-damskie/spodnie-proline/">Nienaganny wygląd do końca zmiany</a></h3><p>Linia premium: przewiewna, elastyczna tkanina i 12 kolorów do łączenia w komplety.</p><p class="blmd-coll-for"><b>Dla:</b> lekarzy, stomatologów, klinik</p></div></article>
-  <article class="blmd-coll blmd-rv"><div class="blmd-coll-img"><img src="img/2023-08-komplet-medyczny-damski-clever-comfort-niebieski.webp" width="1200" height="1805" alt="Niebieski komplet Comfort" loading="lazy"></div><div class="blmd-coll-body"><span class="blmd-coll-tag">Comfort</span><h3><a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/">Miękkość na co dzień</a></h3><p>Klasyczne kroje skupione na wygodzie. Przyjemne w dotyku od pierwszego założenia.</p><p class="blmd-coll-for"><b>Dla:</b> przychodni, gabinetów, aptek</p></div></article>
-  <article class="blmd-coll blmd-rv"><div class="blmd-coll-img"><img src="img/2025-12-komplet-medyczny-damski-classic-professional-fuksja.webp" width="1200" height="1804" alt="Komplet Cotton PRO w kolorze fuksji" loading="lazy"></div><div class="blmd-coll-body"><span class="blmd-coll-tag">Cotton PRO</span><h3><a href="KATEGORIA.html" data-href="https://blancomed.com/kolekcje-damskie/">Bawełna dla wrażliwej skóry</a></h3><p>Wysoka zawartość naturalnej bawełny. Dobry wybór, gdy skóra źle znosi syntetyki.</p><p class="blmd-coll-for"><b>Dla:</b> kosmetologów, gabinetów beauty</p></div></article>
+ <div class="blmd-pgrid blmd-scroll">
+  <article class="blmd-pcard blmd-rv">
+   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-comfy-proline-liliowy-violet-mist/" tabindex="-1" aria-hidden="true"><span class="blmd-badge blmd-badge--sale">−42%</span><img src="img/2024-07-spodnie-medyczne-damskie-comfy-proline-lila.webp" width="1200" height="1805" alt="" loading="lazy"></a>
+   <span class="blmd-pcard-coll">PROline</span>
+   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-comfy-proline-liliowy-violet-mist/">Spodnie medyczne damskie Comfy PROline liliowe Violet Mist</a></h3>
+   <p class="blmd-pcard-price"><span class="blmd-sale"><span class="blmd-sr">Cena promocyjna </span>99,00 zł</span> <s><span class="blmd-sr">Cena regularna </span>170,00 zł</s></p>
+   <p class="blmd-omni">Najniższa cena z 30 dni: 99,00 zł</p>
+  </article>
+  <article class="blmd-pcard blmd-rv">
+   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-jogger-comfort-niebieski-2/" tabindex="-1" aria-hidden="true"><span class="blmd-badge blmd-badge--sale">−40%</span><img src="img/2023-08-komplet-medyczny-damski-modern-comfort-niebieski.webp" width="1200" height="1805" alt="" loading="lazy"></a>
+   <span class="blmd-pcard-coll">Comfort · ostatnie sztuki</span>
+   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/spodnie-medyczne-damskie-jogger-comfort-niebieski-2/">Spodnie medyczne damskie Jogger Comfort niebieskie</a></h3>
+   <p class="blmd-pcard-price"><span class="blmd-sale"><span class="blmd-sr">Cena promocyjna </span>120,00 zł</span> <s><span class="blmd-sr">Cena regularna </span>199,00 zł</s></p>
+   <p class="blmd-omni">Najniższa cena z 30 dni: 120,00 zł</p>
+  </article>
+  <article class="blmd-pcard blmd-rv">
+   <a class="blmd-pcard-img" href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-classic-cotton-pro-fuksja/" tabindex="-1" aria-hidden="true"><span class="blmd-badge blmd-badge--sale">−34%</span><img src="img/2025-12-bluza-medyczna-damska-classic-professional-fuksja-a.webp" width="1200" height="1804" alt="" loading="lazy"></a>
+   <span class="blmd-pcard-coll">Cotton PRO · ostatnie sztuki</span>
+   <h3><a href="PRODUKT.html" data-href="https://blancomed.com/produkt/bluza-medyczna-damska-classic-cotton-pro-fuksja/">Bluza medyczna damska Classic Cotton PRO fuksja</a></h3>
+   <p class="blmd-pcard-price"><span class="blmd-sale"><span class="blmd-sr">Cena promocyjna </span>99,00 zł</span> <s><span class="blmd-sr">Cena regularna </span>149,00 zł</s></p>
+   <p class="blmd-omni">Najniższa cena z 30 dni: 99,00 zł</p>
+  </article>
+  <div class="blmd-outlet">
+   <span class="blmd-eyebrow">Outlet</span>
+   <strong>Sprawdzone modele w niższych cenach</strong>
+   <span>Ostatnie rozmiary i kolory z kolekcji, które znikają z oferty.</span>
+   <span class="blmd-outlet-links"><a href="KATEGORIA.html" data-href="https://blancomed.com/damski-outlet/">Outlet damski <svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></a><a href="KATEGORIA.html" data-href="https://blancomed.com/meski-outlet/">Outlet męski <svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></a></span>
+  </div>
  </div>
 </div></section>
 
@@ -792,13 +894,13 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
 <section class="wp-section alignfull blmd-sec blmd-dark" id="zespoly" aria-labelledby="blmd-team-h"><div class="wp-content-wrap blmd-wrap">
  <div class="blmd-team">
   <div>
-   <span class="blmd-eyebrow">Dla placówek i zespołów</span>
+   <span class="blmd-eyebrow">Dla placówek i zespołów, od 3 osób</span>
    <h2 class="blmd-h2" id="blmd-team-h">Cały zespół w odzieży, która <span class="blmd-acc">pasuje</span> każdemu</h2>
-   <p class="blmd-team-lead">Przyjeżdżamy do Twojej placówki na przymiarki, więc nikt nie zgaduje rozmiaru z tabelki. Gotowe komplety wysyłamy kurierem na wskazany adres.</p>
+   <p class="blmd-team-lead">Ubieramy zarówno 3-osobowe gabinety, jak i całe szpitale. Przyjeżdżamy na przymiarki albo wysyłamy zestaw przymiarowy kurierem, więc nikt nie zgaduje rozmiaru z tabelki.</p>
    <ol class="blmd-steps">
     <li><span><strong>Ustalenia</strong><span>Przez telefon lub mailowo ustalamy modele, kolory, liczbę osób i termin.</span></span></li>
-    <li><span><strong>Przymiarki u Was</strong><span>Przyjeżdżamy na cały dzień i mierzymy każdą osobę z zespołu.</span></span></li>
-    <li><span><strong>Dostawa</strong><span>Uszyte komplety wysyłamy kurierem. Zespół zakłada je od razu.</span></span></li>
+    <li><span><strong>Przymiarki</strong><span>Przyjeżdżamy do placówki albo wysyłamy zestaw przymiarowy. Każdy dobiera swój rozmiar.</span></span></li>
+    <li><span><strong>Haft i dostawa</strong><span>Haft na zamówienie i realizacja do 14 dni roboczych.</span></span></li>
    </ol>
    <div class="blmd-team-perks"><span><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Rabat zespołowy</span><span><svg aria-hidden="true"><use href="#blmd-i-needle"/></svg>Haft logo placówki</span><span><svg aria-hidden="true"><use href="#blmd-i-check"/></svg>Kolor i tkanina na zamówienie</span></div>
    <div class="blmd-hero-btns">
@@ -806,16 +908,15 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
    </div>
   </div>
   <div class="blmd-team-art">
-   <figure class="blmd-arch"><img src="img/2024-09-blancomed_06092024-56.webp" width="1200" height="1805" alt="Kobieta w koralowym komplecie medycznym wybiera bluzy z wieszaka z kolekcją" loading="lazy"></figure>
-   <!-- ŹRÓDŁO: wpis na blogu klienta „Zamówienia grupowe odzieży medycznej. Jak zrealizowaliśmy 212 kompletów medycznych w 9 dni roboczych”. DO-POTWIERDZENIA: zgoda na użycie jako case study. -->
-   <div class="blmd-case"><b>212 kompletów</b><p>uszyliśmy dla jednego zamówienia grupowego w 9 dni roboczych.</p><a href="WPIS.html" data-href="https://blancomed.com/zamowienia-grupowe-odziezy-medycznej-jak-zrealizowalismy-212-kompletow-medycznych-w-9-dni-roboczych/">Jak to zrobiliśmy</a></div>
+   <figure class="blmd-arch blmd-arch--rect"><img src="img/2026-10-zespoly-wieszak.webp" width="665" height="1000" alt="Kobieta wybiera komplety medyczne z wieszaka z kolekcją" loading="lazy"></figure>
+   <div class="blmd-case blmd-case--txt"><b>Od 3 osób do całego szpitala</b><p>Szyjemy dla gabinetów, klinik i placówek publicznych. Realizujemy też zamówienia z przetargów i konkursów.</p><a href="DLA-ZESPOLOW.html#wycena" data-href="https://blancomed.com/dla-zespolow/">Zapytaj o ofertę</a></div>
   </div>
  </div>
 </div></section>
 
 <section class="wp-section alignfull blmd-sec" id="studenci" aria-labelledby="blmd-stud-h"><div class="wp-content-wrap blmd-wrap">
  <div class="blmd-stud blmd-rv">
-  <div class="blmd-stud-img"><img src="img/2024-09-blancomed_06092024-48.webp" width="1200" height="1805" alt="Studentka w liliowym komplecie medycznym ze stetoskopem" loading="lazy"></div>
+  <div class="blmd-stud-img"><img src="img/2026-10-studentka-ash-blue.webp" width="665" height="1000" alt="Kobieta w komplecie Ash Blue ze stetoskopem i laptopem" loading="lazy"></div>
   <div class="blmd-stud-body">
    <span class="blmd-eyebrow">Studenci kierunków medycznych</span>
    <span class="blmd-stud-big" aria-hidden="true">-15%</span>
@@ -826,6 +927,18 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
     <a class="blmd-btn blmd-btn--light" href="STUDENCI.html#grupy" data-href="https://blancomed.com/studenci/">Zamówienie dla grupy <span class="blmd-btn-ico"><svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></span></a>
    </div>
   </div>
+ </div>
+</div></section>
+
+<section class="wp-section alignfull blmd-sec blmd-sec--white" aria-labelledby="blmd-gal-h"><div class="wp-content-wrap blmd-wrap">
+ <!-- Zdjęcia tymczasowe: klient podmieni po sesji zdjęciowej. -->
+ <div class="blmd-row-head"><div><span class="blmd-eyebrow">Blanco Med na co dzień</span><h2 class="blmd-h2" id="blmd-gal-h">Dla niej i dla <span class="blmd-acc">niego</span></h2></div><a class="blmd-link" href="#kategorie">Wybierz swój krój <svg aria-hidden="true"><use href="#blmd-i-arrow"/></svg></a></div>
+ <div class="blmd-gal">
+  <figure><img src="img/2026-10-galeria-deep-magenta.webp" width="665" height="1000" alt="Kobieta w magentowym komplecie z różową bluzą na wieszaku" loading="lazy"><figcaption>Deep Magenta</figcaption></figure>
+  <figure><img src="img/2026-10-galeria-meski-komplet.webp" width="720" height="720" alt="Mężczyzna w niebieskim komplecie medycznym rozmawia przez telefon" loading="lazy"><figcaption>Komplet męski</figcaption></figure>
+  <figure><img src="img/2026-10-galeria-na-prezent.webp" width="665" height="1000" alt="Kobieta w różowym komplecie medycznym z bukietem kwiatów" loading="lazy"><figcaption>Na prezent</figcaption></figure>
+  <figure><img src="img/2026-10-mega-dla-niego.webp" width="720" height="720" alt="Mężczyzna w fioletowym komplecie medycznym z laptopem" loading="lazy"><figcaption>Dla niego</figcaption></figure>
+  <figure><img src="img/2026-10-galeria-royal-blue.webp" width="665" height="1000" alt="Kobieta w granatowym komplecie Royal Blue z laptopem" loading="lazy"><figcaption>Royal Blue</figcaption></figure>
  </div>
 </div></section>
 
@@ -869,7 +982,7 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
   </div>
   <div class="blmd-faq-list">
    <details class="blmd-faq"><summary>Jak dobrać rozmiar bez przymierzania? <span class="blmd-faq-pm" aria-hidden="true"></span></summary><div class="blmd-faq-a"><p>Każdy model mierzymy osobno, na płasko, od zewnątrz. Tabelę wymiarów znajdziesz przy każdym produkcie. Porównaj ją z ubraniem, które dobrze na Tobie leży. Jeśli rozmiar nie będzie pasował, w ciągu 14 dni wymienisz go na inny.</p></div></details>
-   <details class="blmd-faq"><summary>Kiedy dostanę zamówienie? <span class="blmd-faq-pm" aria-hidden="true"></span></summary><div class="blmd-faq-a"><p>Wysyłamy w ciągu 3 do 5 dni roboczych od zaksięgowania płatności. O ewentualnym opóźnieniu poinformujemy Cię osobiście. Dostawa jest darmowa przy zamówieniu od 500 zł.</p></div></details>
+   <details class="blmd-faq"><summary>Kiedy dostanę zamówienie? <span class="blmd-faq-pm" aria-hidden="true"></span></summary><div class="blmd-faq-a"><p>Wysyłamy w ciągu 24 godzin w dni robocze od zaksięgowania płatności. O ewentualnym opóźnieniu poinformujemy Cię osobiście. Dostawa jest darmowa przy zamówieniu od 300 zł.</p></div></details>
    <details class="blmd-faq"><summary>Czy mogę zwrócić lub wymienić produkt? <span class="blmd-faq-pm" aria-hidden="true"></span></summary><div class="blmd-faq-a"><p>Tak, masz 14 dni od otrzymania przesyłki. Produkt musi być w oryginalnym stanie. Wyjątkiem są rzeczy personalizowane, np. z haftem imienia lub logo. <a href="https://blancomed.com/zwroty-i-reklamacje/">Zobacz, jak zwrócić produkt</a>.</p></div></details>
    <details class="blmd-faq"><summary>Czy wystawiacie faktury na firmę? <span class="blmd-faq-pm" aria-hidden="true"></span></summary><div class="blmd-faq-a"><p>Tak. Napisz lub zadzwoń po złożeniu zamówienia, a wystawimy fakturę. Do każdej paczki dołączamy paragon.</p></div></details>
    <details class="blmd-faq"><summary>Jak prać odzież medyczną? <span class="blmd-faq-pm" aria-hidden="true"></span></summary><div class="blmd-faq-a"><p>Temperaturę prania podajemy przy każdym produkcie, bo zależy od tkaniny. Część kolekcji znosi pranie w 60°C. Tkaniny szybko schną, a większość modeli nie wymaga prasowania.</p></div></details>
@@ -928,14 +1041,14 @@ html.blmd-js .blmd-rv.is-in{opacity:1;transform:none}
  </div>
 </div></section>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://blancomed.com/#organization","name":"Blanco Med","url":"https://blancomed.com/","logo":"https://blancomed.com/wp-content/uploads/2023/02/BlancoMed_1-01.png","email":"kontakt@blancomed.com","telephone":"+48665502476","taxID":"8291636183","address":{"@type":"PostalAddress","streetAddress":"Świerzyny 75","postalCode":"98-161","addressLocality":"Zapolice","addressRegion":"łódzkie","addressCountry":"PL"},"sameAs":["https://www.facebook.com/blancomedicum","https://www.instagram.com/blancomed_"]},{"@type":"WebSite","@id":"https://blancomed.com/#website","url":"https://blancomed.com/","name":"Blanco Med","publisher":{"@id":"https://blancomed.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://blancomed.com/?s={search_term_string}&post_type=product","query-input":"required name=search_term_string"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Jak dobrać rozmiar bez przymierzania?","acceptedAnswer":{"@type":"Answer","text":"Każdy model mierzymy osobno, na płasko, od zewnątrz. Tabelę wymiarów znajdziesz przy każdym produkcie. Jeśli rozmiar nie będzie pasował, w ciągu 14 dni wymienisz go na inny."}},{"@type":"Question","name":"Kiedy dostanę zamówienie?","acceptedAnswer":{"@type":"Answer","text":"Wysyłamy w ciągu 3 do 5 dni roboczych od zaksięgowania płatności. Dostawa jest darmowa przy zamówieniu od 500 zł."}},{"@type":"Question","name":"Czy mogę zwrócić lub wymienić produkt?","acceptedAnswer":{"@type":"Answer","text":"Tak, masz 14 dni od otrzymania przesyłki. Produkt musi być w oryginalnym stanie. Wyjątkiem są rzeczy personalizowane."}},{"@type":"Question","name":"Czy wystawiacie faktury na firmę?","acceptedAnswer":{"@type":"Answer","text":"Tak. Napisz lub zadzwoń po złożeniu zamówienia, a wystawimy fakturę."}},{"@type":"Question","name":"Jak prać odzież medyczną?","acceptedAnswer":{"@type":"Answer","text":"Temperaturę prania podajemy przy każdym produkcie. Część kolekcji znosi pranie w 60°C. Większość modeli nie wymaga prasowania."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://blancomed.com/#organization","name":"Blanco Med","url":"https://blancomed.com/","logo":"https://blancomed.com/wp-content/uploads/2023/02/BlancoMed_1-01.png","email":"kontakt@blancomed.com","telephone":"+48665502476","taxID":"8291636183","address":{"@type":"PostalAddress","streetAddress":"Świerzyny 75","postalCode":"98-161","addressLocality":"Zapolice","addressRegion":"łódzkie","addressCountry":"PL"},"sameAs":["https://www.facebook.com/blancomedicum","https://www.instagram.com/blancomed_"]},{"@type":"WebSite","@id":"https://blancomed.com/#website","url":"https://blancomed.com/","name":"Blanco Med","publisher":{"@id":"https://blancomed.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://blancomed.com/?s={search_term_string}&post_type=product","query-input":"required name=search_term_string"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Jak dobrać rozmiar bez przymierzania?","acceptedAnswer":{"@type":"Answer","text":"Każdy model mierzymy osobno, na płasko, od zewnątrz. Tabelę wymiarów znajdziesz przy każdym produkcie. Jeśli rozmiar nie będzie pasował, w ciągu 14 dni wymienisz go na inny."}},{"@type":"Question","name":"Kiedy dostanę zamówienie?","acceptedAnswer":{"@type":"Answer","text":"Wysyłamy w ciągu 24 godzin w dni robocze od zaksięgowania płatności. Dostawa jest darmowa przy zamówieniu od 300 zł."}},{"@type":"Question","name":"Czy mogę zwrócić lub wymienić produkt?","acceptedAnswer":{"@type":"Answer","text":"Tak, masz 14 dni od otrzymania przesyłki. Produkt musi być w oryginalnym stanie. Wyjątkiem są rzeczy personalizowane."}},{"@type":"Question","name":"Czy wystawiacie faktury na firmę?","acceptedAnswer":{"@type":"Answer","text":"Tak. Napisz lub zadzwoń po złożeniu zamówienia, a wystawimy fakturę."}},{"@type":"Question","name":"Jak prać odzież medyczną?","acceptedAnswer":{"@type":"Answer","text":"Temperaturę prania podajemy przy każdym produkcie. Część kolekcji znosi pranie w 60°C. Większość modeli nie wymaga prasowania."}}]}]}</script>
 </main>
 
 <!-- SHELL:START stopka (wspólna dla wszystkich podstron) -->
 <footer class="blmd-foot"><div class="blmd-wrap">
  <div class="blmd-foot-grid">
   <div class="blmd-foot-brand">
-   <a class="blmd-foot-logo" href="index.html" data-href="https://blancomed.com/" aria-label="Blanco Med, strona główna"><img src="img/logo-blancomed-biale.png" width="640" height="245" alt="Blanco Med" loading="lazy"></a>
+   <a class="blmd-foot-logo" href="index.html" data-href="https://blancomed.com/" aria-label="Blanco Med, strona główna"><img src="img/logo-blancomed-2026-biale.png" width="1088" height="212" alt="Blanco Med" loading="lazy"></a>
    <p class="blmd-foot-promise">Odzież medyczna szyta w Polsce dla ludzi, którzy cały dzień są w ruchu.</p>
    <div class="blmd-foot-socials"><a href="https://www.facebook.com/blancomedicum" aria-label="Blanco Med na Facebooku"><svg aria-hidden="true"><use href="#blmd-i-fb"/></svg></a><a href="https://www.instagram.com/blancomed_" aria-label="Blanco Med na Instagramie"><svg aria-hidden="true"><use href="#blmd-i-ig"/></svg></a></div>
   </div>
